@@ -9,7 +9,7 @@ class MapCreater :public Layer
 {
 private:
 	bool init(int number);
-	void createStage(int number);
+	std::vector<std::string> createStage(int number);
 	void createObjectStage(int number);
 	void createObjectGimmick(int number);
 

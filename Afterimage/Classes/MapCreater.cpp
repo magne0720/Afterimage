@@ -1,4 +1,5 @@
 #include "mapCreater.h"
+#include <fstream>
 
 MapCreater* MapCreater::create(int number)
 {
@@ -23,25 +24,37 @@ bool MapCreater::init(int number)
 		return false;
 	}
 	log("Welcome To MapCreater");
-
+	createStage(number);
 
 	return true;
 };
 
-void createStage(int number)
+std::vector<std::string> MapCreater::createStage(int number)
 {
+	
+	std::istringstream stream("stage%d.txt",number);
+	log("{%s}or{%c}", stream, stream);
+	std::string field;
+	std::vector<std::string> result;
+	char delimiter;
+	int i=0;
 
+	while (std::getline(stream, field, delimiter)) {
+		result.push_back(field);
+		log("%c", result[i]);
+		i++;
+	}
+	return result;
+
+};
+
+void MapCreater::createObjectStage(int number)
+{
 
 
 };
 
-void createObjectStage(int number)
-{
-
-
-};
-
-void createObjectGimmick(int number)
+void MapCreater::createObjectGimmick(int number)
 {
 
 
