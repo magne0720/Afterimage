@@ -48,12 +48,14 @@ std::vector<std::string> MapCreater::createStage(int number)
 
 };
 
+//1.0fŠÔŠu‚Å‚¨“X‚Ì”z’u
 void MapCreater::createObjectStage(int number)
 {
 
 
 };
 
+//0.5fŠÔŠu‚ÅƒMƒ~ƒbƒN‚Ì”z’u
 void MapCreater::createObjectGimmick(int number)
 {
 
@@ -61,4 +63,10 @@ void MapCreater::createObjectGimmick(int number)
 
 };
 
+float MapCreater::createObjectShelter(int objectTag)
+{
+	float *p = RainShelter;
+	float heighter = p[0]+objectTag;
+	return heighter;
+};
 
