@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "GameLayer.h"
+#include "RainLayer.h"
 
 USING_NS_CC;
 
@@ -12,7 +13,7 @@ public:
 	CREATE_FUNC(GameScene);
 
 	bool init();
-
+	RainLayer *rainLayer;
 	GameLayer *gameLayer;
 
 	
