@@ -6,6 +6,9 @@ bool GameLayer::init()
 	{
 		return false;
 	}
+	player = Player::create();
+	this->addChild(player, 2);
+
 
 
 	return true;

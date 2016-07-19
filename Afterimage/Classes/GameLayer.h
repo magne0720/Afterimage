@@ -2,6 +2,7 @@
 #define __GAME_LAYER_H__
 
 #include "cocos2d.h"
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -11,6 +12,8 @@ public:
 	CREATE_FUNC(GameLayer);
 
 	bool init();
+
+	Player *player;
 
 	
 private:
