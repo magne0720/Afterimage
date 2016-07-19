@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "MapCreater.h"
 
 USING_NS_CC;
 

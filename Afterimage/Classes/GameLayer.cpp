@@ -17,7 +17,5 @@ bool GameLayer::init()
 		addChild(s);
 	}
 
-
-
 	return true;
 }

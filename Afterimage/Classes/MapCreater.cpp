@@ -1,5 +1,4 @@
 #include "mapCreater.h"
-#include <fstream>
 
 MapCreater* MapCreater::create(int number)
 {
@@ -26,39 +25,79 @@ bool MapCreater::init(int number)
 	log("Welcome To MapCreater");
 	createStage(number);
 
+	createStageTest(1);
+	
+
 	return true;
 };
 
-std::vector<std::string> MapCreater::createStage(int number)
+void MapCreater::update(float delta)
 {
-	
-	std::istringstream stream("stage%d.txt",number);
-	log("{%s}or{%c}", stream, stream);
-	std::string field;
-	std::vector<std::string> result;
-	char delimiter;
-	int i=0;
 
-	while (std::getline(stream, field, delimiter)) {
-		result.push_back(field);
-		log("%c", result[i]);
-		i++;
+
+
+
+
+}
+//ƒeƒLƒXƒg“Ç‚İ‚İŒ^
+int MapCreater::createStage(int number)
+{
+	log("createStage_open");
+
+	std::ifstream ifs("GameStage_1.txt");
+	char str[256];
+	if (ifs.fail())
+	{
+		log("fail");
+		std::cerr << "¸”s" << std::endl;
+		return -1;
 	}
-	return result;
-
+	while (ifs.getline(str, 256 - 1))
+	{
+		log("%c",str);
+		std::cout << "[" << str << "]" << std::endl;
+	}
+	return 0;
 };
 
-void MapCreater::createObjectStage(int number)
+int MapCreater::createStageTest(int number)
 {
+	int a[40] = { 1,1,1,1,1,1,1,1,-1 };
+	int *p=a;
+	for (int i = 0; a[i] != -1; i++)
+	{
+		Sprite* a = createObjectBuilding(p[i]);
+		a->setPosition(Vec2(designResolutionSize.width*0.1*i, designResolutionSize.height*0.6f));
+		addChild(a);
+	}
 
 
-};
+	return 0;
+}
 
-void MapCreater::createObjectGimmick(int number)
+Sprite* MapCreater::createObjectBuilding(int number)
 {
-
-
-
+	log("createObjectBuilding");
+	String* name = String::createWithFormat("building_%d.png", number);
+	Sprite* sp = Sprite::create(name->getCString());
+	
+	return sp;
 };
 
+Sprite* MapCreater::createObjectUmbrella(int number)
+{
+	String* name = String::createWithFormat("umbrella%d.png", number);
+	Sprite* sp = Sprite::create(name->getCString());
+	addChild(sp);
 
+	return sp;
+};
+
+Sprite* MapCreater::createObjectGimmick(int number)
+{
+	String* name = String::createWithFormat("gimmick%d.png", number);
+	Sprite* sp = Sprite::create(name->getCString());
+	addChild(sp);
+
+	return sp;
+};
