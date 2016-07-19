@@ -20,8 +20,8 @@ bool Player::init()
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
 	this->initWithFile("PlantNot1.png");
-	this->setScale(0.4f);
-	this->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height*0.4));
+	this->setScale(0.3f);
+	this->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height*0.3f));
 
 	this->getBoundingBox();
 
@@ -31,7 +31,6 @@ bool Player::init()
 }
 void Player::update(float delta)
 {
-	//log("aaaaa");
 	switch (leftAndRightNum)
 	{
 	case 0:
@@ -46,9 +45,9 @@ void Player::update(float delta)
 		break;
 	}
 }
-bool Player::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
-
-	//画面をタッチした時の処理
+//画面をタッチした時の処理
+bool Player::onTouchBegan(Touch* touch,Event* event) 
+{
 	Point pos = Vec2(touch->getLocationInView().x, touch->getLocationInView().y);
 	if (pos.x > designResolutionSize.width/2)
 	{
@@ -65,15 +64,15 @@ bool Player::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
 	return true;
 
 }
+//タッチ中の処理
+void Player::onTouchMoved(Touch* touch,Event* event) 
+{
 
-void Player::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
-
-	//タッチ中の処理
 
 }
+//タッチが終わった時の処理
+void Player::onTouchEnded(Touch *touch,Event *event) 
+{
 
-void Player::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event) {
-
-	//タッチが終わった時の処理
 	leftAndRightNum = 0;
 }
