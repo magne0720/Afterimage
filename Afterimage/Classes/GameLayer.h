@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "MultiResolution.h"
 
 USING_NS_CC;
 
@@ -13,10 +14,24 @@ public:
 
 	bool init();
 
+	void update(float delta);
+
+	//タッチ系
+	bool onTouchBegan(Touch* touch, Event* event);
+	void onTouchMoved(Touch* touch, Event* event);
+	void onTouchEnded(Touch* touch, Event* event);
+
+	/*Camera *camera;*/
 	Player *player;
+	Sprite *spr;
+
 
 	
 private:
+	//歩く速さ
+	float speed;
+	//左か右か
+	int leftAndRightNum;
 
 };
 #endif // !__GAME_LAYER_H__
