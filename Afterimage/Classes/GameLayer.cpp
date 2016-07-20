@@ -17,5 +17,8 @@ bool GameLayer::init()
 		addChild(s);
 	}
 
+	MapCreater* a = MapCreater::create(1);
+	addChild(a);
+
 	return true;
 }

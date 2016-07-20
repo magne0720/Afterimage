@@ -62,12 +62,13 @@ int MapCreater::createStage(int number)
 
 int MapCreater::createStageTest(int number)
 {
-	int a[40] = { 1,1,1,1,1,1,1,1,-1 };
+	int a[] = { 0,1,2,0,0,-1 };
 	int *p=a;
 	for (int i = 0; a[i] != -1; i++)
 	{
 		Sprite* a = createObjectBuilding(p[i]);
-		a->setPosition(Vec2(designResolutionSize.width*0.1*i, designResolutionSize.height*0.6f));
+		a->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+		a->setPosition(Vec2(800*i-600, designResolutionSize.height*0.19f));
 		addChild(a);
 	}
 
