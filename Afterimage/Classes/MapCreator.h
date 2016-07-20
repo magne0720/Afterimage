@@ -9,13 +9,16 @@
 
 USING_NS_CC;
 
-class MapCreater :public Layer
+class MapCreator :public Layer
 {
 private:
 	bool init(int number);
 	int createStage(int number);
 
-	//ステージ生成用
+	//ステージ生成用 
+	//床(実装確定)
+	Vector <Sprite*> Floors;
+	Sprite* createObjectFloor(int number);
 	//建物(実装確定)
 	Vector <Sprite*> Stages;		
 	Sprite* createObjectBuilding(int number);
@@ -26,11 +29,8 @@ private:
 	Vector <Sprite*> Gimmicks;	
 	Sprite* createObjectGimmick(int number);
 
-
-
-
 public:
-	static MapCreater* create(int number);
+	static MapCreator* create(int number);
 	void update(float delta);
 
 

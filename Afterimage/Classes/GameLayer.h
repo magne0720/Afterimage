@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
-#include "MapCreater.h"
+#include "MapCreator.h"
 #include "MultiResolution.h"
 
 USING_NS_CC;
@@ -25,7 +25,7 @@ public:
 	/*Camera *camera;*/
 	Player *player;
 	Sprite *spr;
-	MapCreater *map;
+	MapCreator *map;
 
 
 	
