@@ -29,5 +29,6 @@ bool RainManager::init(int rainNum)
 	//log("%d", rainNum);
 
 
+
 	return true;
 }
