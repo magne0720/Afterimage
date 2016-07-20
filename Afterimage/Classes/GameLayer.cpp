@@ -35,7 +35,8 @@ bool GameLayer::init()
 	this->addChild(spr);
 
 
-	
+	map = MapCreater::create(1);
+	addChild(map);
 
 	for (int i = 0; i < 11;i++)
 	{
