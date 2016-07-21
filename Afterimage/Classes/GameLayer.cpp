@@ -38,13 +38,13 @@ bool GameLayer::init()
 	map = MapCreator::create(1);
 	addChild(map);
 
-	for (int i = 0; i < 11;i++)
+	/*for (int i = 0; i < 11;i++)
 	{
 		Sprite* s = Sprite::create("tile.png");
 		s->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 		s->setPosition(Vec2( i * 200, 0));
 		addChild(s);
-	}
+	}*/
 
 	//this->runAction(Follow::create(player));
 

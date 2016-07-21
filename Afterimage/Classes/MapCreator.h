@@ -9,6 +9,11 @@
 
 USING_NS_CC;
 
+
+#define SHOP_INTERVAL 800
+#define FLOOR_HEIGHT designResolutionSize.height*0.0
+#define SHOP_HEIGHT designResolutionSize.height*0.185
+
 class MapCreator :public Layer
 {
 private:

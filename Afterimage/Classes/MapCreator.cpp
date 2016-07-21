@@ -36,8 +36,6 @@ void MapCreator::update(float delta)
 
 
 
-
-
 }
 //ÉeÉLÉXÉgì«Ç›çûÇ›å^
 int MapCreator::createStage(int number)
@@ -45,47 +43,58 @@ int MapCreator::createStage(int number)
 	log("createStage_open");
 
 	std::ifstream ifs("GameStage_1.txt");
-	char str[256];
+	std::string str;
 	if (ifs.fail())
 	{
 		log("fail");
 		std::cerr << "é∏îs" << std::endl;
 		return -1;
 	}
-	while (ifs.getline(str, 256 - 1))
+	else
 	{
-		log("%c",str);
-		std::cout << "[" << str << "]" << std::endl;
+		getline(ifs, str);
+		log("filename=[%s]", str);
+		log("end");
+	}
+	for (int i = 0; i != 12; i++) {
+		char split[12];
+		if (str.at(i) != ',') {
+			split[i] = str.at(i);
+		}
+
+		/*	std::cout << "[" << str[i] << "]" << std::endl;
+		String* name = String::createWithFormat("building_%d.png", str[i]);
+		Sprite* a = Sprite::create(name->getCString());
+		addChild(a);
+		*/
 	}
 	return 0;
 };
 
-
+//íºë≈Çøå^
 int MapCreator::createStageTest(int number)
 {
-	int Build[] = { 0, 1, 2, 0, 0, -1 };
-	int Floor[] = { 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 -1 };
+	int Floor[] = { 0,0,0,0,0,0,0,0,0,0,-1 };
+	int Build[] = { 0,1,0,0,1,0,0,0,-1 };
+	int *MAP[] = { Floor,Build };
+	
+	float heighter[] = { FLOOR_HEIGHT,SHOP_HEIGHT };
+	std::string pngName[] = { "floor_%d.png","building_%d.png" };
 
-	int *p = Build;
-	for (int i = 0; p[i] != -1; i++)
+	int *p = MAP[0];
+	for (int k = 0; k<2; k++)
 	{
-		String* name = String::createWithFormat("building_%d.png", p[i]);
-		Sprite* spItem = Sprite::create(name->getCString());
-		spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-		spItem->setPosition(Vec2(800 * i - 600, designResolutionSize.height*0.19f));
-		addChild(spItem);
+		p = MAP[k];
+		for (int i = 0; p[i] != -1; i++)
+		{
+			String* name = String::createWithFormat(pngName[k].data(), p[i]);
+			log("%s", name->getCString());
+			Sprite* spItem = Sprite::create(name->getCString());
+			spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+			spItem->setPosition(Vec2(SHOP_INTERVAL * i, heighter[k]));
+			addChild(spItem);
+		}
 	}
-	p = Floor;
-	for (int i = 0; p[i] != -1; i++)
-	{
-		String* name = String::createWithFormat("floor_%d.png", p[i]);
-		Sprite* spItem = Sprite::create(name->getCString());
-		spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-		spItem->setPosition(Vec2(100 * i , designResolutionSize.height*0.0f));
-		addChild(spItem);
-	}
-
-
 	return 0;
 }
 
