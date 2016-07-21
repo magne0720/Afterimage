@@ -15,6 +15,7 @@ public:
 	bool init();
 	RainLayer *rainLayer;
 	GameLayer *gameLayer;
+	RainLayer *rainLayerb;
 
 	
 private:
