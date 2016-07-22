@@ -27,13 +27,14 @@ bool RainManager::init(int rainNum)
 		return false;
 	}
 	rainOfRain = rainNum;
-	speed = 25.0f;
-	for (int i = 0; i < rainOfRain; i++)
+	speed = 20.0f;
+	delayTime = 2;
+	/*for (int i = 0; i < rainOfRain; i++)
 	{
 		rain.push_back(Rain::create());
 		rainReset(rain[i]);
 		this->addChild(rain[i]);
-	}
+	}*/
 	this->scheduleUpdate();
 
 	return true;
@@ -41,20 +42,54 @@ bool RainManager::init(int rainNum)
 void RainManager::rainReset(Sprite *rain)
 {
 	float onceSp;
-	std::random_device rd;
-	std::mt19937 mt(rd());
-	std::uniform_int_distribution<int> ranSP(100, 200);
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_int_distribution<int> ranSP(100, 102);
 	onceSp = ranSP(mt) * 0.01f;
-	rain->setPosition(Vec2(rand() % (int)designResolutionSize.width + 1, designResolutionSize.height * onceSp));
+	rain->setPosition(Vec2(rand() % (int)designResolutionSize.width + 1, designResolutionSize.height *onceSp));
+}
+void RainManager::dropCreate()
+{
+
+	Rain* s_rain = Rain::create();
+	rainReset(s_rain);
+	this->addChild(s_rain);
+	rain.pushBack(s_rain);
 }
 void RainManager::update(float delta)
 {
-	for (int i = 0; i < rainOfRain; i++)
+	delayTime--;
+	if (rain.size() <= rainOfRain)
 	{
-		rain[i]->setPositionY(rain[i]->getPositionY() - speed);
-		if (rain[i]->getPositionY() < designResolutionSize.height*0.1f)
+		if (delayTime < 0)
 		{
-			rainReset(rain[i]);
+			delayTime =1;
+			dropCreate();
+			log("%d", rain.size());
+		}
+	}
+	for (int i = 0; i < rain.size(); i++)
+	{
+		/*if (i == 50)
+			rainOfRain = 400;
+		if (i == 350)
+			rainOfRain = 30;
+		log("%d", i);*/
+
+		rain.at(i)->setPositionY(rain.at(i)->getPositionY() - speed);
+		if (rain.at(i)->getPositionY() < designResolutionSize.height * 0.0 + 200)
+		{
+			if (rain.size() <= rainOfRain)
+			{
+				rainReset(rain.at(i));
+			}
+			else
+			{
+				rain.at(i)->removeFromParentAndCleanup(true);
+				rain.erase(i);
+			}
+
+			//rainReset(rain.at(i));
 		}
 	}
 }
