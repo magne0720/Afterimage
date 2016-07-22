@@ -86,6 +86,8 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 		leftAndRightNum = 2;
 		player->initWithFile("PlantNot2.png");
 	}
+
+	
 	return true;
 
 }

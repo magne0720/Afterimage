@@ -30,8 +30,5 @@ bool RainLayer::init(int rainNum)
 	rainManager = RainManager::create(rainNum);
 	this->addChild(rainManager);
 
-
-
-	//log("%d", rainNum);
 	return true;
 }
