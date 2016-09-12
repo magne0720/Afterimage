@@ -13,7 +13,7 @@ bool GameScene::init()
 	gameLayer = GameLayer::create();
 	this->addChild(gameLayer, 1);
 
-	rainLayerb = RainLayer::create(20);
+	rainLayerb = RainLayer::create(260);
 	this->addChild(rainLayerb,2);
 
 
