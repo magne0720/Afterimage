@@ -26,14 +26,14 @@ public:
 	Player *player;
 	Sprite *spr;
 	MapCreator *map;
-
-
 	
 private:
 	//歩く速さ
 	float speed;
 	//左か右か
 	int leftAndRightNum;
-
+	//アクションストッパー
+	bool ACTswitch;
+	bool direction;
 };
 #endif // !__GAME_LAYER_H__

@@ -10,6 +10,16 @@ class Player : public Sprite
 public:
 
 	CREATE_FUNC(Player);
+
+	float animeSpeed;
+	Animation *animation;
+	Animate *action;
+	RepeatForever *anime;
+	void changeLeft();
+	void changeRight();
+
+
+
 	bool init();
 	
 private:
