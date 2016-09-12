@@ -65,7 +65,7 @@ void RainManager::update(float delta)
 		{
 			delayTime =1;
 			dropCreate();
-			log("%d", rain.size());
+			//log("%d", rain.size());
 		}
 	}
 	for (int i = 0; i < rain.size(); i++)
