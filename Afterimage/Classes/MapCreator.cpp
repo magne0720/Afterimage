@@ -1,5 +1,4 @@
 #include "MapCreator.h"
-#include "GameLayer.h"
 
 MapCreator* MapCreator::create(int number)
 {
@@ -26,94 +25,76 @@ bool MapCreator::init(int number)
 	log("Welcome To MapCreator");
 	createStage(number);
 
-	createStageTest(1);
-	
-	scheduleUpdate();
-
 	return true;
 };
 
 void MapCreator::update(float delta)
 {
 	log("map->%f", MovementPosition);
-	BuildingMove();
+	//BuildingMove();
 }
 //テキスト読み込み型
 int MapCreator::createStage(int number)
 {
-//	log("createStage_open");
-//
-////	std::ifstream ifs("GameStage_1.txt");
-//	String* str;
-//	//if (ifs.fail())
-//	{
-//		log("fail");
-//		//std::cerr << "失敗" << std::endl;
-//		//return 0;
-//	}
-////	else
-//	{
-//		//getline(ifs, str);
-//		log("filename=[%s]", str);
-//		log("end");
-//	}
-//	for (int i = 0; i != 12; i++) {
-//		char split[12];
-//
-//		/*	std::cout << "[" << str[i] << "]" << std::endl;
-//		String* name = String::createWithFormat("building_%d.png", str[i]);
-//		Sprite* a = Sprite::create(name->getCString());
-//		addChild(a);
-//		*/
-//	}
-	return 0;
-};
-
-//直打ち型
-int MapCreator::createStageTest(int number)
-{
-	int Floor[] = { 1,1,1,1,1,1,1,1,1,1,1,-1 };
-	int Build[] = { 8,9,0,1,2,3,0,0,0,0,0,-1 };
-	int BuildCheck[] = { 5,5,5,5,5,5,5,5,5,5,5,-1 };
-	int *Process[] = {Floor,Build,BuildCheck};
-	int pNum = 0;
-	Vector<Sprite*> s[] = { Umbrellas,Gimmicks };	 
-	float heighter[] = { 
-		SHOP_HEIGHT,
+	auto split = [](const std::string& input, char delimiter) 
+	{
+			istringstream stream(input);
+			string field;
+			vector<string> result;
+			while (std::getline(stream, field, delimiter)) 
+			{
+				result.push_back(field);
+			}
+			return result;
+		};
+	float heighter[] = {
+		0,
 		FLOOR_HEIGHT,
+		SHOP_HEIGHT,
 		SHOP_HEIGHT
 	};
-
-	endPosition = SHOP_INTERVAL*(sizeof(Floor)/sizeof(Floor[0])-sizeof(Floor[0]));
-	log("endposition%d", endPosition);
-	std::string pngName[] = { 
-		"building_%d.png",
+	std::string pngName[] = {
+		"none_%d.png",
 		"floor_%d.png",
-		"building_%d.png" 
+		"building_%d.png",
+		"building_%d.png",
 	};
-	int *p = Process[0];
-	for (int k = 0; k<3; k++)
-	{
-		p = Process[k];
-		for (int i = 0; p[i] != -1; i++)
-		{
-			if (p[i] != 0) {
-				String* name = String::createWithFormat(pngName[k].data(), p[i]);
-				Sprite* spItem = Sprite::create(name->getCString());
-				spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-				spItem->setPosition(Vec2(SHOP_INTERVAL * i, heighter[k]));
-				addChild(spItem);
-				log("%s", name->getCString());
 
+	String* filename = String::createWithFormat("Stage/StageData_001.txt",number);
+	//log("%s", filename->getCString());
+
+		string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
+		vector<string> lines = split(fileText, '\n');
+
+		int counter = 1;
+
+		for (int i = number*4; i<number*4+4; i++)
+		{
+			vector<string> blocks = split(lines[i], ',');
+			
+			if (i != number * 4) {
+
+				for (int j = 0; j < blocks.size(); j++)
+				{
+					int CSVnumber = atoi(blocks.at(j).c_str());
+					//log("%d", CSVnumber);
+					String* name = String::createWithFormat(pngName[counter].data(),CSVnumber);
+					Sprite* spItem = Sprite::create(name->getCString());
+					spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+					spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+					addChild(spItem);
+					//log("%s", name->getCString());
+				}
+				counter++;
 			}
 		}
-	}
-	return 0;
-}
-
+		//log("allclear");
+		return 0;
+};
 //プレイヤーが今いる場所
 int MapCreator::getPositionPlayerX(int positionX)
 {
+	endPosition = positionX;
 	return positionX;
 }
 //奥行別に動き替えるやつ

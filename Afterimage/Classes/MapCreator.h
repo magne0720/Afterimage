@@ -4,8 +4,9 @@
 #include "cocos2d.h"
 #include "MultiResolution.h"
 #include "Player.h"
-//#include <iostream>
-//#include <fstream>
+#include <iostream>
+
+using namespace std; 
 
 USING_NS_CC;
 
@@ -47,7 +48,7 @@ public:
 	static MapCreator* create(int number);
 	void update(float delta);
 
-	static int getPositionPlayerX(int positionX);
+	int getPositionPlayerX(int positionX);
 	float MovementPosition;
 
 	//スクリプト内の直読み込み
