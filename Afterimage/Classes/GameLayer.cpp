@@ -23,14 +23,6 @@ bool GameLayer::init()
 	player->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height*0.3f));
 	this->addChild(player, 2);
 
-	////*camera = Camera::create();
-	//camera->getCameraMask();
-	//camera->setPosition(Vec2(designResolutionSize.width*0, designResolutionSize.height*0));
-	//this->addChild(camera);*/
-	////*auto camera = new ActionCamera();
-	////camera->autorelease();
-	//camera->setTarget(player);*/
-	////this->runAction(Follow::create(player));
 
 	spr = Sprite::create();
 	spr->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
