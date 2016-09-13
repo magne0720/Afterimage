@@ -36,6 +36,9 @@ bool GameLayer::init()
 	spr->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
 	this->addChild(spr);
 
+	umbrella = UmbrellaCreator::create();
+	umbrella->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
+	this->addChild(umbrella);
 
 	//map = MapCreator::create(1);
 	//addChild(map);

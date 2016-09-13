@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "MapCreator.h"
 #include "MultiResolution.h"
+#include "UmbrellaCreator.h"
 
 USING_NS_CC;
 
@@ -25,6 +26,7 @@ public:
 	/*Camera *camera;*/
 	Player *player;
 	Sprite *spr;
+	UmbrellaCreator *umbrella;
 	MapCreator *map;
 	
 private:
