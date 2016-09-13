@@ -8,15 +8,15 @@ bool Player::init()
 	}
 	animeSpeed = 0.3f;
 
-	this->initWithFile("playerRight1.png");
+	this->initWithFile("arukuRight2.png");
 	this->setScale(0.1f);
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("playerRight2-1.png");
-	animation->addSpriteFrameWithFileName("playerRight2-2.png");
-	animation->addSpriteFrameWithFileName("playerRight2-3.png");
-	animation->addSpriteFrameWithFileName("playerRight2-2.png");
+	animation->addSpriteFrameWithFileName("arukuRight1.png");
+	animation->addSpriteFrameWithFileName("arukuRight2.png");
+	animation->addSpriteFrameWithFileName("arukuRight3.png");
+	animation->addSpriteFrameWithFileName("arukuRight2.png");
 
 	animation->setDelayPerUnit(animeSpeed);
 	animation->setRestoreOriginalFrame(true);
@@ -35,21 +35,21 @@ bool Player::init()
 	action2 = Animate::create(animation);
 	anime2 = RepeatForever::create(action);*/
 
-	this->runAction(anime);
+	//this->runAction(anime);
 
 	this->getBoundingBox();
 	return true;
 }
 void Player::changeLeft()
 {
-	this->stopAction(anime);
+	//this->stopAction(anime);
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("playerLeft2-1.png");
-	animation->addSpriteFrameWithFileName("playerLeft2-2.png");
-	animation->addSpriteFrameWithFileName("playerLeft2-3.png");
-	animation->addSpriteFrameWithFileName("playerLeft2-2.png");
+	animation->addSpriteFrameWithFileName("arukuLeft1.png");
+	animation->addSpriteFrameWithFileName("arukuLeft2.png");
+	animation->addSpriteFrameWithFileName("arukuLeft3.png");
+	animation->addSpriteFrameWithFileName("arukuLeft2.png");
 
 
 	animation->setDelayPerUnit(animeSpeed);
@@ -61,14 +61,14 @@ void Player::changeLeft()
 }
 void Player::changeRight()
 {
-	this->stopAction(anime);
+	//this->stopAction(anime);
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("playerRight2-1.png");
-	animation->addSpriteFrameWithFileName("playerRight2-2.png");
-	animation->addSpriteFrameWithFileName("playerRight2-3.png");
-	animation->addSpriteFrameWithFileName("playerRight2-2.png");
+	animation->addSpriteFrameWithFileName("arukuRight1.png");
+	animation->addSpriteFrameWithFileName("arukuRight2.png");
+	animation->addSpriteFrameWithFileName("arukuRight3.png");
+	animation->addSpriteFrameWithFileName("arukuRight2.png");
 
 
 	animation->setDelayPerUnit(animeSpeed);
@@ -77,4 +77,16 @@ void Player::changeRight()
 	action = Animate::create(animation);
 	anime = RepeatForever::create(action);
 	this->runAction(anime);
+}
+void Player::stopAct(int LR)
+{
+	this->stopAction(anime);
+	if (LR == 1)
+	{
+		this->initWithFile("arukuRight2.png");
+	}
+	else
+	{
+		this->initWithFile("arukuLeft2.png");
+	}
 }

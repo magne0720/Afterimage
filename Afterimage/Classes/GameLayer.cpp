@@ -37,8 +37,8 @@ bool GameLayer::init()
 	this->addChild(spr);
 
 
-	map = MapCreator::create(1);
-	addChild(map);
+	//map = MapCreator::create(1);
+	//addChild(map);
 	//for (int i = 0; i < 11;i++)
 	//{
 	//	Sprite* s = Sprite::create("tile.png");
@@ -47,6 +47,10 @@ bool GameLayer::init()
 	//	addChild(s);
 	//}
 	//this->runAction(Follow::create(player));
+	player->changeLeft();
+	player->stopAct(2);
+	player->changeRight();
+	player->stopAct(1);
 
 	this->scheduleUpdate();
 	return true;
@@ -127,7 +131,7 @@ void GameLayer::onTouchMoved(Touch* touch, Event* event)
 //タッチが終わった時の処理
 void GameLayer::onTouchEnded(Touch *touch, Event *event)
 {
-
+	player->stopAct(leftAndRightNum);
 	leftAndRightNum = 0;
 	direction = true;
 }

@@ -17,7 +17,7 @@ public:
 	RepeatForever *anime;
 	void changeLeft();
 	void changeRight();
-
+	void stopAct(int LR);
 
 
 	bool init();
