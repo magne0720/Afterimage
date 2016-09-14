@@ -23,30 +23,42 @@ bool MapCreator::init(int number)
 		return false;
 	}
 	log("Welcome To MapCreator");
+
+	startPosition = 0;
+	endPosition = 0;
+
+	Floors = Layer::create();
+	addChild(Floors);
+
+	Buildings = Layer::create();
+	addChild(Buildings);
+
 	createStage(number);
+
+
+	scheduleUpdate();
 
 	return true;
 };
 
 void MapCreator::update(float delta)
 {
-	log("map->%f", MovementPosition);
-	//BuildingMove();
+	BuildingMove();
 }
 //テキスト読み込み型
 int MapCreator::createStage(int number)
 {
-	auto split = [](const std::string& input, char delimiter) 
+	auto split = [](const std::string& input, char delimiter)
 	{
-			istringstream stream(input);
-			string field;
-			vector<string> result;
-			while (std::getline(stream, field, delimiter)) 
-			{
-				result.push_back(field);
-			}
-			return result;
-		};
+		istringstream stream(input);
+		string field;
+		vector<string> result;
+		while (std::getline(stream, field, delimiter))
+		{
+			result.push_back(field);
+		}
+		return result;
+	};
 	float heighter[] = {
 		0,
 		FLOOR_HEIGHT,
@@ -60,50 +72,53 @@ int MapCreator::createStage(int number)
 		"building_%d.png",
 	};
 
-	String* filename = String::createWithFormat("Stage/StageData_001.txt",number);
-	//log("%s", filename->getCString());
+	String* filename = String::createWithFormat("Stage/StageData_001.txt", number);
 
-		string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
-		vector<string> lines = split(fileText, '\n');
+	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
+	vector<string> lines = split(fileText, '\n');
 
-		int counter = 1;
+	int counter = 1;
 
-		for (int i = number*4; i<number*4+4; i++)
-		{
-			vector<string> blocks = split(lines[i], ',');
-			
-			if (i != number * 4) {
+	for (int i = number * 4; i < number * 4 + 4; i++)
+	{
+		vector<string> blocks = split(lines[i], ',');
 
-				for (int j = 0; j < blocks.size(); j++)
-				{
-					int CSVnumber = atoi(blocks.at(j).c_str());
-					//log("%d", CSVnumber);
-					String* name = String::createWithFormat(pngName[counter].data(),CSVnumber);
-					Sprite* spItem = Sprite::create(name->getCString());
-					spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-					spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+		if (i != number * 4) {
+
+			for (int j = 0; j < blocks.size(); j++)
+			{
+				int CSVnumber = atoi(blocks.at(j).c_str());
+				String* name = String::createWithFormat(pngName[counter].data(), CSVnumber);
+				Sprite* spItem = Sprite::create(name->getCString());
+				spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+				spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+				if (i == number * 4 + 1)
+					Floors->addChild(spItem);
+				if (i == number * 4 + 2)
+					Buildings->addChild(spItem);
+				if (i == number * 4 + 3)
 					addChild(spItem);
-					//log("%s", name->getCString());
-				}
-				counter++;
 			}
+			counter++;
 		}
-		//log("allclear");
-		return 0;
+		endPosition = SHOP_INTERVAL*blocks.size();
+	}
+
+	return 0;
 };
 //プレイヤーが今いる場所
-int MapCreator::getPositionPlayerX(int positionX)
+float MapCreator::getPositionPlayerX(float positionX)
 {
-	endPosition = positionX;
+	playerPosition = positionX;
 	return positionX;
 }
 //奥行別に動き替えるやつ
 //レイヤー別のほうが楽だと思ったので保留
 void MapCreator::BuildingMove()
 {
-	float XX = 0;
+	static float XX = 0;
 
-		XX =MovementPosition/endPosition;
-		log("position=%f", XX);
-		Floors->setPositionX(XX*(800));
+	XX = (endPosition-playerPosition)*startPosition + playerPosition*endPosition;
+	Floors->setPositionX(XX);
+
 }

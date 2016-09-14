@@ -40,7 +40,9 @@ private:
 	//キャラの位置
 
 	//ステージの最後の位置
-	int endPosition;
+	float startPosition;
+	float endPosition;
+	float playerPosition;
 
 	void BuildingMove();
 
@@ -48,8 +50,8 @@ public:
 	static MapCreator* create(int number);
 	void update(float delta);
 
-	int getPositionPlayerX(int positionX);
-	float MovementPosition;
+	float getPositionPlayerX(float positionX);
+	float myAnchor;
 
 	//スクリプト内の直読み込み
 	int createStageTest(int number);
