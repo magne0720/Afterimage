@@ -33,6 +33,8 @@ private:
 	Layer* Floors;
 	//Œš•¨(ŽÀ‘•Šm’è)
 	Layer* Buildings;
+	//”wŒi‚±‚ÌŽèŽ†
+	Layer* BackGrounds;
 	//ŽP(ŽÀ‘•Šm’è)
 	Vector <Sprite*> Umbrellas; 
 	//“X‚Ì“üŒû(ŽÀ‘•—\’è)

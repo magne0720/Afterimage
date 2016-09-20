@@ -33,8 +33,10 @@ bool MapCreator::init(int number)
 	Buildings = Layer::create();
 	addChild(Buildings);
 
-	createStage(number);
+	BackGrounds = Layer::create();
+	addChild(BackGrounds);
 
+	createStage(number);
 
 	scheduleUpdate();
 
@@ -97,11 +99,13 @@ int MapCreator::createStage(int number)
 				if (i == number * 4 + 2)
 					Buildings->addChild(spItem);
 				if (i == number * 4 + 3)
-					addChild(spItem);
+					BackGrounds->addChild(spItem);
 			}
 			counter++;
 		}
 		endPosition = SHOP_INTERVAL*blocks.size();
+		log("endPosition==%f", endPosition);
+		Floors->setAnchorPoint(Vec2(endPosition*0.5,0));
 	}
 
 	return 0;
@@ -110,15 +114,16 @@ int MapCreator::createStage(int number)
 float MapCreator::getPositionPlayerX(float positionX)
 {
 	playerPosition = positionX;
+	log("playerPosition==%f", playerPosition);
+
 	return positionX;
 }
 //奥行別に動き替えるやつ
-//レイヤー別のほうが楽だと思ったので保留
 void MapCreator::BuildingMove()
 {
-	static float XX = 0;
-
-	XX = (endPosition-playerPosition)*startPosition + playerPosition*endPosition;
+	float XX = ((endPosition-playerPosition)/endPosition)/endPosition;
+	log("XX=%f", XX);
 	Floors->setPositionX(XX);
-
+	Buildings->setPositionX(XX);
+	BackGrounds->setPositionX(XX);
 }
