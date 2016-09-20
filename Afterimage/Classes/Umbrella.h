@@ -9,12 +9,14 @@ class Umbrella : public Sprite
 {
 public:
 	CREATE_FUNC(Umbrella);
-
-	float speed;
-
+	//ƒ‚ƒu‚Ì‘¬‚³
+	float mobspeed;
+	//¶‰E”»’f
+	int RL;
 	bool init();
 
 	void randomMan();
+	void update(float delta);
 
 	
 private:

@@ -29,11 +29,11 @@ bool GameLayer::init()
 	this->addChild(spr);
 
 	umbrella = UmbrellaCreator::create();
-	umbrella->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
-	this->addChild(umbrella);
+	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
+	this->addChild(umbrella,1);
 
-	//map = MapCreator::create(1);
-	//addChild(map);
+	map = MapCreator::create(1);
+	addChild(map);
 	//for (int i = 0; i < 11;i++)
 	//{
 	//	Sprite* s = Sprite::create("tile.png");

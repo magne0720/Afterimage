@@ -9,7 +9,7 @@ bool Player::init()
 	animeSpeed = 0.3f;
 
 	this->initWithFile("arukuRight2.png");
-	this->setScale(0.1f);
+	this->setScale(0.18f);
 
 	animation = Animation::create();
 
