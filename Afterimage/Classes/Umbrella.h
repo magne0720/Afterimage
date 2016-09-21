@@ -18,7 +18,7 @@ public:
 	void randomMan();
 	void update(float delta);
 
-	Vec2 mobEnd;
+	float mobEnd;
 	
 private:
 
