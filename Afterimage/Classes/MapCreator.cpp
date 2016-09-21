@@ -106,6 +106,7 @@ int MapCreator::createStage(int number)
 		endPosition = SHOP_INTERVAL*blocks.size();
 		log("endPosition==%f", endPosition);
 		Floors->setAnchorPoint(Vec2(endPosition*0.5,0));
+		Floors->setPositionX(0);
 	}
 
 	return 0;
