@@ -1,5 +1,6 @@
 #include "Umbrella.h"
 #include "MultiResolution.h"
+#include "GameLayer.h"
 
 bool Umbrella::init()
 {
