@@ -9,7 +9,6 @@ bool Umbrella::init()
 	}
 	randomMan();
 
-
 	this->scheduleUpdate();
 
 	return true;
