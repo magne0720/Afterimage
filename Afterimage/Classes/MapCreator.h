@@ -22,10 +22,7 @@ private:
 	bool init(int number);
 	int createStage(int number);
 
-	void createFloors();
-	void createBuildings();
-	void createUmbrellas();
-	void createGimmicks();
+	
 	//次これやる
 
 	//ステージ生成用 
@@ -42,13 +39,14 @@ private:
 	//キャラの位置
 
 	//ステージの最後の位置
-	float startPosition;
-	float endPosition;
 	float playerPosition;
 
 	void BuildingMove();
 
 public:
+	float startPosition;
+	float endPosition;
+
 	static MapCreator* create(int number);
 	void update(float delta);
 

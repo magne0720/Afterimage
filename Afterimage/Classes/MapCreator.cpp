@@ -104,9 +104,7 @@ int MapCreator::createStage(int number)
 			counter++;
 		}
 		endPosition = SHOP_INTERVAL*blocks.size();
-		log("endPosition==%f", endPosition);
-		Floors->setAnchorPoint(Vec2(endPosition*0.5,0));
-		Floors->setPositionX(0);
+
 	}
 
 	return 0;
@@ -122,7 +120,7 @@ float MapCreator::getPositionPlayerX(float positionX)
 //‰œs•Ê‚É“®‚«‘Ö‚¦‚é‚â‚Â
 void MapCreator::BuildingMove()
 {
-	float XX = ((endPosition-playerPosition)/endPosition)/endPosition;
+	float XX = ((endPosition-playerPosition)/endPosition);
 	log("XX=%f", XX);
 	Floors->setPositionX(XX);
 	Buildings->setPositionX(XX);
