@@ -52,6 +52,9 @@ bool GameLayer::init()
 }
 void GameLayer::update(float delta)
 {
+	//マップにプレイヤーの位置を送る
+	map->getPositionPlayerX(player->getPositionX());
+
 	if (player->getPositionX() < designResolutionSize.width / 2)
 	{
 		spr->setPositionX(spr->getPositionX());
