@@ -1,12 +1,12 @@
 #include "UmbrellaCreator.h"
 
-UmbrellaCreator *UmbrellaCreator::create(float endPos)
+UmbrellaCreator *UmbrellaCreator::create(float endPos,int ManNo)
 
 {
 
 	UmbrellaCreator *pRet = new UmbrellaCreator();
 
-	if (pRet && pRet->init(endPos))
+	if (pRet && pRet->init(endPos,ManNo))
 	{
 		pRet->autorelease();
 
@@ -18,15 +18,18 @@ UmbrellaCreator *UmbrellaCreator::create(float endPos)
 	}
 }
 
-bool UmbrellaCreator::init(float endPos)
+bool UmbrellaCreator::init(float endPos, int ManNo)
 {
 	if (!Node::init())
 	{
 		return false;
 	}
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < ManNo; i++)
 	{
-		umbrella[i] = Umbrella::create(endPos);
+		//umbrella[i] = Umbrella::create(endPos);
+		//umbrella[i]->setScale(0.3f);
+		//this->addChild(umbrella[i]);
+		umbrella.push_back(Umbrella::create(endPos));
 		umbrella[i]->setScale(0.3f);
 		this->addChild(umbrella[i]);
 	}
