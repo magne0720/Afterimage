@@ -26,9 +26,6 @@ bool UmbrellaCreator::init(float endPos, int ManNo)
 	}
 	for (int i = 0; i < ManNo; i++)
 	{
-		//umbrella[i] = Umbrella::create(endPos);
-		//umbrella[i]->setScale(0.3f);
-		//this->addChild(umbrella[i]);
 		umbrella.push_back(Umbrella::create(endPos));
 		umbrella[i]->setScale(0.3f);
 		this->addChild(umbrella[i]);
