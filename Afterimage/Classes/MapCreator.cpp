@@ -22,8 +22,6 @@ bool MapCreator::init(int number)
 	{
 		return false;
 	}
-	log("Welcome To MapCreator");
-
 	startPosition = 0;
 	endPosition = 0;
 
@@ -127,8 +125,6 @@ float MapCreator::getPositionPlayerX(float positionX)
 void MapCreator::BackGroundMove()
 {
 	float XX = (playerPosition);
-	//log("XX=%f", XX);
-	//Floors->setPositionX(XX);
-	//Shops->setPositionX(XX);
+
 	BackGrounds->setPositionX(XX/10);
 }

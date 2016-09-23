@@ -37,8 +37,6 @@ void ShopBase::update(float delta)
 
 void ShopBase::ShopCreate(int kind)
 {
-	log("get1");
-	log("get2");
 	auto split = [](const std::string& input, char delimiter)
 	{
 		istringstream stream(input);
@@ -54,9 +52,8 @@ void ShopBase::ShopCreate(int kind)
 	String* filename = String::createWithFormat("Shop/ShopData.txt");
 
 	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
-	log("get3"); 
+
 	vector<string> lines = split(fileText, '\n');
-	log("get4"); 
 	vector<string> datas = split(lines[kind], ',');
 	
 	int temp = 0;
@@ -65,7 +62,6 @@ void ShopBase::ShopCreate(int kind)
 	{
 		//Ç±Ç±Ç…èàóù
 		char data = datas[i][0];
-		log("getend%d",i);
 
 #define LINE_OPEN datas[i].c_str()
 
@@ -74,14 +70,10 @@ void ShopBase::ShopCreate(int kind)
 		case 'N'://name
 			i++;
 			shopStatus.name = LINE_OPEN;
-			log("%s", shopStatus.name.c_str());
-			log("getname");
 			break;
 		case 'G'://gate
 			i++;
 			shopStatus.gate = atof(LINE_OPEN);
-			log("%f",shopStatus.gate);
-			log("getgate");
 			break;
 		case 'S'://status
 			i++;
@@ -90,18 +82,12 @@ void ShopBase::ShopCreate(int kind)
 				shopStatus.status = true;
 			else
 				shopStatus.status = false;
-			log("%d",shopStatus.status);
-			log("getstatus");
 			break;
 		case 'M'://min-max
 			i++;	
 			shopStatus.min = atof(LINE_OPEN);
-			log("%f", shopStatus.min);
-			log("getmin");
 			i++;
 			shopStatus.max = atof(LINE_OPEN);
-			log("%f", shopStatus.max);
-			log("getmax");
 			break;
 		default:
 			break;
