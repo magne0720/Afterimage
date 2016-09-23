@@ -45,7 +45,6 @@ bool Umbrella::init(float endPos)
 void Umbrella::randomMan()
 {
 	this->initWithFile("PlantNot1.png");
-
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_int_distribution<int> mobSP(500, 1500);
@@ -74,6 +73,7 @@ void Umbrella::update(float delta)
 			break;
 		case 1:
 			this->setPositionX(this->getPositionX() + mobspeed);
+			this->setFlipX(false);
 			if (this->getPositionX() > mobEnd)
 			{
 				randomMan();
@@ -81,6 +81,7 @@ void Umbrella::update(float delta)
 			break;
 		case 2:
 			this->setPositionX(this->getPositionX() - mobspeed);
+			this->setFlipX(true);
 			if (this->getPositionX() < designResolutionSize.width * -0.1f)
 			{
 				randomMan();
