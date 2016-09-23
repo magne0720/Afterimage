@@ -24,12 +24,15 @@ bool UmbrellaCreator::init(float endPos, int ManNo)
 	{
 		return false;
 	}
+
 	for (int i = 0; i < ManNo; i++)
 	{
 		umbrella.push_back(Umbrella::create(endPos));
 		umbrella[i]->setScale(0.3f);
 		this->addChild(umbrella[i]);
 	}
+
+
 
 	return true;
 }

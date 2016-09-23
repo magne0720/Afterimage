@@ -18,6 +18,8 @@ public:
 
 	virtual bool init(float endPos, int ManNo);
 
+	float endPos;
+
 private:
 
 };

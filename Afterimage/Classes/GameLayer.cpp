@@ -31,7 +31,7 @@ bool GameLayer::init()
 	map = MapCreator::create(1);
 	addChild(map);
 	                                   //ゴール位置　生成数
-	umbrella = UmbrellaCreator::create(map->endPosition,100);
+	umbrella = UmbrellaCreator::create(map->endPosition,50);
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
 	this->addChild(umbrella, 1);
 
@@ -55,7 +55,7 @@ bool GameLayer::init()
 void GameLayer::update(float delta)
 {
 	//マップにプレイヤーの位置を送る
-	map->getPositionPlayerX(player->getPositionX());
+	map->getPositionPlayerX(spCamera->getPositionX());
 
 	if (player->getPositionX() < designResolutionSize.width / 2)
 	{

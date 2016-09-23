@@ -14,13 +14,17 @@ public:
 	float mobspeed;
 	//¶‰E”»’f
 	int RL;
+	//¶¬’x‰„
+	bool goMan;
+
 	virtual bool init(float endPos);
 
 	//ƒ‰ƒ“ƒ_ƒ€¶¬
 	void randomMan();
 	//•à‚­‚©•à‚©‚È‚¢‚©
 	void walk(float delta);
-	void randomRL();
+	//goMan‚ÌØ‚è‘Ö‚¦
+	void goManSwitch(float delta);
 	void update(float delta);
 
 	float mobEnd;
