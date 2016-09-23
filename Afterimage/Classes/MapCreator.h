@@ -5,6 +5,7 @@
 #include "MultiResolution.h"
 #include "Player.h"
 #include <iostream>
+#include "ShopBase.h"
 
 using namespace std; 
 
@@ -29,7 +30,7 @@ private:
 	//床(実装確定)
 	Layer* Floors;
 	//建物(実装確定)
-	Layer* Buildings;
+	Layer* Shops;
 	//背景この手紙
 	Layer* BackGrounds;
 	//傘(実装確定)
@@ -38,10 +39,13 @@ private:
 	Vector <Sprite*> Gimmicks;	
 	//キャラの位置
 
+	//ショップの個体値
+	ShopBase* shop;
+
 	//ステージの最後の位置
 	float playerPosition;
 
-	void BuildingMove();
+	void BackGroundMove();
 
 public:
 	float startPosition;

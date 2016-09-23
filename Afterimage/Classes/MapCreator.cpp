@@ -28,13 +28,13 @@ bool MapCreator::init(int number)
 	endPosition = 0;
 
 	Floors = Layer::create();
-	addChild(Floors);
-
-	Buildings = Layer::create();
-	addChild(Buildings);
+	addChild(Floors,4);
 
 	BackGrounds = Layer::create();
-	addChild(BackGrounds);
+	addChild(BackGrounds,2);
+
+	Shops = Layer::create();
+	addChild(Shops,3);
 
 	createStage(number);
 
@@ -45,7 +45,7 @@ bool MapCreator::init(int number)
 
 void MapCreator::update(float delta)
 {
-	BuildingMove();
+	BackGroundMove();
 }
 //テキスト読み込み型
 int MapCreator::createStage(int number)
@@ -71,7 +71,7 @@ int MapCreator::createStage(int number)
 		"none_%d.png",
 		"floor_%d.png",
 		"building_%d.png",
-		"building_%d.png",
+		"background_%d.png",
 	};
 
 	String* filename = String::createWithFormat("Stage/StageData_001.txt", number);
@@ -97,14 +97,20 @@ int MapCreator::createStage(int number)
 				if (i == number * 4 + 1)
 					Floors->addChild(spItem);
 				if (i == number * 4 + 2)
-					Buildings->addChild(spItem);
-				if (i == number * 4 + 3)
+				{
+					ShopBase* shop = ShopBase::create(CSVnumber);
+					shop->initWithFile(name->getCString());
+					shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+					shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+					Shops->addChild(shop);
+				}
+				if (i == number * 4 + 3) 
 					BackGrounds->addChild(spItem);
 			}
 			counter++;
 		}
 		endPosition = SHOP_INTERVAL*blocks.size();
-
+		Floors->setAnchorPoint(Point(endPosition / 2, 0));
 	}
 
 	return 0;
@@ -113,16 +119,16 @@ int MapCreator::createStage(int number)
 float MapCreator::getPositionPlayerX(float positionX)
 {
 	playerPosition = positionX;
-	log("playerPosition==%f", playerPosition);
+	//log("playerPosition==%f", playerPosition);
 
 	return positionX;
 }
 //奥行別に動き替えるやつ
-void MapCreator::BuildingMove()
+void MapCreator::BackGroundMove()
 {
-	float XX = ((endPosition-playerPosition)/endPosition);
-	log("XX=%f", XX);
-	Floors->setPositionX(XX);
-	Buildings->setPositionX(XX);
-	BackGrounds->setPositionX(XX);
+	float XX = (playerPosition);
+	//log("XX=%f", XX);
+	//Floors->setPositionX(XX);
+	//Shops->setPositionX(XX);
+	BackGrounds->setPositionX(XX/10);
 }
