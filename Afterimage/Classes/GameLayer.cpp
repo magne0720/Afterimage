@@ -28,12 +28,13 @@ bool GameLayer::init()
 	spr->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
 	this->addChild(spr);
 
-	umbrella = UmbrellaCreator::create();
-	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
-	this->addChild(umbrella,1);
-
 	map = MapCreator::create(1);
 	addChild(map);
+
+	umbrella = UmbrellaCreator::create(map->endPosition);
+	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
+	this->addChild(umbrella, 1);
+
 	//for (int i = 0; i < 11;i++)
 	//{
 	//	Sprite* s = Sprite::create("tile.png");
@@ -50,8 +51,10 @@ bool GameLayer::init()
 	this->scheduleUpdate();
 	return true;
 }
+
 void GameLayer::update(float delta)
 {
+
 	//マップにプレイヤーの位置を送る
 	map->getPositionPlayerX(player->getPositionX());
 
@@ -83,6 +86,7 @@ void GameLayer::update(float delta)
 		break;
 	}
 }
+
 //画面をタッチした時の処理
 bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 {
@@ -120,12 +124,14 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 	return true;
 
 }
+
 //タッチ中の処理
 void GameLayer::onTouchMoved(Touch* touch, Event* event)
 {
 
 
 }
+
 //タッチが終わった時の処理
 void GameLayer::onTouchEnded(Touch *touch, Event *event)
 {

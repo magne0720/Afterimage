@@ -1,23 +1,42 @@
 #include "Umbrella.h"
 #include "MultiResolution.h"
-#include "GameLayer.h"
 
-bool Umbrella::init()
+Umbrella *Umbrella::create(float endPos)
+{
+
+	Umbrella *pRet = new Umbrella();
+
+	if (pRet && pRet->init(endPos))
+	{
+		pRet->autorelease();
+
+		return pRet;
+	}
+	else {
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+
+bool Umbrella::init(float endPos)
 {
 	if (!Sprite::init())
 	{
 		return false;
 	}
-	randomMan();
 
+	mobEnd = endPos;
+	randomMan();
+	
 	this->scheduleUpdate();
 
 	return true;
 }
+
 void Umbrella::randomMan()
 {
 	this->initWithFile("PlantNot1.png");
-
 
 	random_device rd;
 	mt19937 mt(rd());
@@ -32,22 +51,27 @@ void Umbrella::randomMan()
 	}
 	else
 	{
-		this->setPosition(Vec2(designResolutionSize.width * 1, designResolutionSize.height*0.3f));
+		this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.3f));
 	}
-
-
-
 }
+
 void Umbrella::update(float delta)
 {
 	if (RL == 1)
 	{
 		this->setPositionX(this->getPositionX() + mobspeed);
+		if (this->getPositionX() > mobEnd)
+		{
+			randomMan();
+		}
 	}
 	else
 	{
 		this->setPositionX(this->getPositionX() - mobspeed);
+		if (this->getPositionX() < designResolutionSize.width * -0.1f)
+		{
+			randomMan();
+		}
+
 	}
-
-
 }

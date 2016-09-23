@@ -104,7 +104,6 @@ int MapCreator::createStage(int number)
 			counter++;
 		}
 		endPosition = SHOP_INTERVAL*blocks.size();
-
 	}
 
 	return 0;

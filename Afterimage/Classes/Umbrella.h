@@ -8,12 +8,13 @@ using namespace std;
 class Umbrella : public Sprite
 {
 public:
-	CREATE_FUNC(Umbrella);
+	//CREATE_FUNC(Umbrella);
+	static Umbrella *create(float endPos);
 	//ÉÇÉuÇÃë¨Ç≥
 	float mobspeed;
 	//ç∂âEîªíf
 	int RL;
-	bool init();
+	virtual bool init(float endPos);
 
 	void randomMan();
 	void update(float delta);
@@ -23,4 +24,5 @@ public:
 private:
 
 };
+
 #endif // !

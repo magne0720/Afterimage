@@ -9,11 +9,11 @@ USING_NS_CC;
 class UmbrellaCreator : public Node
 {
 public:
-	CREATE_FUNC(UmbrellaCreator);
+	static UmbrellaCreator *create(float endPos);
 
 	Umbrella *umbrella[15];
 
-	bool init();
+	virtual bool init(float endPos);
 
 private:
 
