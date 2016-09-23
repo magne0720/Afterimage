@@ -16,7 +16,11 @@ public:
 	int RL;
 	virtual bool init(float endPos);
 
+	//ƒ‰ƒ“ƒ_ƒ€¶¬
 	void randomMan();
+	//•à‚­‚©•à‚©‚È‚¢‚©
+	void walk(float delta);
+	void randomRL();
 	void update(float delta);
 
 	float mobEnd;

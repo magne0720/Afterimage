@@ -31,7 +31,7 @@ bool GameLayer::init()
 	map = MapCreator::create(1);
 	addChild(map);
 	                                   //ƒS[ƒ‹ˆÊ’u@¶¬”
-	umbrella = UmbrellaCreator::create(map->endPosition,15);
+	umbrella = UmbrellaCreator::create(map->endPosition,100);
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
 	this->addChild(umbrella, 1);
 

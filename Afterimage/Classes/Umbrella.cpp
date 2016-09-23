@@ -25,9 +25,9 @@ bool Umbrella::init(float endPos)
 	{
 		return false;
 	}
-
 	mobEnd = endPos;
 	randomMan();
+	walk(0);
 	
 	this->scheduleUpdate();
 
@@ -40,9 +40,9 @@ void Umbrella::randomMan()
 
 	random_device rd;
 	mt19937 mt(rd());
-	uniform_int_distribution<int> mobSP(5, 15);
+	uniform_int_distribution<int> mobSP(500, 1500);
 	uniform_int_distribution<int> intRL(1, 2);
-	mobspeed = (float)mobSP(mt);
+	mobspeed = (float)mobSP(mt) / 100;
 	RL = intRL(mt);
 
 	if (RL == 1)
@@ -57,21 +57,37 @@ void Umbrella::randomMan()
 
 void Umbrella::update(float delta)
 {
-	if (RL == 1)
+	switch (RL)
 	{
+	case 0:
+		this->setPositionX(this->getPositionX());
+		break;
+	case 1:
 		this->setPositionX(this->getPositionX() + mobspeed);
 		if (this->getPositionX() > mobEnd)
 		{
 			randomMan();
 		}
-	}
-	else
-	{
+		break;
+	case 2:
 		this->setPositionX(this->getPositionX() - mobspeed);
 		if (this->getPositionX() < designResolutionSize.width * -0.1f)
 		{
 			randomMan();
 		}
-
+		break;
 	}
+}
+
+void Umbrella::walk(float delta)
+{
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_int_distribution<int> randomTime(100, 200);
+	uniform_int_distribution<int> RLranZERO(0, 2);
+	RL = RLranZERO(mt);
+	log("yobareta");
+	this->schedule(schedule_selector(Umbrella::walk), ((float)randomTime(mt)/100));
+
+
 }
