@@ -25,7 +25,7 @@ public:
 
 	/*Camera *camera;*/
 	Player *player;
-	Sprite *spr;
+	Sprite *spCamera;
 	UmbrellaCreator *umbrella;
 	MapCreator *map;
 	

@@ -3,17 +3,20 @@
 
 #include "cocos2d.h"
 #include "Umbrella.h"
+#include <vector>
+using namespace std;
 
 USING_NS_CC;
 
 class UmbrellaCreator : public Node
 {
 public:
-	CREATE_FUNC(UmbrellaCreator);
+	static UmbrellaCreator *create(float endPos,int ManNo);
 
-	Umbrella *umbrella[15];
+	//Umbrella *umbrella[15];
+	vector<Umbrella*> umbrella;
 
-	bool init();
+	virtual bool init(float endPos, int ManNo);
 
 private:
 

@@ -24,16 +24,17 @@ bool GameLayer::init()
 	this->addChild(player, 2);
 
 
-	spr = Sprite::create();
-	spr->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
-	this->addChild(spr);
-
-	umbrella = UmbrellaCreator::create();
-	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
-	this->addChild(umbrella,1);
+	spCamera = Sprite::create();
+	spCamera->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
+	this->addChild(spCamera);
 
 	map = MapCreator::create(1);
 	addChild(map);
+	                                   //ゴール位置　生成数
+	umbrella = UmbrellaCreator::create(map->endPosition,100);
+	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
+	this->addChild(umbrella, 1);
+
 	//for (int i = 0; i < 11;i++)
 	//{
 	//	Sprite* s = Sprite::create("tile.png");
@@ -50,6 +51,7 @@ bool GameLayer::init()
 	this->scheduleUpdate();
 	return true;
 }
+
 void GameLayer::update(float delta)
 {
 	//マップにプレイヤーの位置を送る
@@ -57,11 +59,11 @@ void GameLayer::update(float delta)
 
 	if (player->getPositionX() < designResolutionSize.width / 2)
 	{
-		spr->setPositionX(spr->getPositionX());
+		spCamera->setPositionX(spCamera->getPositionX());
 	}
 	else
 	{
-		spr->setPositionX(player->getPositionX());
+		spCamera->setPositionX(player->getPositionX());
 	}
 
 	if (player->getPositionX() /*+ (player->getContentSize().width/2)*/ <= designResolutionSize.width * 0)
@@ -83,13 +85,14 @@ void GameLayer::update(float delta)
 		break;
 	}
 }
+
 //画面をタッチした時の処理
 bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 {
 	Point pos = Vec2(touch->getLocationInView().x, touch->getLocationInView().y);
 	if (ACTswitch == true)
 	{
-		this->runAction(Follow::create(spr));
+		this->runAction(Follow::create(spCamera));
 		ACTswitch = false;
 	}
 	if (pos.x > designResolutionSize.width / 2)
@@ -120,12 +123,14 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 	return true;
 
 }
+
 //タッチ中の処理
 void GameLayer::onTouchMoved(Touch* touch, Event* event)
 {
 
 
 }
+
 //タッチが終わった時の処理
 void GameLayer::onTouchEnded(Touch *touch, Event *event)
 {
