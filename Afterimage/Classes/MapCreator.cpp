@@ -36,6 +36,15 @@ bool MapCreator::init(int number)
 
 	createStage(number);
 
+	for (int i = 0; i < allShops.size();i++)
+	
+	{
+		log("shopPositionX=[%f]", allShops.at(i)->shopStatus.gate);
+
+	}
+
+
+
 	scheduleUpdate();
 
 	return true;
@@ -100,6 +109,7 @@ int MapCreator::createStage(int number)
 					shop->initWithFile(name->getCString());
 					shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 					shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+					shop->shopStatus.gate += SHOP_INTERVAL*j;
 					Shops->addChild(shop);
 					if(shop->shopStatus.status==true)
 					allShops.pushBack(shop);
