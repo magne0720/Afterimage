@@ -10,9 +10,9 @@ USING_NS_CC;
 class GameScene : public Scene
 {
 public:
-	CREATE_FUNC(GameScene);
+	static GameScene *create(int fromTitle);
 
-	bool init();
+	bool init(int fromTitle);
 	RainLayer *rainLayer;
 	GameLayer *gameLayer;
 	RainLayer *rainLayerb;

@@ -2,6 +2,7 @@
 #include "HelloWorldScene.h"
 #include "MultiResolution.h"
 #include "GameScene.h"
+#include "TitleScene.h"
 
 USING_NS_CC;
 
@@ -79,8 +80,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    //auto scene = HelloWorld::createScene();
-	auto scene = GameScene::create();
+	//auto scene = GameScene::create();
+	auto scene = TitleScene::create();
 
 	// ‰ð‘œ“x‚ÌÝ’è
 	glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
