@@ -28,7 +28,7 @@ bool Umbrella::init(float endPos)
 	goMan = false;
 	stopRandom = true;
 	mobEnd = endPos;
-	randomMan();
+	//randomMan();
 	walk(0);
 
 	random_device rd;
