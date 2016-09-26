@@ -12,9 +12,11 @@ USING_NS_CC;
 class GameLayer : public Layer
 {
 public:
-	CREATE_FUNC(GameLayer);
+	static GameLayer *create(int fromTitle);
 
-	bool init();
+	bool init(int fromTitle);
+	//タイトルからの(仮)
+	int a;
 
 	void update(float delta);
 
@@ -34,6 +36,8 @@ private:
 	float speed;
 	//左か右か
 	int leftAndRightNum;
+	//モブの数
+	int mobNum;
 	//アクションストッパー
 	bool ACTswitch;
 	bool direction;

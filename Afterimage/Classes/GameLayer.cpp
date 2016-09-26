@@ -1,13 +1,34 @@
 #include "GameLayer.h"
 
-bool GameLayer::init()
+GameLayer *GameLayer::create(int fromTitle)
+
+{
+
+	GameLayer *pRet = new GameLayer();
+
+	if (pRet && pRet->init(fromTitle))
+	{
+		pRet->autorelease();
+
+		return pRet;
+	}
+	else {
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+
+bool GameLayer::init(int fromTitle)
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
+	a = fromTitle;
 	speed = 15.0f;
 	leftAndRightNum = 0;
+	mobNum = 50;
 	ACTswitch = true;
 	direction = true;
 
@@ -31,7 +52,7 @@ bool GameLayer::init()
 	map = MapCreator::create(1);
 	addChild(map);
 	                                   //ƒS[ƒ‹ˆÊ’u@¶¬”
-	umbrella = UmbrellaCreator::create(map->endPosition,50);
+	umbrella = UmbrellaCreator::create(map->endPosition,mobNum);
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
 	this->addChild(umbrella, 1);
 
@@ -83,6 +104,12 @@ void GameLayer::update(float delta)
 		player->setPositionX(player->getPositionX() - speed);
 	default:
 		break;
+	}
+	for (int i = 0; i < mobNum; i++)
+	{
+		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
+		{
+		}
 	}
 }
 
