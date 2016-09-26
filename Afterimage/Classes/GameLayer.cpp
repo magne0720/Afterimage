@@ -32,6 +32,7 @@ bool GameLayer::init(int fromTitle)
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
+	goalStop = true;
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -72,7 +73,10 @@ bool GameLayer::init(int fromTitle)
 		uniform_int_distribution<int> shopOrEnd(0, 1);
 		if (shopOrEnd(mt) == 0)
 		{
+			shopstop = false;
+			this->schedule(schedule_selector(GameLayer::shopStopON), 6);
 			umbrella->umbrella[n]->randomMan();
+
 		}
 		else
 		{
@@ -124,11 +128,14 @@ void GameLayer::update(float delta)
 	}
 	random_device rd;
 	mt19937 mt(rd());
-
-	if (player->getBoundingBox().containsPoint(Vec2(map->goalPosition, designResolutionSize.height*0.4f)));
+	if (player->getBoundingBox().containsPoint(Point(map->goalPosition, designResolutionSize.height*0.4f)))
 	{
+		if (goalStop == true)
+		{
+			goalStop = false;
+			log("G--------O---------A--------L");
+		}
 	}
-
 	for (int i = 0; i < mobNum; i++)
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
@@ -157,6 +164,7 @@ void GameLayer::update(float delta)
 					umbrella->umbrella[i]->randomMan();
 					break;
 				case 3:
+					umbrella->umbrella[i]->stopRandomOFF();
 					mobShop(i);
 					break;
 				default:
@@ -233,7 +241,7 @@ void GameLayer::mobShop(int mobNum)
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
 		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
 		shopstop = false;
-		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
+		this->schedule(schedule_selector(GameLayer::shopStopON), 6);
 	}
 }
 

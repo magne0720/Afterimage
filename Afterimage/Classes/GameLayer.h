@@ -30,6 +30,8 @@ public:
 	void shopStopON(float delta);
 	//モブ店湧きストッパー
 	bool shopstop;
+	//連続ゴールストッパー
+	bool goalStop;
 
 	/*Camera *camera;*/
 	Player *player;

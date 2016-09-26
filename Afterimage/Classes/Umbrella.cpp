@@ -114,7 +114,7 @@ void Umbrella::goManSwitch(float delta)
 void Umbrella::stopRandomOFF()
 {
 	stopRandom = false;
-	this->schedule(schedule_selector(Umbrella::stopRandomON), 3);
+	this->schedule(schedule_selector(Umbrella::stopRandomON), 6);
 
 }
 
