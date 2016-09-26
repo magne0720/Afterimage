@@ -120,14 +120,26 @@ void GameLayer::update(float delta)
 				//log("size.at=[%d]",j);
 				random_device rd;
 				mt19937 mt(rd());
-				uniform_int_distribution<int> erasure(0,1);
-				if (erasure(mt) == 0)
+				uniform_int_distribution<int> erasure(0,3);
+				//if (erasure(mt) == 0)
+				//{
+				//	umbrella->umbrella[i]->stopRandomOFF();
+				//}
+				//else
+				//{
+				//	umbrella->umbrella[i]->randomMan();
+				//}
+				switch (erasure(mt))
 				{
-					umbrella->umbrella[i]->stopRandomOFF();
-				}
-				else
-				{
+				case 2:
 					umbrella->umbrella[i]->randomMan();
+					break;
+				case 3:
+
+					break;
+				default:
+					umbrella->umbrella[i]->stopRandomOFF();
+					break;
 				}
 			}
 		}
