@@ -17,6 +17,8 @@ public:
 	int RL;
 	//生成遅延
 	bool goMan;
+	//ランダムスタッパー
+	bool stopRandom;
 
 	virtual bool init(float endPos);
 
@@ -26,6 +28,10 @@ public:
 	void walk(float delta);
 	//goManの切り替え
 	void goManSwitch(float delta);
+	//stopRandomの切り替え
+	void stopRandomOFF();
+	void stopRandomON(float delta);
+
 	void update(float delta);
 
 	float mobEnd;

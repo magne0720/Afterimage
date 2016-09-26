@@ -6,6 +6,7 @@
 #include "MapCreator.h"
 #include "MultiResolution.h"
 #include "UmbrellaCreator.h"
+using namespace std;
 
 USING_NS_CC;
 
@@ -24,6 +25,8 @@ public:
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);
 	void onTouchEnded(Touch* touch, Event* event);
+	
+	
 
 	/*Camera *camera;*/
 	Player *player;

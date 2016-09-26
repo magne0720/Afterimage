@@ -28,7 +28,7 @@ bool GameLayer::init(int fromTitle)
 	stageNum = fromTitle;
 	speed = 15.0f;
 	leftAndRightNum = 0;
-	mobNum = 50;
+	mobNum = 20;
 	ACTswitch = true;
 	direction = true;
 
@@ -105,11 +105,43 @@ void GameLayer::update(float delta)
 	default:
 		break;
 	}
+	random_device rd;
+	mt19937 mt(rd());
+
 	for (int i = 0; i < mobNum; i++)
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
 		{
+		}
+		for (int j = 0; j < map->allShops.size(); j++)
+		{
+			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Point(map->allShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
+			{
+				//log("size.at=[%d]",j);
+				random_device rd;
+				mt19937 mt(rd());
+				uniform_int_distribution<int> erasure(0,3);
+				//if (erasure(mt) == 0)
+				//{
+				//	umbrella->umbrella[i]->stopRandomOFF();
+				//}
+				//else
+				//{
+				//	umbrella->umbrella[i]->randomMan();
+				//}
+				switch (erasure(mt))
+				{
+				case 2:
+					umbrella->umbrella[i]->randomMan();
+					break;
+				case 3:
 
+					break;
+				default:
+					umbrella->umbrella[i]->stopRandomOFF();
+					break;
+				}
+			}
 		}
 	}
 }
