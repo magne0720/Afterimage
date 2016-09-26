@@ -213,6 +213,11 @@ void GameLayer::mobShop(int mobNum)
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
 		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
 		shopstop = false;
-
+		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
+}
+
+void GameLayer::shopStopON(float delta)
+{
+	shopstop = true;
 }

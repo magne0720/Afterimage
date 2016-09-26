@@ -27,7 +27,7 @@ public:
 	void onTouchEnded(Touch* touch, Event* event);
 	//モブがわく店
 	void mobShop(int mobNum);
-
+	void shopStopON(float delta);
 	//モブ店湧きストッパー
 	bool shopstop;
 
