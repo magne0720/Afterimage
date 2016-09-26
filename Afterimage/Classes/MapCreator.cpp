@@ -22,8 +22,6 @@ bool MapCreator::init(int number)
 	{
 		return false;
 	}
-	log("Welcome To MapCreator");
-
 	startPosition = 0;
 	endPosition = 0;
 
@@ -103,6 +101,7 @@ int MapCreator::createStage(int number)
 					shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 					shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
 					Shops->addChild(shop);
+					allShops.pushBack(shop);
 				}
 				if (i == number * 4 + 3) 
 					BackGrounds->addChild(spItem);
@@ -127,8 +126,6 @@ float MapCreator::getPositionPlayerX(float positionX)
 void MapCreator::BackGroundMove()
 {
 	float XX = (playerPosition);
-	//log("XX=%f", XX);
-	//Floors->setPositionX(XX);
-	//Shops->setPositionX(XX);
+
 	BackGrounds->setPositionX(XX/10);
 }

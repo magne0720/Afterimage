@@ -25,7 +25,6 @@ private:
 
 	
 	//次これやる
-
 	//ステージ生成用 
 	//床(実装確定)
 	Layer* Floors;
@@ -50,6 +49,9 @@ private:
 public:
 	float startPosition;
 	float endPosition;
+
+	//店の配列
+	Vector<ShopBase*> allShops;
 
 	static MapCreator* create(int number);
 	void update(float delta);
