@@ -30,6 +30,7 @@ bool GameLayer::init(int fromTitle)
 	leftAndRightNum = 0;
 	mobNum = 20;
 	ACTswitch = true;
+	shopstop = true;
 	direction = true;
 
 	auto tap = EventListenerTouchOneByOne::create();
@@ -112,6 +113,7 @@ void GameLayer::update(float delta)
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
 		{
+
 		}
 		for (int j = 0; j < map->allShops.size(); j++)
 		{
@@ -135,7 +137,7 @@ void GameLayer::update(float delta)
 					umbrella->umbrella[i]->randomMan();
 					break;
 				case 3:
-
+					mobShop(i);
 					break;
 				default:
 					umbrella->umbrella[i]->stopRandomOFF();
@@ -197,4 +199,20 @@ void GameLayer::onTouchEnded(Touch *touch, Event *event)
 	player->stopAct(leftAndRightNum);
 	leftAndRightNum = 0;
 	direction = true;
+}
+
+void GameLayer::mobShop(int mobNum)
+{
+	if (shopstop == true)
+	{
+		umbrella->umbrella[mobNum]->stopRandomOFF();
+		random_device rd;
+		mt19937 mt(rd());
+		//log("mapSize%d", map->allShops.size());
+		int mSize = map->allShops.size();
+		uniform_int_distribution<int> randomShop(0, (mSize - 1));
+		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
+		shopstop = false;
+
+	}
 }
