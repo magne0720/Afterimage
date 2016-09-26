@@ -88,22 +88,27 @@ int MapCreator::createStage(int number)
 
 	int counter = 1;
 
-	for (int i = number * 4; i < number * 4 + 4; i++)
+	for (int i = number * 5; i < number * 5 + 5; i++)
 	{
 		vector<string> blocks = split(lines[i], ',');
 
-		if (i != number * 4) {
-
+		if (i != number * 5) {
 			for (int j = 0; j < blocks.size(); j++)
 			{
 				int CSVnumber = atoi(blocks.at(j).c_str());
+				if (i == number * 5 + 4) 
+				{
+					goalPosition = CSVnumber;
+
+					break;
+				}
 				String* name = String::createWithFormat(pngName[counter].data(), CSVnumber);
 				Sprite* spItem = Sprite::create(name->getCString());
 				spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 				spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
-				if (i == number * 4 + 1)
+				if (i == number * 5 + 1)
 					Floors->addChild(spItem);
-				if (i == number * 4 + 2)
+				if (i == number * 5 + 2)
 				{
 					ShopBase* shop = ShopBase::create(CSVnumber);
 					shop->initWithFile(name->getCString());
@@ -113,15 +118,14 @@ int MapCreator::createStage(int number)
 					Shops->addChild(shop);
 					if(shop->shopStatus.status==true)
 					allShops.pushBack(shop);
-					log("%d", allShops.size());
 				}
-				if (i == number * 4 + 3) 
+				if (i == number * 5 + 3) 
 					BackGrounds->addChild(spItem);
+					
 			}
 			counter++;
 		}
 		endPosition = SHOP_INTERVAL*blocks.size();
-		Floors->setAnchorPoint(Point(endPosition / 2, 0));
 	}
 
 	return 0;

@@ -16,6 +16,7 @@ USING_NS_CC;
 #define FLOOR_HEIGHT (designResolutionSize.height*0.0)
 #define SHOP_HEIGHT (designResolutionSize.height*0.185)
 #define START_POSITION 0
+#define NUMBER_PATH 6
 
 class MapCreator :public Layer
 {
@@ -52,6 +53,8 @@ public:
 
 	//店の配列
 	Vector<ShopBase*> allShops;
+	//ゴール地点
+	float goalPosition;
 
 	static MapCreator* create(int number);
 	void update(float delta);
