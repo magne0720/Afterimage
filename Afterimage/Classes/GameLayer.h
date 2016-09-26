@@ -25,8 +25,11 @@ public:
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);
 	void onTouchEnded(Touch* touch, Event* event);
-	
-	
+	//モブがわく店
+	void mobShop(int mobNum);
+
+	//モブ店湧きストッパー
+	bool shopstop;
 
 	/*Camera *camera;*/
 	Player *player;
