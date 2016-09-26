@@ -15,8 +15,8 @@ public:
 	static GameLayer *create(int fromTitle);
 
 	bool init(int fromTitle);
-	//ƒ^ƒCƒgƒ‹‚©‚ç‚Ì(‰¼)
-	int a;
+
+	int stageNum;
 
 	void update(float delta);
 

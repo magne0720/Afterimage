@@ -25,7 +25,7 @@ bool GameLayer::init(int fromTitle)
 	{
 		return false;
 	}
-	a = fromTitle;
+	stageNum = fromTitle;
 	speed = 15.0f;
 	leftAndRightNum = 0;
 	mobNum = 50;
@@ -109,6 +109,7 @@ void GameLayer::update(float delta)
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
 		{
+
 		}
 	}
 }
