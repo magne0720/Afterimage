@@ -98,7 +98,7 @@ int MapCreator::createStage(int number)
 				int CSVnumber = atoi(blocks.at(j).c_str());
 				if (i == number * 5 + 4) 
 				{
-					goalPosition = CSVnumber;
+					goalPosition = allShops.at(CSVnumber)->shopStatus.gate;
 
 					break;
 				}

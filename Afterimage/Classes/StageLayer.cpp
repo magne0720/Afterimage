@@ -19,29 +19,29 @@ bool StageLayer::init()
 
 
 	return true;
-}
+};
 
 void StageLayer::update(float delta) 
 {
 
-
-}
+};
 
 //画面をタッチした時の処理
 bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 {
 
 	return true;
-}
+};
 
 //タッチ中の処理
 void StageLayer::onTouchMoved(Touch* touch, Event* event)
 {
 
 
-}
+};
 
 //タッチが終わった時の処理
 void StageLayer::onTouchEnded(Touch *touch, Event *event)
 {
-}
+
+};
