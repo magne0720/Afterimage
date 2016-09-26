@@ -101,7 +101,9 @@ int MapCreator::createStage(int number)
 					shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 					shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
 					Shops->addChild(shop);
+					if(shop->shopStatus.status==true)
 					allShops.pushBack(shop);
+					log("%d", allShops.size());
 				}
 				if (i == number * 4 + 3) 
 					BackGrounds->addChild(spItem);
