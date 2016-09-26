@@ -118,6 +118,7 @@ int MapCreator::createStage(int number)
 					Shops->addChild(shop);
 					if(shop->shopStatus.status==true)
 					allShops.pushBack(shop);
+					endPosition = SHOP_INTERVAL*blocks.size();
 				}
 				if (i == number * 5 + 3) 
 					BackGrounds->addChild(spItem);
@@ -125,7 +126,6 @@ int MapCreator::createStage(int number)
 			}
 			counter++;
 		}
-		endPosition = SHOP_INTERVAL*blocks.size();
 	}
 
 	return 0;

@@ -21,6 +21,12 @@ bool StageLayer::init()
 	return true;
 }
 
+void StageLayer::update(float delta) 
+{
+
+
+}
+
 //‰æ–Ê‚ğƒ^ƒbƒ`‚µ‚½‚Ìˆ—
 bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 {

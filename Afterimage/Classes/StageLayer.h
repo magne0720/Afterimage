@@ -17,7 +17,7 @@ public:
 
 
 private:
-
+	void update(float delta);
 
 };
 #endif // !__Stage_LAYER__
