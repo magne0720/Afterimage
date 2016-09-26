@@ -28,7 +28,7 @@ bool GameLayer::init(int fromTitle)
 	stageNum = fromTitle;
 	speed = 15.0f;
 	leftAndRightNum = 0;
-	mobNum = 50;
+	mobNum = 20;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
@@ -65,22 +65,6 @@ bool GameLayer::init(int fromTitle)
 	//	addChild(s);
 	//}
 	//this->runAction(Follow::create(player));
-	for (int n = 0; n < mobNum; n++)
-	{
-		random_device rd;
-		mt19937 mt(rd());
-		uniform_int_distribution<int> shopOrEnd(0, 1);
-		if (shopOrEnd(mt) == 0)
-		{
-			umbrella->umbrella[n]->randomMan();
-		}
-		else
-		{
-			umbrella->umbrella[n]->stopRandomOFF();
-			mobShop(n);
-		}
-	}
-
 	player->changeLeft();
 	player->stopAct(2);
 	player->changeRight();
@@ -125,19 +109,14 @@ void GameLayer::update(float delta)
 	random_device rd;
 	mt19937 mt(rd());
 
-	if (player->getBoundingBox().containsPoint(Vec2(map->goalPosition, designResolutionSize.height*0.4f)));
-	{
-	}
-
 	for (int i = 0; i < mobNum; i++)
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
 		{
-
 		}
 		for (int j = 0; j < map->allShops.size(); j++)
 		{
-			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->allShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
+			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Point(map->allShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
 			{
 				//log("size.at=[%d]",j);
 				random_device rd;
@@ -233,11 +212,6 @@ void GameLayer::mobShop(int mobNum)
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
 		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
 		shopstop = false;
-		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
-	}
-}
 
-void GameLayer::shopStopON(float delta)
-{
-	shopstop = true;
+	}
 }

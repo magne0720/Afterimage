@@ -1,5 +1,7 @@
 #include "MapCreator.h"
 
+#include "StageItem.h"
+
 MapCreator* MapCreator::create(int number)
 {
 	MapCreator *pRet = new MapCreator();
@@ -33,6 +35,9 @@ bool MapCreator::init(int number)
 
 	Shops = Layer::create();
 	addChild(Shops,3);
+
+	StageItem* ss = StageItem::create(1);
+	addChild(ss);
 
 	createStage(number);
 
