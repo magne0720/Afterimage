@@ -6,6 +6,7 @@
 #include "MapCreator.h"
 #include "MultiResolution.h"
 #include "UmbrellaCreator.h"
+using namespace std;
 
 USING_NS_CC;
 

@@ -26,6 +26,7 @@ bool Umbrella::init(float endPos)
 		return false;
 	}
 	goMan = false;
+	stopRandom = true;
 	mobEnd = endPos;
 	randomMan();
 	walk(0);
@@ -44,21 +45,25 @@ bool Umbrella::init(float endPos)
 
 void Umbrella::randomMan()
 {
-	this->initWithFile("PlantNot1.png");
-	random_device rd;
-	mt19937 mt(rd());
-	uniform_int_distribution<int> mobSP(500, 1500);
-	uniform_int_distribution<int> intRL(1, 2);
-	mobspeed = (float)mobSP(mt) / 100;
-	RL = intRL(mt);
+	if (stopRandom == true)
+	{
+		this->initWithFile("PlantNot1.png");
+		random_device rd;
+		mt19937 mt(rd());
+		uniform_int_distribution<int> mobSP(500, 1500);
+		uniform_int_distribution<int> intRL(1, 2);
+		mobspeed = (float)mobSP(mt) / 100;
+		RL = intRL(mt);
 
-	if (RL == 1)
-	{
-		this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.3f));
-	}
-	else
-	{
-		this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.3f));
+		if (RL == 1)
+		{
+			this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.3f));
+		}
+		else
+		{
+			this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.3f));
+		}
+		stopRandomOFF();
 	}
 }
 
@@ -104,4 +109,16 @@ void Umbrella::walk(float delta)
 void Umbrella::goManSwitch(float delta)
 {
 	goMan = true;
+}
+
+void Umbrella::stopRandomOFF()
+{
+	stopRandom = false;
+	this->schedule(schedule_selector(Umbrella::stopRandomON), 3);
+
+}
+
+void Umbrella::stopRandomON(float delta)
+{
+	stopRandom = true;
 }
