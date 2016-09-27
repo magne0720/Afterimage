@@ -268,6 +268,7 @@ bool GameLayer::hit()
 				player->getPositionX() < map->allShops.at(t)->shopStatus.max)
 			{
 				log("%d", t);
+				hitNum = 0;
 			}
 			else
 			{
