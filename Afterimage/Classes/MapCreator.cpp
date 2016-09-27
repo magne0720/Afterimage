@@ -215,7 +215,7 @@ void MapCreator::StageCreate(vector<string> letter)
 	log("welcome To StageCreate!"); 
 	for (int i = 1; i < letter.size(); i++)
 	{
-		log("%c", letter[i].c_str());
+		//log("%c", letter[i].c_str());
 		int CSVnumber = atoi(letter[i].c_str());
 		log("CSVnumber=%d", CSVnumber);
 		ShopBase* shop = ShopBase::create(CSVnumber);
