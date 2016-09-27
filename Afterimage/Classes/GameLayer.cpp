@@ -137,10 +137,7 @@ void GameLayer::update(float delta)
 			log("G--------O---------A--------L");
 		}
 	}
-	if (hit() == true)
-	{
-	}
-	else
+	if (!hit())
 	{
 		PlayerHP--;
 	}
@@ -252,7 +249,9 @@ void GameLayer::shopStopON(float delta)
 
 bool GameLayer::hit()
 {
-	int hitNum = 0;
+	//int hitNum = 0;
+	bool isShop = false;
+	bool isUmbrella = false;
 	for (int t = 0; t < map->allShops.size(); t++)
 	{
 		//if (player->getPositionX() < map->allShops.at(t)->shopStatus.min &&
@@ -263,16 +262,12 @@ bool GameLayer::hit()
 		//}
 		if (player->getBoundingBox().intersectsRect(map->allShops.at(t)->getBoundingBox()))
 		{
-			//log("[%f],[%f]" ,map->allShops.at(t)->shopStatus.min, map->allShops.at(t)->shopStatus.max);
+			log("[%f],[%f]" ,map->allShops.at(t)->shopStatus.min, map->allShops.at(t)->shopStatus.max);
 			if (player->getPositionX() > map->allShops.at(t)->shopStatus.min &&
 				player->getPositionX() < map->allShops.at(t)->shopStatus.max)
 			{
-				log("%d", t);
-				hitNum = 0;
-			}
-			else
-			{
-				hitNum++;
+				//log("%d", t);
+				isShop = true;
 			}
 			
 		}
@@ -281,22 +276,16 @@ bool GameLayer::hit()
 	{
 		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[s]->getBoundingBox()))
 		{
-			hitNum = 0;
+			isUmbrella = true;
 			s = mobNum;
-
 		}
-		else
-		{
-			hitNum++;
-		}
-
 	}
 
-	if (hitNum == 0)//“–‚½‚Á‚Ä‚È‚¢
+	if (isShop|| isUmbrella)//ˆÀ‘S
 	{
 		return true;
 	}
-	else//“–‚½‚Á‚Ä‚é
+	else//Ž€
 	{
 		return false;
 	}
