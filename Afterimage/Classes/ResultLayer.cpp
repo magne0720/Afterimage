@@ -1,5 +1,6 @@
 #include "ResultLayer.h"
 #include "TitleScene.h"
+#include "MultiResolution.h"
 
 
 ResultLayer* ResultLayer::create(int score)
@@ -34,7 +35,15 @@ bool ResultLayer::init(int score)
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
-
+	for (float f = 0; f < 1;f+=0.1)
+	{
+		for (float g = 0; g < 1;g+=0.1)
+		{
+			Sprite* sp = Sprite::create("umbrella_0.png");
+			sp->setPosition(Vec2(designResolutionSize.width*f, designResolutionSize.height*g));
+			addChild(sp);
+		}
+	}
 
 	return true;
 };

@@ -1,5 +1,5 @@
-#ifndef __RESULTLAYER_H__
-#define __RESULTLAYER_H__
+#ifndef __RESULT_LAYER_H__
+#define __RESULT_LAYER_H__
 
 #include "cocos2d.h"
 

@@ -109,74 +109,19 @@ void MapCreator::createStage(int number)
 			break;
 		case 'B'://BACK
 			BackCreate(blocks);
-
 			log("B");
 			break;
 		case 'G'://GOAL
 			log("G");
-			//j++;
-			//endPosition = CSVnumber;
+			goalPosition = openShops.at(atoi(blocks[1].c_str()))->shopStatus.gate;
+			log("goal=[%f]", goalPosition);
 			break;
 		default:
 			log("default");
-			//int CSVnumber = atoi(blocks.at(i).c_str());
-			//String* name = String::createWithFormat(pngName[name_count].data(), CSVnumber);
-
-			//ShopBase* shop = ShopBase::create(CSVnumber);
-
-
-			//	Sprite* spItem = Sprite::create(name->getCString());
-			//spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-			//spItem->setPosition(Vec2(SHOP_INTERVAL * i, heighter[height_count]));
-			//addChild(spItem);
-			//shop->initWithFile(name->getCString());
-			//shop->setPosition(Vec2(SHOP_INTERVAL * i, heighter[height_count]));
-			//shop->shopStatus.gate += SHOP_INTERVAL*i;
-			//Shops->addChild(shop);
-			//	if (shop->shopStatus.status == true)
-				//	allShops.pushBack(shop);
-			//endPosition = SHOP_INTERVAL*blocks.size();
 
 			break;
 		}
 	}
-	log("stop");
-		//for (int j = 0; j < blocks.size(); j++)
-		//{
-		//	int CSVnumber = atoi(blocks.at(j).c_str());
-		//		String* name = String::createWithFormat(pngName[counter].data(), CSVnumber);
-		//	Sprite* spItem = Sprite::create(name->getCString());
-		//	spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-		//	spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
-		//	if (i == number * 5 + 4)
-		//	{
-		//		//goalPosition = allShops.at(CSVnumber)->shopStatus.gate;
-
-		//		//break;
-		//	}
-		//
-		//	if (i == number * 5 + 1)
-		//	{
-		//		//Floors->addChild(spItem);
-		//	}
-		//	if (i == number * 5 + 2)
-		//	{
-		//		ShopBase* shop = ShopBase::create(CSVnumber);
-		//		shop->initWithFile(name->getCString());
-		//		shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
-		//		shop->shopStatus.gate += SHOP_INTERVAL*j;
-		//		Shops->addChild(shop);
-		//		if (shop->shopStatus.status == true)
-		//			allShops.pushBack(shop);
-		//		endPosition = SHOP_INTERVAL*blocks.size();
-		//	}
-		//	if (i == number * 5 + 3)
-		//	{
-		//		//	BackGrounds->addChild(spItem);
-		//	}
-		//}
-		//counter++;
-
 
 };
 //ƒvƒŒƒCƒ„[‚ª¡‚¢‚éêŠ
