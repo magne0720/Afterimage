@@ -224,7 +224,8 @@ void MapCreator::StageCreate(vector<string> letter)
 		shop->shopStatus.gate += SHOP_INTERVAL * (i - 1);
 		Shops->addChild(shop);
 		if (shop->shopStatus.status == true)
-			allShops.pushBack(shop);
+			openShops.pushBack(shop);
+		allShops.pushBack(shop);
 		endPosition = SHOP_INTERVAL*letter.size();
 	}
 };
