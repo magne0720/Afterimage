@@ -137,7 +137,14 @@ void GameLayer::update(float delta)
 			log("G--------O---------A--------L");
 		}
 	}
-	hit();
+	if (hit() == true)
+	{
+	}
+	else
+	{
+		PlayerHP--;
+	}
+	log("%d", PlayerHP);
 	for (int i = 0; i < mobNum; i++)
 	{
 		for (int j = 0; j < map->openShops.size(); j++)
@@ -248,20 +255,48 @@ bool GameLayer::hit()
 	int hitNum = 0;
 	for (int t = 0; t < map->allShops.size(); t++)
 	{
-		for (int s = 0; s < mobNum; s++)
+		//if (player->getPositionX() < map->allShops.at(t)->shopStatus.min &&
+		//	player->getPositionX() > map->allShops.at(t)->shopStatus.max
+		//	)
+		//{
+		//	hitNum++;
+		//}
+		if (player->getBoundingBox().intersectsRect(map->allShops.at(t)->getBoundingBox()))
 		{
-			if (
-				player->getBoundingBox().intersectsRect(umbrella->umbrella[s]->getBoundingBox()) || 
-				player->getPositionX() > map->allShops.at(t)->shopStatus.min &&
-				player->getPositionX() < map->allShops.at(t)->shopStatus.max
-				)
+			//log("[%f],[%f]" ,map->allShops.at(t)->shopStatus.min, map->allShops.at(t)->shopStatus.max);
+			if (player->getPositionX() > map->allShops.at(t)->shopStatus.min &&
+				player->getPositionX() < map->allShops.at(t)->shopStatus.max)
+			{
+				log("%d", t);
+			}
+			else
 			{
 				hitNum++;
 			}
-
+			
 		}
 	}
-	log("%d", hitNum);
+	for (int s = 0; s < mobNum; s++)
+	{
+		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[s]->getBoundingBox()))
+		{
+			hitNum = 0;
+			s = mobNum;
 
-	return true;
+		}
+		else
+		{
+			hitNum++;
+		}
+
+	}
+
+	if (hitNum == 0)//“–‚½‚Á‚Ä‚È‚¢
+	{
+		return true;
+	}
+	else//“–‚½‚Á‚Ä‚é
+	{
+		return false;
+	}
 }
