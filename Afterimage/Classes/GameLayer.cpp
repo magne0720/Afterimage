@@ -142,9 +142,9 @@ void GameLayer::update(float delta)
 		{
 
 		}
-		for (int j = 0; j < map->allShops.size(); j++)
+		for (int j = 0; j < map->openShops.size(); j++)
 		{
-			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->allShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
+			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->openShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
 			{
 				random_device rd;
 				mt19937 mt(rd());
