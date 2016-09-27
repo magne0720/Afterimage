@@ -76,7 +76,7 @@ void RainManager::update(float delta)
 			rainOfRain = 30;
 		log("%d", i);*/
 
-		rain.at(i)->setPositionY(rain.at(i)->getPositionY() - speed);
+		rain.at(i)->setPositionY(rain.at(i)->getPositionY() - rain.at(i)->speed);
 		if (rain.at(i)->getPositionY() < designResolutionSize.height * 0.0 + 200)
 		{
 			if (rain.size() <= rainOfRain)
