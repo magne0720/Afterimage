@@ -3,12 +3,15 @@
 
 #include "cocos2d.h"
 USING_NS_CC;
+using namespace std;
 
 class Rain : public Sprite
 {
 public:
 	//‰æ‘œo‚·‚¾‚¯
 	CREATE_FUNC(Rain);
+
+	float speed;
 
 	bool init();
 	
