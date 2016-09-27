@@ -1,9 +1,9 @@
 #include "ShopBase.h"
 
-ShopBase* ShopBase::create(int kind)
+ShopBase* ShopBase::create(int kind,int number)
 {
 	ShopBase *pRet = new ShopBase();
-	if (pRet && pRet->init(kind))
+	if (pRet && pRet->init(kind,number))
 	{
 		pRet->autorelease();
 		return pRet;
@@ -16,7 +16,7 @@ ShopBase* ShopBase::create(int kind)
 	}
 };
 
-bool ShopBase::init(int kind)
+bool ShopBase::init(int kind,int number)
 {
 	if(!Sprite::init())
 	{
@@ -24,7 +24,11 @@ bool ShopBase::init(int kind)
 	}
 	log("ShopBase=%d", kind);
 
+	shopKind = kind;
+	shopNumber = number;
+
 	String* name = String::createWithFormat("building_%d.png", kind);
+
 
 	initWithFile(name->getCString());
 	log("%s", name->getCString());

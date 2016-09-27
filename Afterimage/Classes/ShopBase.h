@@ -12,14 +12,15 @@ class ShopBase :public Sprite
 private:
 
 	int shopKind;
+	int shopNumber;
 	float shopGate;
 	void ShopCreate(int kind);
 
 
 
 public:
-	static ShopBase* create(int kind);
-	bool init(int kind);
+	static ShopBase* create(int kind, int number);
+	bool init(int kind,int number);
 	void update(float delta);
 
 	struct myShop

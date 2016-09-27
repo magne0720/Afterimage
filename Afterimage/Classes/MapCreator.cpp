@@ -163,10 +163,13 @@ void MapCreator::StageCreate(vector<string> letter)
 		//log("%c", letter[i].c_str());
 		int CSVnumber = atoi(letter[i].c_str());
 		log("CSVnumber=%d", CSVnumber);
-		ShopBase* shop = ShopBase::create(CSVnumber);
+		ShopBase* shop = ShopBase::create(CSVnumber,i-1);
 		shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 		shop->setPosition(Vec2(SHOP_INTERVAL * (i - 1), SHOP_HEIGHT));
 		shop->shopStatus.gate += SHOP_INTERVAL * (i - 1);
+		shop->shopStatus.min += SHOP_INTERVAL*(i - 1);
+		shop->shopStatus.max += SHOP_INTERVAL*(i - 1);
+
 		Shops->addChild(shop);
 		if (shop->shopStatus.status == true)
 			openShops.pushBack(shop);
