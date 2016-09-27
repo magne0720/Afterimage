@@ -56,7 +56,7 @@ void Umbrella::randomMan()
 		uniform_int_distribution<int> intRL(1, 2);
 		mobspeed = (float)mobSP(mt) / 100;
 		RL = intRL(mt);
-
+		stockRL = RL;
 		if (RL == 1)
 		{
 			this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.3f));
@@ -125,7 +125,12 @@ void Umbrella::walk(float delta)
 		this->scheduleOnce(schedule_selector(Umbrella::leftRightMan), ((float)randomTime(mt) / 100));
 		break;
 	default:
-		this->schedule(schedule_selector(Umbrella::walk), ((float)randomTime(mt) / 100));
+
+		//this->schedule(schedule_selector(Umbrella::walk), ((float)randomTime(mt) / 100));
+		stockRL = RL;
+		RL = 0;
+		this->scheduleOnce(schedule_selector(Umbrella::leftRightMan), ((float)randomTime(mt) / 100));
+
 		break;
 	}
 }
@@ -151,7 +156,7 @@ void Umbrella::leftRightMan(float delta)
 {
 	random_device rd;
 	mt19937 mt(rd());
-	uniform_int_distribution<int> LRTime(100, 500);
+	uniform_int_distribution<int> LRTime(500, 1000);
 	RL = stockRL;
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)LRTime(mt) / 100));
 

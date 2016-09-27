@@ -230,11 +230,12 @@ void GameLayer::mobShop(int mobNum)
 		random_device rd;
 		mt19937 mt(rd());
 		//log("mapSize%d", map->allShops.size());
-		int mSize = map->allShops.size();
+		int mSize = map->openShops.size();
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
 		uniform_int_distribution<int> RLor(1,2);
 		umbrella->umbrella[mobNum]->RL = RLor(mt);
-		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
+		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
+		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
 		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
 }
