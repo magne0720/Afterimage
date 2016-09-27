@@ -13,6 +13,8 @@ public:
 	static Umbrella *create(float endPos);
 	//ƒ‚ƒu‚Ì‘¬‚³
 	float mobspeed;
+	//•Û‘¶—p¶‰E”»’f
+	int stockRL;
 	//¶‰E”»’f
 	int RL;
 	//¶¬’x‰„
@@ -31,6 +33,7 @@ public:
 	//stopRandom‚ÌØ‚è‘Ö‚¦
 	void stopRandomOFF();
 	void stopRandomON(float delta);
+	void leftRightMan(float delta);
 
 	void update(float delta);
 
