@@ -26,6 +26,7 @@ bool GameLayer::init(int fromTitle)
 		return false;
 	}
 	stageNum = fromTitle;
+	PlayerHP = 10000;
 	speed = 15.0f;
 	leftAndRightNum = 0;
 	mobNum = 20;
@@ -136,12 +137,9 @@ void GameLayer::update(float delta)
 			log("G--------O---------A--------L");
 		}
 	}
+	hit();
 	for (int i = 0; i < mobNum; i++)
 	{
-		if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
-		{
-
-		}
 		for (int j = 0; j < map->openShops.size(); j++)
 		{
 			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->openShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
@@ -243,4 +241,27 @@ void GameLayer::mobShop(int mobNum)
 void GameLayer::shopStopON(float delta)
 {
 	shopstop = true;
+}
+
+bool GameLayer::hit()
+{
+	int hitNum = 0;
+	for (int t = 0; t < map->allShops.size(); t++)
+	{
+		for (int s = 0; s < mobNum; s++)
+		{
+			if (
+				player->getBoundingBox().intersectsRect(umbrella->umbrella[s]->getBoundingBox()) || 
+				player->getPositionX() > map->allShops.at(t)->shopStatus.min &&
+				player->getPositionX() < map->allShops.at(t)->shopStatus.max
+				)
+			{
+				hitNum++;
+			}
+
+		}
+	}
+	log("%d", hitNum);
+
+	return true;
 }

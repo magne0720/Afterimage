@@ -18,7 +18,7 @@ public:
 	bool init(int fromTitle);
 
 	int stageNum;
-
+	int PlayerHP;
 	void update(float delta);
 
 	//タッチ系
@@ -32,6 +32,7 @@ public:
 	bool shopstop;
 	//連続ゴールストッパー
 	bool goalStop;
+	bool hit();
 
 	/*Camera *camera;*/
 	Player *player;
