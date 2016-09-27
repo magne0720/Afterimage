@@ -1,5 +1,4 @@
 #include "MapCreator.h"
-
 #include "StageItem.h"
 
 MapCreator* MapCreator::create(int number)
@@ -45,10 +44,7 @@ bool MapCreator::init(int number)
 	
 	{
 		log("shopPositionX=[%f]", allShops.at(i)->shopStatus.gate);
-
 	}
-
-
 
 	scheduleUpdate();
 
@@ -60,7 +56,7 @@ void MapCreator::update(float delta)
 	BackGroundMove();
 }
 //テキスト読み込み型
-int MapCreator::createStage(int number)
+void MapCreator::createStage(int number)
 {
 	auto split = [](const std::string& input, char delimiter)
 	{
@@ -85,55 +81,103 @@ int MapCreator::createStage(int number)
 		"building_%d.png",
 		"background_%d.png",
 	};
+	int counter = number * 6;
 
-	String* filename = String::createWithFormat("Stage/StageData_001.txt", number);
+	String* filename = String::createWithFormat("Stage/StageData_001.txt");
 
 	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
-	vector<string> lines = split(fileText, '\n');
+	vector<string> lines = split(fileText, '\n');			//行配列
 
-	int counter = 1;
-
-	for (int i = number * 5; i < number * 5 + 5; i++)
+	for (int i = counter; lines[i][0] != 'n'; i++) 
 	{
-		vector<string> blocks = split(lines[i], ',');
+		char data = lines[i][0];
+		log("lines=[%s]", lines[i].c_str());
+		log("data=[%c]", data);
 
-		if (i != number * 5) {
-			for (int j = 0; j < blocks.size(); j++)
-			{
-				int CSVnumber = atoi(blocks.at(j).c_str());
-				if (i == number * 5 + 4) 
-				{
-					goalPosition = allShops.at(CSVnumber)->shopStatus.gate;
+		vector<string> blocks = split(lines[i], ',');			//行配列
 
-					break;
-				}
-				String* name = String::createWithFormat(pngName[counter].data(), CSVnumber);
-				Sprite* spItem = Sprite::create(name->getCString());
-				spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-				spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
-				if (i == number * 5 + 1)
-					Floors->addChild(spItem);
-				if (i == number * 5 + 2)
-				{
-					ShopBase* shop = ShopBase::create(CSVnumber);
-					shop->initWithFile(name->getCString());
-					shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-					shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
-					shop->shopStatus.gate += SHOP_INTERVAL*j;
-					Shops->addChild(shop);
-					if(shop->shopStatus.status==true)
-					allShops.pushBack(shop);
-					endPosition = SHOP_INTERVAL*blocks.size();
-				}
-				if (i == number * 5 + 3) 
-					BackGrounds->addChild(spItem);
-					
-			}
-			counter++;
+
+		switch (data)
+		{
+		case 'F'://FLOOR
+			log("F");
+			FloorCreate(blocks);
+			break;
+		case 'S'://SHOP
+			StageCreate(blocks);
+			log("S");
+			break;
+		case 'B'://BACK
+			BackCreate(blocks);
+
+			log("B");
+			break;
+		case 'G'://GOAL
+			log("G");
+			//j++;
+			//endPosition = CSVnumber;
+			break;
+		default:
+			log("default");
+			//int CSVnumber = atoi(blocks.at(i).c_str());
+			//String* name = String::createWithFormat(pngName[name_count].data(), CSVnumber);
+
+			//ShopBase* shop = ShopBase::create(CSVnumber);
+
+
+			//	Sprite* spItem = Sprite::create(name->getCString());
+			//spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+			//spItem->setPosition(Vec2(SHOP_INTERVAL * i, heighter[height_count]));
+			//addChild(spItem);
+			//shop->initWithFile(name->getCString());
+			//shop->setPosition(Vec2(SHOP_INTERVAL * i, heighter[height_count]));
+			//shop->shopStatus.gate += SHOP_INTERVAL*i;
+			//Shops->addChild(shop);
+			//	if (shop->shopStatus.status == true)
+				//	allShops.pushBack(shop);
+			//endPosition = SHOP_INTERVAL*blocks.size();
+
+			break;
 		}
 	}
+	log("stop");
+		//for (int j = 0; j < blocks.size(); j++)
+		//{
+		//	int CSVnumber = atoi(blocks.at(j).c_str());
+		//		String* name = String::createWithFormat(pngName[counter].data(), CSVnumber);
+		//	Sprite* spItem = Sprite::create(name->getCString());
+		//	spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+		//	spItem->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+		//	if (i == number * 5 + 4)
+		//	{
+		//		//goalPosition = allShops.at(CSVnumber)->shopStatus.gate;
 
-	return 0;
+		//		//break;
+		//	}
+		//
+		//	if (i == number * 5 + 1)
+		//	{
+		//		//Floors->addChild(spItem);
+		//	}
+		//	if (i == number * 5 + 2)
+		//	{
+		//		ShopBase* shop = ShopBase::create(CSVnumber);
+		//		shop->initWithFile(name->getCString());
+		//		shop->setPosition(Vec2(SHOP_INTERVAL * j, heighter[counter]));
+		//		shop->shopStatus.gate += SHOP_INTERVAL*j;
+		//		Shops->addChild(shop);
+		//		if (shop->shopStatus.status == true)
+		//			allShops.pushBack(shop);
+		//		endPosition = SHOP_INTERVAL*blocks.size();
+		//	}
+		//	if (i == number * 5 + 3)
+		//	{
+		//		//	BackGrounds->addChild(spItem);
+		//	}
+		//}
+		//counter++;
+
+
 };
 //プレイヤーが今いる場所
 float MapCreator::getPositionPlayerX(float positionX)
@@ -150,3 +194,51 @@ void MapCreator::BackGroundMove()
 
 	BackGrounds->setPositionX(XX/10);
 }
+
+
+void MapCreator::FloorCreate(vector<string> letter)
+{
+	log("welcome To FloorCreate!");
+	for (int i = 1; i < letter.size(); i++)
+	{
+		log("[%d,%d]", i, letter.size());
+		int CSVnumber = atoi(letter.at(i).c_str());
+		String* name = String::createWithFormat("floor_%d.png", CSVnumber);
+		Sprite* spItem = Sprite::create(name->getCString());
+		spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+		spItem->setPosition(Vec2(SHOP_INTERVAL * (i-1), FLOOR_HEIGHT));
+		Floors->addChild(spItem);
+	}
+};
+void MapCreator::StageCreate(vector<string> letter)
+{
+	log("welcome To StageCreate!"); 
+	for (int i = 1; i < letter.size(); i++)
+	{
+		log("%c", letter[i].c_str());
+		int CSVnumber = atoi(letter[i].c_str());
+		log("CSVnumber=%d", CSVnumber);
+		ShopBase* shop = ShopBase::create(CSVnumber);
+		shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+		shop->setPosition(Vec2(SHOP_INTERVAL * (i - 1), SHOP_HEIGHT));
+		shop->shopStatus.gate += SHOP_INTERVAL * (i - 1);
+		Shops->addChild(shop);
+		if (shop->shopStatus.status == true)
+			allShops.pushBack(shop);
+		endPosition = SHOP_INTERVAL*letter.size();
+	}
+};
+
+void MapCreator::BackCreate(vector<string> letter)
+{
+	log("welcome To BackCreate!");
+	for (int i = 1; i < letter.size(); i++)
+	{
+		int CSVnumber = atoi(letter.at(i).c_str());
+		String* name = String::createWithFormat("background_%d.png", CSVnumber);
+		Sprite* spItem = Sprite::create(name->getCString());
+		spItem->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+		spItem->setPosition(Vec2(SHOP_INTERVAL * (i - 1), SHOP_HEIGHT));
+		BackGrounds->addChild(spItem);
+	}
+};

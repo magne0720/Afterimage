@@ -42,7 +42,7 @@ bool TitleLayer::onTouchBegan(Touch* touch, Event* event)
 {
 	if (tapStopper == true)
 	{
-		Director::getInstance()->replaceScene(TransitionFade::create(1.0f, GameScene::create(1), Color3B::WHITE));
+		Director::getInstance()->replaceScene(TransitionFade::create(4.0f, GameScene::create(1), Color3B::WHITE));
 		tapStopper = false;
 	}
 

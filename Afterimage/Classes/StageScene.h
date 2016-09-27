@@ -10,7 +10,7 @@ class StageScene : public Scene
 {
 public:
 	CREATE_FUNC(StageScene);
-	StageLayer *StageLayer;
+	//StageLayer *StageLayer;
 
 
 

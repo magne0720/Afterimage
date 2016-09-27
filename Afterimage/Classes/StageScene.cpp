@@ -7,8 +7,8 @@ bool StageScene::init()
 		return false;
 	}
 
-	StageLayer = StageLayer::create();
-	this->addChild(StageLayer);
+	StageLayer* StageLayer = StageLayer::create();
+	addChild(StageLayer);
 
 
 	return true;

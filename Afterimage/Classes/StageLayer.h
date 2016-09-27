@@ -1,5 +1,5 @@
-#ifndef __STAGE_LAYER__
-#define __STAGE_LAYER__
+#ifndef __STAGE_LAYER_H__
+#define __STAGE_LAYER_H__
 
 #include "cocos2d.h"
 

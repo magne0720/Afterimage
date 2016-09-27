@@ -22,6 +22,12 @@ bool ShopBase::init(int kind)
 	{
 		return false;
 	}
+	log("ShopBase=%d", kind);
+
+	String* name = String::createWithFormat("building_%d.png", kind);
+
+	initWithFile(name->getCString());
+	log("%s", name->getCString());
 
 	ShopCreate(kind);
 

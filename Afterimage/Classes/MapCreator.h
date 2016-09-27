@@ -22,7 +22,7 @@ class MapCreator :public Layer
 {
 private:
 	bool init(int number);
-	int createStage(int number);
+	void createStage(int number);
 
 	
 	//次これやる
@@ -47,6 +47,10 @@ private:
 
 	void BackGroundMove();
 
+	void FloorCreate(vector<string> letter);
+	void StageCreate(vector<string> letter);
+	void BackCreate(vector<string> letter);
+
 public:
 	float startPosition;
 	float endPosition;
@@ -63,8 +67,7 @@ public:
 	float myAnchor;
 
 	//スクリプト内の直読み込み
-	int createStageTest(int number);
-
+	
 };
 
 
