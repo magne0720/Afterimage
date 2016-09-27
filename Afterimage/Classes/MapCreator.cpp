@@ -169,7 +169,7 @@ void MapCreator::StageCreate(vector<string> letter)
 		shop->shopStatus.gate += SHOP_INTERVAL * (i - 1);
 		shop->shopStatus.min += SHOP_INTERVAL*(i - 1);
 		shop->shopStatus.max += SHOP_INTERVAL*(i - 1);
-
+		
 		Shops->addChild(shop);
 		if (shop->shopStatus.status == true)
 			openShops.pushBack(shop);
