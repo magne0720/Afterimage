@@ -28,7 +28,7 @@ bool GameLayer::init(int fromTitle)
 	stageNum = fromTitle;
 	speed = 15.0f;
 	leftAndRightNum = 0;
-	mobNum = 50;
+	mobNum = 20;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
@@ -146,34 +146,26 @@ void GameLayer::update(float delta)
 		{
 			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->allShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
 			{
-				//log("size.at=[%d]",j);
 				random_device rd;
 				mt19937 mt(rd());
 				uniform_int_distribution<int> erasure(0,3);
-				//if (erasure(mt) == 0)
-				//{
-				//	umbrella->umbrella[i]->stopRandomOFF();
-				//}
-				//else
-				//{
-				//	umbrella->umbrella[i]->randomMan();
-				//}
 				switch (erasure(mt))
 				{
-				case 2:
-					umbrella->umbrella[i]->randomMan();
+				case 0:
+					mobShop(i);
 					break;
-				case 3:
-					umbrella->umbrella[i]->stopRandomOFF();
+				case 1:
 					mobShop(i);
 					break;
 				default:
 					umbrella->umbrella[i]->stopRandomOFF();
+
 					break;
 				}
 			}
 		}
 	}
+
 }
 
 //‰æ–Ê‚ðƒ^ƒbƒ`‚µ‚½Žž‚Ìˆ—
@@ -233,15 +225,17 @@ void GameLayer::mobShop(int mobNum)
 {
 	if (shopstop == true)
 	{
+		shopstop = false;
 		umbrella->umbrella[mobNum]->stopRandomOFF();
 		random_device rd;
 		mt19937 mt(rd());
 		//log("mapSize%d", map->allShops.size());
 		int mSize = map->allShops.size();
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
+		uniform_int_distribution<int> RLor(1,2);
+		umbrella->umbrella[mobNum]->RL = RLor(mt);
 		umbrella->umbrella[mobNum]->setPositionX(map->allShops.at(randomShop(mt))->shopStatus.gate);
-		shopstop = false;
-		this->schedule(schedule_selector(GameLayer::shopStopON), 6);
+		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
 }
 
