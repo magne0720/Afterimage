@@ -57,6 +57,9 @@ public:
 
 	//店の配列
 	Vector<ShopBase*> allShops;
+	Vector<ShopBase*> openShops;
+
+
 	//ゴール地点
 	float goalPosition;
 
