@@ -44,8 +44,6 @@ bool GameLayer::init(int fromTitle)
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
-	rainManagerBack = RainManager::create(120);
-	this->addChild(rainManagerBack, 0);
 
 	player = Player::create();
 	player->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height*0.3f));
@@ -58,6 +56,9 @@ bool GameLayer::init(int fromTitle)
 
 	map = MapCreator::create(1);
 	addChild(map);
+
+	rainManagerBack = RainManager::create(120);
+	this->addChild(rainManagerBack, 0);
 
 	rainManager = RainManager::create(260);
 	this->addChild(rainManager, 3);
@@ -107,6 +108,9 @@ void GameLayer::update(float delta)
 {
 	//マップにプレイヤーの位置を送る
 	map->getPositionPlayerX(spCamera->getPositionX());
+	rainManagerBack->spCameraPos(spCamera->getPositionX());
+	rainManager->spCameraPos(spCamera->getPositionX());
+
 
 	if (player->getPositionX() < designResolutionSize.width / 2)
 	{
@@ -116,8 +120,6 @@ void GameLayer::update(float delta)
 	{
 		spCamera->setPositionX(player->getPositionX());
 	}
-	rainManagerBack->setPositionX(spCamera->getPositionX() - (designResolutionSize.width/2));
-	rainManager->setPositionX(spCamera->getPositionX() - (designResolutionSize.width / 2));
 
 	if (player->getPositionX() /*+ (player->getContentSize().width/2)*/ <= designResolutionSize.width * 0)
 	{
@@ -161,7 +163,7 @@ void GameLayer::update(float delta)
 		}
 
 	}
-	log("%d", PlayerHP);
+	//log("%d", PlayerHP);
 	for (int i = 0; i < mobNum; i++)
 	{
 		for (int j = 0; j < map->openShops.size(); j++)

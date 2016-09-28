@@ -25,6 +25,5 @@ bool HPGauge::init()
 void HPGauge::update(float delta)
 {
 	float HP = (float)((GameScene*)(this->getParent()))->gameLayer->PlayerHP;
-	log("%f", ((float)HP/500));
 	hpGauge->setScaleX(HP / 500.0f);
 }

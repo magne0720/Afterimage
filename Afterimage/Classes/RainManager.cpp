@@ -1,4 +1,5 @@
 #include "RainManager.h"
+#include "GameLayer.h"
 
 RainManager *RainManager::create(int rainNum)
 
@@ -39,8 +40,10 @@ void RainManager::rainReset(Sprite *rain)
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_int_distribution<int> ranSP(100, 102);
+	uniform_int_distribution<int> spCamera(spCameraMin, spCameraMax);
+
 	onceSp = ranSP(mt) * 0.01f;
-	rain->setPosition(Vec2(rand() % (int)designResolutionSize.width + 1, designResolutionSize.height *onceSp));
+	rain->setPosition(Vec2(spCamera(mt), designResolutionSize.height *onceSp));
 }
 void RainManager::dropCreate()
 {
@@ -86,4 +89,12 @@ void RainManager::update(float delta)
 			//rainReset(rain.at(i));
 		}
 	}
+}
+
+void RainManager::spCameraPos(float pos)
+{
+	spCameraMin = (int)pos - (int)designResolutionSize.width*1;
+	spCameraMax = (int)pos + (int)designResolutionSize.width*1;
+	log("%d,%d", spCameraMin,spCameraMax);
+
 }

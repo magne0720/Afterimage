@@ -18,6 +18,9 @@ public:
 	//位置リセット
 	void rainReset(Sprite *rain);
 	void update(float delta);
+	int spCameraMin;
+	int spCameraMax;
+	void spCameraPos(float pos);
 	
 	//雨の量
 	int rainOfRain;
