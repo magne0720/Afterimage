@@ -12,10 +12,11 @@ bool HPGauge::init()
 	hpGauge->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
 	this->addChild(hpGauge);
 
-	hpWaku = Sprite::create("HPgauge.png");
+	hpWaku = Sprite::create("HPwaku2.png");
 	hpWaku->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.9f));
 	hpWaku->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
 	this->addChild(hpWaku);
+	maxHP = 500.0f;
 
 	this->scheduleUpdate();
 
@@ -24,6 +25,23 @@ bool HPGauge::init()
 
 void HPGauge::update(float delta)
 {
-	float HP = (float)((GameScene*)(this->getParent()))->gameLayer->PlayerHP;
-	hpGauge->setScaleX(HP / 500.0f);
+	float HP = ((float)((GameScene*)(this->getParent()))->gameLayer->PlayerHP/maxHP);
+	log("%f", HP);
+	if (HP > ((1.0f/3.0f)*2.0f))
+	{
+		hpGauge->setColor(Color3B::GREEN);
+	}
+	else
+	{
+		if (HP > (1.0f/3.0f))
+		{
+			hpGauge->setColor(Color3B::YELLOW);
+		}
+		else
+		{
+			hpGauge->setColor(Color3B::RED);
+		}
+	}
+
+	hpGauge->setScaleX(HP);
 }
