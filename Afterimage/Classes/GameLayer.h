@@ -6,6 +6,7 @@
 #include "MapCreator.h"
 #include "MultiResolution.h"
 #include "UmbrellaCreator.h"
+#include "RainManager.h"
 using namespace std;
 
 USING_NS_CC;
@@ -35,6 +36,8 @@ public:
 	bool hit();
 
 	/*Camera *camera;*/
+	RainManager *rainManagerBack;
+	//RainManager *rainManager;
 	Player *player;
 	Sprite *spCamera;
 	UmbrellaCreator *umbrella;
