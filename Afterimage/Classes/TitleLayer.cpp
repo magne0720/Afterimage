@@ -33,6 +33,8 @@ bool TitleLayer::init()
 	titleNode = TitleNode::create();
 	this->addChild(titleNode);
 
+	rainManagerA->spCameraPos(designResolutionSize.width / 2);
+	rainManagerB->spCameraPos(designResolutionSize.width / 2);
 
 	return true;
 }

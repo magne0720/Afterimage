@@ -29,7 +29,7 @@ bool GameLayer::init(int fromTitle)
 	}
 	stageNum = fromTitle;
 	PlayerHP = 500;
-	speed = 15.0f;
+	speed = 10.0f;
 	leftAndRightNum = 0;
 	mobNum = 20;
 	ACTswitch = true;
