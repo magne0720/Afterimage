@@ -27,7 +27,7 @@ bool GameLayer::init(int fromTitle)
 		return false;
 	}
 	stageNum = fromTitle;
-	PlayerHP = 10000;
+	PlayerHP = 500;
 	speed = 15.0f;
 	leftAndRightNum = 0;
 	mobNum = 20;
@@ -44,6 +44,9 @@ bool GameLayer::init(int fromTitle)
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
+	rainManagerBack = RainManager::create(120);
+	this->addChild(rainManagerBack, 0);
+
 	player = Player::create();
 	player->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height*0.3f));
 	this->addChild(player, 2);
@@ -55,6 +58,9 @@ bool GameLayer::init(int fromTitle)
 
 	map = MapCreator::create(1);
 	addChild(map);
+
+	rainManager = RainManager::create(260);
+	this->addChild(rainManager, 3);
 	                                   //ƒS[ƒ‹ˆÊ’u@¶¬”
 	umbrella = UmbrellaCreator::create(map->endPosition,mobNum);
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
@@ -109,6 +115,8 @@ void GameLayer::update(float delta)
 	{
 		spCamera->setPositionX(player->getPositionX());
 	}
+	rainManagerBack->setPositionX(spCamera->getPositionX() - (designResolutionSize.width/2));
+	rainManager->setPositionX(spCamera->getPositionX() - (designResolutionSize.width / 2));
 
 	if (player->getPositionX() /*+ (player->getContentSize().width/2)*/ <= designResolutionSize.width * 0)
 	{

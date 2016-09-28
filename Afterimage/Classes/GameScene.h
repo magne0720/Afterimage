@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "GameLayer.h"
-#include "RainLayer.h"
+//#include "RainLayer.h"
 
 USING_NS_CC;
 
@@ -13,9 +13,9 @@ public:
 	static GameScene *create(int fromTitle);
 
 	bool init(int fromTitle);
-	RainLayer *rainLayer;
+	//RainLayer *rainLayer;
 	GameLayer *gameLayer;
-	RainLayer *rainLayerb;
+	//RainLayer *rainLayerb;
 
 	
 private:

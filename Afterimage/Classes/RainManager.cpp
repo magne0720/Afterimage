@@ -29,12 +29,6 @@ bool RainManager::init(int rainNum)
 	rainOfRain = rainNum;
 	speed = 20.0f;
 	delayTime = 2;
-	/*for (int i = 0; i < rainOfRain; i++)
-	{
-		rain.push_back(Rain::create());
-		rainReset(rain[i]);
-		this->addChild(rain[i]);
-	}*/
 	this->scheduleUpdate();
 
 	return true;
