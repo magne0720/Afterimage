@@ -35,6 +35,7 @@ bool ResultLayer::init(int score)
 	takeTimer = 0;
 	pClock = takeClock;
 	endScore = score;
+	
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -49,7 +50,7 @@ bool ResultLayer::init(int score)
 		for (float g = 0; g <= 1; g += 0.1)
 		{
 			Sprite* sp = Sprite::create("umbrella_0.png");
-			sp->setPosition(Vec2(designResolutionSize.width*f, designResolutionSize.height*g));
+			sp->setPosition(Vec2(designResolutionSize.width*05, designResolutionSize.height*0.5));
 			addChild(sp);
 			Umbrellas.pushBack(sp);
 		}
@@ -84,10 +85,7 @@ void ResultLayer::update(float delta)
 		if (!tapStopper)
 			tapStopper = true;
 	}
-	for (int i = 0; i < Umbrellas.size(); i++) 
-	{
 
-	}
 };
 
 //画面をタッチした時の処理

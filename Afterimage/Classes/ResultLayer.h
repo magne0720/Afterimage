@@ -33,7 +33,7 @@ private:
 
 	Vector<Label*> scoreBoards;
 	Vector<Sprite*> Umbrellas;
-	int umum;
+
 
 	void update(float delta);
 	void makeBoard();
