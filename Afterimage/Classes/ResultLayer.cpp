@@ -34,6 +34,7 @@ bool ResultLayer::init(int score)
 	tapStopper = false;
 	takeTimer = 0;
 	pClock = takeClock;
+	endScore = score;
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -43,24 +44,29 @@ bool ResultLayer::init(int score)
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
-	for (float f = 0; f <= 1;f+=0.1)
+	for (float f = 0; f <= 1; f += 0.1)
 	{
-		for (float g = 0; g <= 1;g+=0.1)
+		for (float g = 0; g <= 1; g += 0.1)
 		{
 			Sprite* sp = Sprite::create("umbrella_0.png");
 			sp->setPosition(Vec2(designResolutionSize.width*f, designResolutionSize.height*g));
 			addChild(sp);
+			Umbrellas.pushBack(sp);
 		}
 	}
-	
-	makeBoard();
+
+	if (score != 0)
+		makeBoard();
+	else
+		missBoard();
+
 
 	scheduleUpdate();
 
 	return true;
 };
 
-void ResultLayer::update(float delta) 
+void ResultLayer::update(float delta)
 {
 	takeTimer += delta;
 	if (!*pClock == 0)
@@ -75,10 +81,13 @@ void ResultLayer::update(float delta)
 	}
 	else
 	{
-		if(!tapStopper)
-		tapStopper = true;
+		if (!tapStopper)
+			tapStopper = true;
 	}
+	for (int i = 0; i < Umbrellas.size(); i++) 
+	{
 
+	}
 };
 
 //画面をタッチした時の処理
@@ -111,20 +120,60 @@ void ResultLayer::makeBoard()
 {
 	string strItem[5] =
 	{
-		"1,クリア",
-		"2,すげええ[GJ]",
-		"3,スコアは%d",
-		"4,マッチョ",
-		"5,none",
+		"クリアポリポリ",
+		"がんばったポリポリ",
+		"スコアは%dポリポリ",
+		"ポリポリ",
+		"none",
+	};
+	int letterSize[5] =
+	{
+		100,100,100,200,0
+	};
+	int letterBitween[5] =
+	{
+		100,100,100,150,0
 	};
 
 	for (int i = 0; i<sizeof(takeClock) / sizeof(takeClock[0]); i++)
 	{
-		String* name = String::createWithFormat(strItem[i].c_str(), score);
-		Label* pLabel = Label::create(name->getCString(),"851H-kktt",100);
-		pLabel->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height *0.7f-(i*100)));
+		String* name = String::createWithFormat(strItem[i].c_str(), endScore);
+		Label* pLabel = Label::create(name->getCString(), "fonts/851H-kktt.ttf", letterSize[i]);
+		pLabel->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height *0.75f - (i*letterBitween[i])));
 		pLabel->setVisible(false);
 		addChild(pLabel);
 		scoreBoards.pushBack(pLabel);
 	}
+};
+
+void ResultLayer::missBoard()
+{
+	string strItem[5] =
+	{
+		"ミスポリポリ",
+		"ぬれすぎたポリポリ",
+		"かわいたらまたくるポリポリ",
+		"ポリポリ...",
+		"none",
+	};
+	int letterSize[5] =
+	{
+		100,100,100,80,0
+	};
+	int letterBitween[5] =
+	{
+		100,100,100,150,0
+	};
+
+	for (int i = 0; i<sizeof(takeClock) / sizeof(takeClock[0]); i++)
+	{
+		String* name = String::createWithFormat(strItem[i].c_str(), endScore);
+		Label* pLabel = Label::create(name->getCString(), "fonts/851H-kktt.ttf", letterSize[i]);
+		pLabel->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height *0.75f - (i*letterBitween[i])));
+		pLabel->setVisible(false);
+		addChild(pLabel);
+		scoreBoards.pushBack(pLabel);
+	}
+
+
 };

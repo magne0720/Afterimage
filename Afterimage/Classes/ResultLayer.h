@@ -17,6 +17,7 @@ public:
 
 
 private:
+	int endScore;
 	int clockCounter;	
 	bool tapStopper;
 	float takeTimer;
@@ -30,11 +31,13 @@ private:
 	};
 	float* pClock;
 
-	int score;
 	Vector<Label*> scoreBoards;
+	Vector<Sprite*> Umbrellas;
+	int umum;
 
 	void update(float delta);
 	void makeBoard();
+	void missBoard();
 
 
 

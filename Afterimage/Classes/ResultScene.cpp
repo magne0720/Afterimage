@@ -24,7 +24,7 @@ bool ResultScene::init(int score)
 		return false;
 	}
 
-	ResultLayer* ResultLayer = ResultLayer::create(0);
+	ResultLayer* ResultLayer = ResultLayer::create(score);
 	addChild(ResultLayer);
 
 

@@ -146,7 +146,7 @@ void GameLayer::update(float delta)
 		if (goalStop == true)
 		{
 			goalStop = false;
-			Director::getInstance()->replaceScene(ResultScene::create(1));
+			Director::getInstance()->replaceScene(ResultScene::create(PlayerHP));
 			log("G--------O---------A--------L");
 		}
 	}
@@ -159,7 +159,7 @@ void GameLayer::update(float delta)
 		if (goalStop == true)
 		{
 			goalStop = false;
-			Director::getInstance()->replaceScene(ResultScene::create(1));
+			Director::getInstance()->replaceScene(ResultScene::create(0));
 		}
 
 	}
