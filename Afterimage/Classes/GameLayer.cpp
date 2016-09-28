@@ -66,6 +66,7 @@ bool GameLayer::init(int fromTitle)
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
 	this->addChild(umbrella, 1);
 
+
 	//for (int i = 0; i < 11;i++)
 	//{
 	//	Sprite* s = Sprite::create("tile.png");

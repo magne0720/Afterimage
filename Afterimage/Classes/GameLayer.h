@@ -37,7 +37,7 @@ public:
 
 	/*Camera *camera;*/
 	RainManager *rainManagerBack;
-	RainManager *rainManager;
+	//RainManager *rainManager;
 	Player *player;
 	Sprite *spCamera;
 	UmbrellaCreator *umbrella;
