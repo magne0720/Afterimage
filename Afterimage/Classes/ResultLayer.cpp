@@ -1,3 +1,5 @@
+#pragma execution_character_set("utf-8")
+
 #include "ResultLayer.h"
 #include "TitleScene.h"
 #include "MultiResolution.h"
@@ -26,6 +28,10 @@ bool ResultLayer::init(int score)
 	{
 		return false;
 	}
+	clockCounter = 0;
+	tapStopper = false;
+	takeTimer = 0;
+	pClock = takeClock;
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -44,13 +50,31 @@ bool ResultLayer::init(int score)
 			addChild(sp);
 		}
 	}
+	
+	makeBoard();
+
+	scheduleUpdate();
 
 	return true;
 };
 
 void ResultLayer::update(float delta) 
 {
-
+	takeTimer += delta;
+	if (!*pClock == 0) {
+		if (takeTimer >= *pClock)
+		{
+			log("timeIn_float=[%f]", *pClock);
+			scoreBoards.at(clockCounter)->setVisible(true);
+			pClock++;
+			clockCounter++;
+		}
+	}
+	else
+	{
+		if(!tapStopper)
+		tapStopper = true;
+	}
 
 };
 
@@ -78,4 +102,26 @@ void ResultLayer::onTouchEnded(Touch *touch, Event *event)
 {
 
 
+};
+
+void ResultLayer::makeBoard()
+{
+	string strItem[5] =
+	{
+		"1,クリア",
+		"2,すげええ",
+		"3,スコア\t%d",
+		"4,マッチョ",
+		"5,huwaa",
+	};
+
+	for (int i = 0; i<sizeof(takeClock) / sizeof(takeClock[0]); i++)
+	{
+		String* name = String::createWithFormat(strItem[i].c_str(), score);
+		Label* pLabel = Label::create(name->getCString(),"arial",100);
+		pLabel->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height *0.7f-(i*100)));
+		pLabel->setVisible(false);
+		addChild(pLabel);
+		scoreBoards.pushBack(pLabel);
+	}
 };

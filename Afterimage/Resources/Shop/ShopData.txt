@@ -1,5 +1,5 @@
 N,yuka,G,0,S,0,M,0,0,
-N,hanaya,G,411,S,1,M,0,800,
+N,hanaya,G,402,S,1,M,45,762
 N,nikuya,G,297,S,0,M,0,800,
 N,lechord,G,399,S,1,M,0,800,
 N,hanaya,G,30.5,S,0,M,50,120,
