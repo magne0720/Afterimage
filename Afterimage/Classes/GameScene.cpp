@@ -32,16 +32,8 @@ bool GameScene::init(int fromTitle)
 	gameLayer = GameLayer::create(fromTitle);
 	this->addChild(gameLayer, 1);
 
-	//this->scheduleOnce(schedule_selector(GameScene::rainDelay), 0.5f);
 	rainLayerb = RainLayer::create(260);
 	this->addChild(rainLayerb, 2);
 
 	return true;
-}
-
-void GameScene::rainDelay(float delta)
-{
-	rainLayerb = RainLayer::create(260);
-	this->addChild(rainLayerb, 2);
-
 }

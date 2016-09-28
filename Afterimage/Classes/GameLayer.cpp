@@ -1,4 +1,5 @@
 #include "GameLayer.h"
+#include "ResultScene.h"
 
 GameLayer *GameLayer::create(int fromTitle)
 
@@ -134,12 +135,22 @@ void GameLayer::update(float delta)
 		if (goalStop == true)
 		{
 			goalStop = false;
+			Director::getInstance()->replaceScene(ResultScene::create(1));
 			log("G--------O---------A--------L");
 		}
 	}
 	if (!hit())
 	{
 		PlayerHP--;
+	}
+	if (PlayerHP < 0)
+	{
+		if (goalStop == true)
+		{
+			goalStop = false;
+			Director::getInstance()->replaceScene(ResultScene::create(1));
+		}
+
 	}
 	log("%d", PlayerHP);
 	for (int i = 0; i < mobNum; i++)

@@ -16,7 +16,6 @@ public:
 	RainLayer *rainLayer;
 	GameLayer *gameLayer;
 	RainLayer *rainLayerb;
-	void rainDelay(float delta);
 
 	
 private:
