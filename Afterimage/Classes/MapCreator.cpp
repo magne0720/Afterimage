@@ -100,24 +100,24 @@ void MapCreator::createStage(int number)
 		switch (data)
 		{
 		case 'F'://FLOOR
-			log("F");
+		//	log("F");
 			FloorCreate(blocks);
 			break;
 		case 'S'://SHOP
 			StageCreate(blocks);
-			log("S");
+			//log("S");
 			break;
 		case 'B'://BACK
 			BackCreate(blocks);
-			log("B");
+			//log("B");
 			break;
 		case 'G'://GOAL
 			log("G");
 			goalPosition = openShops.at(atoi(blocks[1].c_str()))->shopStatus.gate;
-			log("goal=[%f]", goalPosition);
+		//	log("goal=[%f]", goalPosition);
 			break;
 		default:
-			log("default");
+			//log("default");
 
 			break;
 		}
@@ -143,10 +143,10 @@ void MapCreator::BackGroundMove()
 
 void MapCreator::FloorCreate(vector<string> letter)
 {
-	log("welcome To FloorCreate!");
+	//log("welcome To FloorCreate!");
 	for (int i = 1; i < letter.size(); i++)
 	{
-		log("[%d,%d]", i, letter.size());
+		//log("[%d,%d]", i, letter.size());
 		int CSVnumber = atoi(letter.at(i).c_str());
 		String* name = String::createWithFormat("floor_%d.png", CSVnumber);
 		Sprite* spItem = Sprite::create(name->getCString());
@@ -157,12 +157,12 @@ void MapCreator::FloorCreate(vector<string> letter)
 };
 void MapCreator::StageCreate(vector<string> letter)
 {
-	log("welcome To StageCreate!"); 
+	//log("welcome To StageCreate!"); 
 	for (int i = 1; i < letter.size(); i++)
 	{
 		//log("%c", letter[i].c_str());
 		int CSVnumber = atoi(letter[i].c_str());
-		log("CSVnumber=%d", CSVnumber);
+		//log("CSVnumber=%d", CSVnumber);
 		ShopBase* shop = ShopBase::create(CSVnumber,i-1);
 		shop->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 		shop->setPosition(Vec2(SHOP_INTERVAL * (i - 1), SHOP_HEIGHT));
@@ -180,7 +180,7 @@ void MapCreator::StageCreate(vector<string> letter)
 
 void MapCreator::BackCreate(vector<string> letter)
 {
-	log("welcome To BackCreate!");
+	//log("welcome To BackCreate!");
 	for (int i = 1; i < letter.size(); i++)
 	{
 		int CSVnumber = atoi(letter.at(i).c_str());

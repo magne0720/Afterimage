@@ -1,8 +1,10 @@
-#pragma execution_character_set("utf-8")
+ï»¿#pragma execution_character_set("utf-8")
 
 #include "ResultLayer.h"
 #include "TitleScene.h"
 #include "MultiResolution.h"
+
+
 
 
 ResultLayer* ResultLayer::create(int score)
@@ -41,9 +43,9 @@ bool ResultLayer::init(int score)
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
-	for (float f = 0; f < 1;f+=0.1)
+	for (float f = 0; f <= 1;f+=0.1)
 	{
-		for (float g = 0; g < 1;g+=0.1)
+		for (float g = 0; g <= 1;g+=0.1)
 		{
 			Sprite* sp = Sprite::create("umbrella_0.png");
 			sp->setPosition(Vec2(designResolutionSize.width*f, designResolutionSize.height*g));
@@ -61,10 +63,11 @@ bool ResultLayer::init(int score)
 void ResultLayer::update(float delta) 
 {
 	takeTimer += delta;
-	if (!*pClock == 0) {
+	if (!*pClock == 0)
+	{
 		if (takeTimer >= *pClock)
 		{
-			log("timeIn_float=[%f]", *pClock);
+			//log("timeIn_float=[%f]", *pClock);
 			scoreBoards.at(clockCounter)->setVisible(true);
 			pClock++;
 			clockCounter++;
@@ -78,7 +81,7 @@ void ResultLayer::update(float delta)
 
 };
 
-//‰æ–Ê‚ğƒ^ƒbƒ`‚µ‚½‚Ìˆ—
+//ç”»é¢ã‚’ã‚¿ãƒƒãƒã—ãŸæ™‚ã®å‡¦ç†
 bool ResultLayer::onTouchBegan(Touch* touch, Event* event)
 {
 	if (tapStopper == true)
@@ -90,14 +93,14 @@ bool ResultLayer::onTouchBegan(Touch* touch, Event* event)
 	return true;
 };
 
-//ƒ^ƒbƒ`’†‚Ìˆ—
+//ã‚¿ãƒƒãƒä¸­ã®å‡¦ç†
 void ResultLayer::onTouchMoved(Touch* touch, Event* event)
 {
 
 
 };
 
-//ƒ^ƒbƒ`‚ªI‚í‚Á‚½‚Ìˆ—
+//ã‚¿ãƒƒãƒãŒçµ‚ã‚ã£ãŸæ™‚ã®å‡¦ç†
 void ResultLayer::onTouchEnded(Touch *touch, Event *event)
 {
 
@@ -108,17 +111,17 @@ void ResultLayer::makeBoard()
 {
 	string strItem[5] =
 	{
-		"1,ƒNƒŠƒA",
-		"2,‚·‚°‚¦‚¦",
-		"3,ƒXƒRƒA\t%d",
-		"4,ƒ}ƒbƒ`ƒ‡",
-		"5,huwaa",
+		"1,ã‚¯ãƒªã‚¢",
+		"2,ã™ã’ãˆãˆ[GJ]",
+		"3,ã‚¹ã‚³ã‚¢ã¯%d",
+		"4,ãƒãƒƒãƒãƒ§",
+		"5,none",
 	};
 
 	for (int i = 0; i<sizeof(takeClock) / sizeof(takeClock[0]); i++)
 	{
 		String* name = String::createWithFormat(strItem[i].c_str(), score);
-		Label* pLabel = Label::create(name->getCString(),"arial",100);
+		Label* pLabel = Label::create(name->getCString(),"851H-kktt",100);
 		pLabel->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height *0.7f-(i*100)));
 		pLabel->setVisible(false);
 		addChild(pLabel);

@@ -1,4 +1,4 @@
-#ifndef __RESULT_LAYER_H__
+﻿#ifndef __RESULT_LAYER_H__
 #define __RESULT_LAYER_H__
 
 #include "cocos2d.h"
@@ -25,8 +25,8 @@ private:
 		1.0f,
 		2.0f,
 		3.0f,
-		4.0f,
-		0.0f
+		5.0f,
+		0
 	};
 	float* pClock;
 
@@ -35,6 +35,7 @@ private:
 
 	void update(float delta);
 	void makeBoard();
+
 
 
 
