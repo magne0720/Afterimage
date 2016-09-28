@@ -1,5 +1,6 @@
 #include "GameLayer.h"
 #include "ResultScene.h"
+#include "GameScene.h"
 
 GameLayer *GameLayer::create(int fromTitle)
 
@@ -94,7 +95,6 @@ bool GameLayer::init(int fromTitle)
 			mobShop(n);
 		}
 	}
-
 	player->changeLeft();
 	player->stopAct(2);
 	player->changeRight();

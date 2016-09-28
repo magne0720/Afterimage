@@ -13,10 +13,11 @@ public:
 	Sprite *hpGauge;
 	Sprite *hpWaku;
 
+	float maxHP;
+
 	bool init();
 
 	void update(float delta);
-
 	
 private:
 
