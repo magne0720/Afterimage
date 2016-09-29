@@ -15,8 +15,9 @@ bool StageLayer::init()
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
-
-
+	Sprite* sp = Sprite::create("building_1.png");
+	sp->setPosition(Vec2(designResolutionSize.width*0.5f, designResolutionSize.height*0.5f));
+	addChild(sp);
 
 	return true;
 };
