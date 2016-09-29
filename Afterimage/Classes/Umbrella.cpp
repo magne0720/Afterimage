@@ -49,7 +49,7 @@ void Umbrella::randomMan()
 {
 	if (stopRandom == true)
 	{
-		this->initWithFile("PlantNot1.png");
+		this->initWithFile("umbrellaMob.png");
 		random_device rd;
 		mt19937 mt(rd());
 		uniform_int_distribution<int> mobSP(500, 1200);
@@ -59,11 +59,11 @@ void Umbrella::randomMan()
 		stockRL = RL;
 		if (RL == 1)
 		{
-			this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.3f));
+			this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.35f));
 		}
 		else
 		{
-			this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.3f));
+			this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.35f));
 		}
 		stopRandomOFF();
 	}
@@ -80,11 +80,11 @@ void Umbrella::update(float delta)
 			break;
 		case 1:
 			this->setPositionX(this->getPositionX() + mobspeed);
-			this->setFlipX(false);
+			this->setFlipX(true);
 			break;
 		case 2:
 			this->setPositionX(this->getPositionX() - mobspeed);
-			this->setFlipX(true);
+			this->setFlipX(false);
 			break;
 		}
 		if (this->getPositionX() > mobEnd || this->getPositionX() < designResolutionSize.width * -0.1f)
