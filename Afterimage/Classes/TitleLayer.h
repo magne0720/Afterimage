@@ -16,23 +16,25 @@ public:
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);
 	void onTouchEnded(Touch* touch, Event* event);
+	Animation *animation;
+	Animate *action;
+	RepeatForever *anime;
 	//‘O
 	RainManager *rainManagerA;
-
 	MapCreator *mapCreator;
 	Sprite *player;
-
 	//Œã‚ë
 	RainManager *rainManagerB;
-
 	TitleNode *titleNode;
 
+	void update(float delta);
 	bool init();
 
 
 private:
 
 	bool tapStopper;
+	bool playerStopper;
 
 };
 #endif // !__TITLE_LAYER__
