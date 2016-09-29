@@ -29,6 +29,7 @@ bool Umbrella::init(float endPos)
 	goMan = false;
 	stopRandom = true;
 	mobEnd = endPos;
+
 	//randomMan();
 
 	random_device rd;
@@ -60,10 +61,12 @@ void Umbrella::randomMan()
 		if (RL == 1)
 		{
 			this->setPosition(Vec2(designResolutionSize.width * -0.1f, designResolutionSize.height*0.35f));
+			RLJudge(0);
 		}
 		else
 		{
 			this->setPosition(Vec2(mobEnd, designResolutionSize.height*0.35f));
+			RLJudge(0);
 		}
 		stopRandomOFF();
 	}
@@ -80,11 +83,9 @@ void Umbrella::update(float delta)
 			break;
 		case 1:
 			this->setPositionX(this->getPositionX() + mobspeed);
-			this->setFlipX(true);
 			break;
 		case 2:
 			this->setPositionX(this->getPositionX() - mobspeed);
-			this->setFlipX(false);
 			break;
 		}
 		if (this->getPositionX() > mobEnd || this->getPositionX() < designResolutionSize.width * -0.1f)
@@ -160,4 +161,19 @@ void Umbrella::leftRightMan(float delta)
 	RL = stockRL;
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)LRTime(mt) / 100));
 
+}
+
+void Umbrella::RLJudge(float delta)
+{
+	switch (stockRL)
+	{
+	case 1:
+		this->setFlipX(true);
+		break;
+	case 2:
+		this->setFlippedX(false);
+		break;
+	default:
+		break;
+	}
 }

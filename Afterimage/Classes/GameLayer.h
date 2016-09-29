@@ -49,6 +49,8 @@ public:
 	Sprite *spCamera;
 	UmbrellaCreator *umbrella;
 	MapCreator *map;
+	//押し出しのアクション
+	MoveBy *move;
 	
 private:
 	//歩く速さ

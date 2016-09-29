@@ -31,7 +31,7 @@ bool GameLayer::init(int fromTitle)
 	PlayerHP = 500;
 	speed = 10.0f;
 	leftAndRightNum = 0;
-	mobNum = 20;
+	mobNum = 50;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
@@ -203,9 +203,27 @@ void GameLayer::update(float delta)
 				{
 					angerGauge[i] = 0;
 					playerLoss();
+					//if (umbrella->umbrella[i]->RL == 2)
+					//{
+					//	umbrella->umbrella[i]->setFlipX(true);
+					//}
+					//else
+					//{
+					//	umbrella->umbrella[i]->setFlipX(false);
+					//}
+
 				}
-				log("%d : %d", i, angerGauge[i]);
 			}
+			else
+			{
+				angerGauge[i]--;
+				if (angerGauge[i] <= 0 )
+				{
+					angerGauge[i] = 0;
+				}
+			}
+			log("%d : %d", i, angerGauge[i]);
+
 		}
 
 	}
@@ -279,6 +297,7 @@ void GameLayer::mobShop(int mobNum)
 		uniform_int_distribution<int> RLor(1,2);
 		umbrella->umbrella[mobNum]->RL = RLor(mt);
 		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
+		umbrella->umbrella[mobNum]->RLJudge(0);
 		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
 		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
@@ -329,9 +348,17 @@ bool GameLayer::hit()
 void GameLayer::playerLoss()
 {
 	tapStop = false;
+	if (leftAndRightNum == 2)
+	{
+		move = MoveBy::create(0.03f, Vec2(200.0f, 0));
+	}
+	else
+	{
+	    move = MoveBy::create(0.03f, Vec2(-200.0f, 0));
+	}
 	leftAndRightNum = 0;
-	player->setPositionX(player->getPositionX() - 80.0f);
-	this->scheduleOnce(schedule_selector(GameLayer::lossRelease), 2.0f);
+	player->runAction(move);
+	this->scheduleOnce(schedule_selector(GameLayer::lossRelease), 1.5f);
 
 }
 
