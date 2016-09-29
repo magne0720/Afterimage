@@ -7,6 +7,7 @@
 #include "MultiResolution.h"
 #include "UmbrellaCreator.h"
 #include "RainManager.h"
+#include <vector>
 using namespace std;
 
 USING_NS_CC;
@@ -29,11 +30,17 @@ public:
 	//モブがわく店
 	void mobShop(int mobNum);
 	void shopStopON(float delta);
+	//Playerタイムロス
+	void playerLoss();
+	//プレイヤーが動けるように
+	void lossRelease(float delta);
 	//モブ店湧きストッパー
 	bool shopstop;
 	//連続ゴールストッパー
 	bool goalStop;
 	bool hit();
+	//タップストッパー
+	bool tapStop;
 
 	/*Camera *camera;*/
 	RainManager *rainManagerBack;
@@ -53,5 +60,7 @@ private:
 	//アクションストッパー
 	bool ACTswitch;
 	bool direction;
+	//モブの怒りゲージ
+	vector<int> angerGauge;
 };
 #endif // !__GAME_LAYER_H__
