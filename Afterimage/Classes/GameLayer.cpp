@@ -31,11 +31,12 @@ bool GameLayer::init(int fromTitle)
 	PlayerHP = 500;
 	speed = 10.0f;
 	leftAndRightNum = 0;
-	mobNum = 20;
+	mobNum = 50;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
 	goalStop = true;
+	tapStop = true;
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -79,6 +80,7 @@ bool GameLayer::init(int fromTitle)
 	//this->runAction(Follow::create(player));
 	for (int n = 0; n < mobNum; n++)
 	{
+		angerGauge.push_back(0);
 		random_device rd;
 		mt19937 mt(rd());
 		uniform_int_distribution<int> shopOrEnd(0, 1);
@@ -164,6 +166,7 @@ void GameLayer::update(float delta)
 
 	}
 	//log("%d", PlayerHP);
+
 	for (int i = 0; i < mobNum; i++)
 	{
 		for (int j = 0; j < map->openShops.size(); j++)
@@ -188,6 +191,41 @@ void GameLayer::update(float delta)
 				}
 			}
 		}
+		if (tapStop)
+		{
+			if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
+			{
+				log("%d hit!", i);
+				//tapStop = false;
+				//leftAndRightNum = 0;
+				angerGauge[i]++;
+				if (angerGauge[i] > 300)
+				{
+					angerGauge[i] = 0;
+					playerLoss();
+					//if (umbrella->umbrella[i]->RL == 2)
+					//{
+					//	umbrella->umbrella[i]->setFlipX(true);
+					//}
+					//else
+					//{
+					//	umbrella->umbrella[i]->setFlipX(false);
+					//}
+
+				}
+			}
+			else
+			{
+				angerGauge[i]--;
+				if (angerGauge[i] <= 0 )
+				{
+					angerGauge[i] = 0;
+				}
+			}
+			log("%d : %d", i, angerGauge[i]);
+
+		}
+
 	}
 
 }
@@ -201,30 +239,30 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* event)
 		this->runAction(Follow::create(spCamera));
 		ACTswitch = false;
 	}
-	if (pos.x > designResolutionSize.width / 2)
+	if (tapStop)
 	{
-		log("migi");
-		leftAndRightNum = 1;
-		if (direction == true)
+		if (pos.x > designResolutionSize.width / 2)
 		{
-			player->changeRight();
-			direction = false;
+			log("migi");
+			leftAndRightNum = 1;
+			if (direction == true)
+			{
+				player->changeRight();
+				direction = false;
+			}
 		}
-		//player->initWithFile("PlantNot1.png");
-	}
-	if (pos.x < designResolutionSize.width / 2)
-	{
-		log("hidari");
-		leftAndRightNum = 2;
-		if (direction == true)
+		if (pos.x < designResolutionSize.width / 2)
 		{
-			player->changeLeft();
-			direction = false;
+			log("hidari");
+			leftAndRightNum = 2;
+			if (direction == true)
+			{
+				player->changeLeft();
+				direction = false;
+			}
+
 		}
-		//player->initWithFile("PlantNot2.png");
-
 	}
-
 	
 	return true;
 
@@ -259,6 +297,7 @@ void GameLayer::mobShop(int mobNum)
 		uniform_int_distribution<int> RLor(1,2);
 		umbrella->umbrella[mobNum]->RL = RLor(mt);
 		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
+		umbrella->umbrella[mobNum]->RLJudge(0);
 		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
 		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
@@ -276,19 +315,12 @@ bool GameLayer::hit()
 	bool isUmbrella = false;
 	for (int t = 0; t < map->allShops.size(); t++)
 	{
-		//if (player->getPositionX() < map->allShops.at(t)->shopStatus.min &&
-		//	player->getPositionX() > map->allShops.at(t)->shopStatus.max
-		//	)
-		//{
-		//	hitNum++;
-		//}
 		if (player->getBoundingBox().intersectsRect(map->allShops.at(t)->getBoundingBox()))
 		{
 			log("[%f],[%f]" ,map->allShops.at(t)->shopStatus.min, map->allShops.at(t)->shopStatus.max);
 			if (player->getPositionX() > map->allShops.at(t)->shopStatus.min &&
 				player->getPositionX() < map->allShops.at(t)->shopStatus.max)
 			{
-				//log("%d", t);
 				isShop = true;
 			}
 			
@@ -311,4 +343,26 @@ bool GameLayer::hit()
 	{
 		return false;
 	}
+}
+
+void GameLayer::playerLoss()
+{
+	tapStop = false;
+	if (leftAndRightNum == 2)
+	{
+		move = MoveBy::create(0.03f, Vec2(200.0f, 0));
+	}
+	else
+	{
+	    move = MoveBy::create(0.03f, Vec2(-200.0f, 0));
+	}
+	leftAndRightNum = 0;
+	player->runAction(move);
+	this->scheduleOnce(schedule_selector(GameLayer::lossRelease), 1.5f);
+
+}
+
+void GameLayer::lossRelease(float delta)
+{
+	tapStop = true;
 }

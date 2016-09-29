@@ -81,12 +81,15 @@ void Player::changeRight()
 void Player::stopAct(int LR)
 {
 	this->stopAction(anime);
-	if (LR == 1)
+	switch (LR)
 	{
+	case 1:
 		this->initWithFile("arukuRight2.png");
-	}
-	else
-	{
+		break;
+	case 2:
 		this->initWithFile("arukuLeft2.png");
+		break;
+	default:
+		break;
 	}
 }
