@@ -202,7 +202,6 @@ void GameLayer::update(float delta)
 				if (angerGauge[i] > 300)
 				{
 					angerGauge[i] = 0;
-					playerLoss();
 					if (umbrella->umbrella[i]->RL == 2)
 					{
 						umbrella->umbrella[i]->setFlipX(true);
@@ -211,6 +210,7 @@ void GameLayer::update(float delta)
 					{
 						umbrella->umbrella[i]->setFlipX(false);
 					}
+					playerLoss(i);
 
 				}
 			}
@@ -345,19 +345,23 @@ bool GameLayer::hit()
 	}
 }
 
-void GameLayer::playerLoss()
+void GameLayer::playerLoss(int mob)
 {
 	tapStop = false;
 	if (leftAndRightNum == 2)
 	{
 		move = MoveBy::create(0.03f, Vec2(200.0f, 0));
+		mobMove = MoveBy::create(0.03f, Vec2(100.0f, 0));
 	}
 	else
 	{
 	    move = MoveBy::create(0.03f, Vec2(-200.0f, 0));
+		mobMove = MoveBy::create(0.03f, Vec2(-100.0f, 0));
 	}
 	leftAndRightNum = 0;
+	umbrella->umbrella[mob]->runAction(mobMove);
 	player->runAction(move);
+	this->scheduleOnce(schedule_selector(GameLayer::mobLookBack), 0.2f);
 	this->scheduleOnce(schedule_selector(GameLayer::lossRelease), 1.5f);
 
 }
@@ -365,5 +369,12 @@ void GameLayer::playerLoss()
 void GameLayer::lossRelease(float delta)
 {
 	tapStop = true;
+}
 
+void GameLayer::mobLookBack(float delta)
+{
+	for (int i = 0; i < mobNum; i++)
+	{
+		umbrella->umbrella[i]->RLJudge(0);
+	}
 }

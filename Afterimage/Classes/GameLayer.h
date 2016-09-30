@@ -31,9 +31,11 @@ public:
 	void mobShop(int mobNum);
 	void shopStopON(float delta);
 	//Playerタイムロス
-	void playerLoss();
+	void playerLoss(int mob);
 	//プレイヤーが動けるように
 	void lossRelease(float delta);
+	//モブが振り返るまでの時間
+	void mobLookBack(float delta);
 	//モブ店湧きストッパー
 	bool shopstop;
 	//連続ゴールストッパー
@@ -51,6 +53,7 @@ public:
 	MapCreator *map;
 	//押し出しのアクション
 	MoveBy *move;
+	MoveBy *mobMove;
 	
 private:
 	//歩く速さ
