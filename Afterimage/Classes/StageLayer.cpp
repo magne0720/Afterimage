@@ -40,6 +40,8 @@ bool StageLayer::init()
 
 void StageLayer::update(float delta) 
 {
+
+
 		
 	if (moveSpeed > 0)
 	{
@@ -74,6 +76,7 @@ void StageLayer::update(float delta)
 			Stages.at(i)->setScale(0.5);
 			letter->setString(Stages.at(i)->myData.LETTER);
 			StageNumber = i;
+			isDesided = true;
 		}
 		else
 		{
@@ -90,7 +93,7 @@ bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 
 	if (touch->getLocation().x <= designResolutionSize.width*0.1f)
 	{
-		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+		//Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
 	}
 	for (int i = 0; i < Stages.size(); i++)
 	{
@@ -118,7 +121,16 @@ void StageLayer::onTouchMoved(Touch* touch, Event* event)
 void StageLayer::onTouchEnded(Touch *touch, Event *event)
 {
 	isStageTouch = false;
-
+	for (int i = 0; i < Stages.size(); i++)
+	{
+		if (Stages.at(i)->getBoundingBox().containsPoint(touch->getLocation()))
+		{
+			if(isDesided)
+			{
+				Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+			}
+		}
+	}
 };
 
 void StageLayer::setBoard()
