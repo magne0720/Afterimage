@@ -17,6 +17,8 @@ public:
 	int stockRL;
 	//左右判断
 	int RL;
+	//怒りやすさ
+	int angerMax;
 	//生成遅延
 	bool goMan;
 	//ランダムスタッパー

@@ -199,23 +199,53 @@ void GameLayer::update(float delta)
 			if (player->getBoundingBox().intersectsRect(umbrella->umbrella[i]->getBoundingBox()))
 			{
 				log("%d hit!", i);
-				//tapStop = false;
-				//leftAndRightNum = 0;
-				angerGauge[i]++;
-				if (angerGauge[i] > 300)
+				switch (umbrella->umbrella[i]->stockRL)
 				{
-					angerGauge[i] = 0;
-					if (umbrella->umbrella[i]->RL == 2)
+				case 1:
+					if (player->getPositionX() > umbrella->umbrella[i]->getPositionX())
 					{
-						umbrella->umbrella[i]->setFlipX(true);
+						angerGauge[i]++;
+						if (angerGauge[i] > umbrella->umbrella[i]->angerMax)
+						{
+							angerGauge[i] = 0;
+							umbrella->umbrella[i]->setFlipX(false);
+							playerLoss(i);
+						}
+						log("hanbunkoeta");
 					}
-					else
+					break;
+				case 2:
+					if (player->getPositionX() < umbrella->umbrella[i]->getPositionX())
 					{
-						umbrella->umbrella[i]->setFlipX(false);
+						angerGauge[i]++;
+						if (angerGauge[i] > umbrella->umbrella[i]->angerMax)
+						{
+							angerGauge[i] = 0;
+							umbrella->umbrella[i]->setFlipX(true);
+							playerLoss(i);
+						}
 					}
-					playerLoss(i);
 
+					break;
+				default:
+					break;
 				}
+
+				//angerGauge[i]++;
+				////log("%d : %d", i, angerGauge[i]);
+				//if (angerGauge[i] > umbrella->umbrella[i]->angerMax)
+				//{
+				//	angerGauge[i] = 0;
+				//	if (umbrella->umbrella[i]->RL == 2)
+				//	{
+				//		umbrella->umbrella[i]->setFlipX(true);
+				//	}
+				//	else
+				//	{
+				//		umbrella->umbrella[i]->setFlipX(false);
+				//	}
+				//	playerLoss(i);
+				//}
 			}
 			else
 			{
@@ -225,7 +255,6 @@ void GameLayer::update(float delta)
 					angerGauge[i] = 0;
 				}
 			}
-			log("%d : %d", i, angerGauge[i]);
 
 		}
 
@@ -379,6 +408,7 @@ void GameLayer::playerLoss(int mob)
 	leftAndRightNum = 0;
 	umbrella->umbrella[mob]->runAction(mobMove);
 	player->runAction(move);
+	player->runAction(Blink::create(1.5f, 8));
 	this->scheduleOnce(schedule_selector(GameLayer::mobLookBack), 0.2f);
 	this->scheduleOnce(schedule_selector(GameLayer::lossRelease), 1.5f);
 

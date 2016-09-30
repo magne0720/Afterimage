@@ -35,8 +35,11 @@ bool Umbrella::init(float endPos)
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_int_distribution<int> STime(100, 1000);
+	uniform_int_distribution<int> randomAnger(300, 600);
+
 	this->schedule(schedule_selector(Umbrella::goManSwitch), ((float)STime(mt) / 100));
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
+	angerMax = randomAnger(mt);
 
 
 	
