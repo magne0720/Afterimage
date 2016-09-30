@@ -57,18 +57,18 @@ bool GameLayer::init(int fromTitle)
 	spCamera->setPosition(Vec2(designResolutionSize.width / 2, designResolutionSize.height / 2));
 	this->addChild(spCamera);
 
-	map = MapCreator::create(1);
+	map = MapCreator::create(stageNum);
 	addChild(map);
 
 	rainManagerBack = RainManager::create(120);
 	this->addChild(rainManagerBack, 0);
 
 	rainManager = RainManager::create(260);
-	this->addChild(rainManager, 3);
+	this->addChild(rainManager, 4);
 	                                   //ƒS[ƒ‹ˆÊ’u@¶¬”
 	umbrella = UmbrellaCreator::create(map->endPosition,mobNum);
 	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
-	this->addChild(umbrella, 1);
+	this->addChild(umbrella, 3);
 
 
 	//for (int i = 0; i < 11;i++)

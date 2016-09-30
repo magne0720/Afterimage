@@ -46,6 +46,8 @@ public:
 	
 private:
 
+
+	float timer;
 };
 
 #endif // !

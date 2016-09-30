@@ -41,6 +41,11 @@ bool Umbrella::init(float endPos)
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
 	angerMax = randomAnger(mt);
 
+    //RepeatForever *repeatForever = RepeatForever::create(Sequence::create(JumpBy::create(0.2f, Vec2(0, 0), 25, 1),DelayTime::create(0.1f),NULL));
+	//this->runAction(repeatForever);
+
+
+	timer = 0;
 
 	
 	this->scheduleUpdate();
@@ -97,6 +102,18 @@ void Umbrella::update(float delta)
 
 
 	}
+
+	timer += 0.02f;
+	timer = timer / 1.0f;
+	if(timer > 0.6f)
+	{
+		timer = -0.6f;
+	}
+
+	float y = -6 * sin(2.0f * M_PI * 15 / 180 * timer);
+		this->setPositionY(y+this->getPositionY());
+
+
 }
 
 void Umbrella::walk(float delta)
