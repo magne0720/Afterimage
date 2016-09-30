@@ -23,6 +23,7 @@ private:
 	float moveSpeed;
 	float RX, RY;
 	bool isStageTouch;
+	bool isDesided;
 	Sprite* desideSP;
 	Label* letter;
 
