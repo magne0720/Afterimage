@@ -1,5 +1,6 @@
 #include "TitleLayer.h"
 #include "GameScene.h"
+#include "StageScene.h"
 
 bool TitleLayer::init()
 {
@@ -48,7 +49,7 @@ bool TitleLayer::onTouchBegan(Touch* touch, Event* event)
 {
 	if (tapStopper == true)
 	{
-		Director::getInstance()->replaceScene(TransitionFade::create(4.0f, GameScene::create(1), Color3B::WHITE));
+		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, StageScene::create(), Color3B::WHITE));
 		animation = Animation::create();
 
 		animation->addSpriteFrameWithFileName("arukuRight1.png");
