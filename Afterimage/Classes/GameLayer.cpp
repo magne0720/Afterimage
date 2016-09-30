@@ -225,27 +225,10 @@ void GameLayer::update(float delta)
 							playerLoss(i);
 						}
 					}
-
 					break;
 				default:
 					break;
 				}
-
-				//angerGauge[i]++;
-				////log("%d : %d", i, angerGauge[i]);
-				//if (angerGauge[i] > umbrella->umbrella[i]->angerMax)
-				//{
-				//	angerGauge[i] = 0;
-				//	if (umbrella->umbrella[i]->RL == 2)
-				//	{
-				//		umbrella->umbrella[i]->setFlipX(true);
-				//	}
-				//	else
-				//	{
-				//		umbrella->umbrella[i]->setFlipX(false);
-				//	}
-				//	playerLoss(i);
-				//}
 			}
 			else
 			{
