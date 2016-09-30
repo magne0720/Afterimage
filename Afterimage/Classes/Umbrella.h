@@ -17,6 +17,8 @@ public:
 	int stockRL;
 	//左右判断
 	int RL;
+	//怒りやすさ
+	int angerMax;
 	//生成遅延
 	bool goMan;
 	//ランダムスタッパー
@@ -34,8 +36,9 @@ public:
 	void stopRandomOFF();
 	void stopRandomON(float delta);
 	void leftRightMan(float delta);
+	//左右判断
 	void RLJudge(float delta);
-		
+
 
 	void update(float delta);
 
