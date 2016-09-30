@@ -203,14 +203,14 @@ void GameLayer::update(float delta)
 				{
 					angerGauge[i] = 0;
 					playerLoss();
-					//if (umbrella->umbrella[i]->RL == 2)
-					//{
-					//	umbrella->umbrella[i]->setFlipX(true);
-					//}
-					//else
-					//{
-					//	umbrella->umbrella[i]->setFlipX(false);
-					//}
+					if (umbrella->umbrella[i]->RL == 2)
+					{
+						umbrella->umbrella[i]->setFlipX(true);
+					}
+					else
+					{
+						umbrella->umbrella[i]->setFlipX(false);
+					}
 
 				}
 			}
