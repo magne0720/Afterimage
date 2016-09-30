@@ -365,4 +365,5 @@ void GameLayer::playerLoss()
 void GameLayer::lossRelease(float delta)
 {
 	tapStop = true;
+
 }
