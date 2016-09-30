@@ -7,12 +7,16 @@
 USING_NS_CC;
 using namespace std;
 
+
+#define ALL_STAGE 30
+
 class StageItem:public Sprite
 {
 public:
 	static StageItem* create(int number);
 	bool init(int number);
 	void allSet(int number);
+	void randomSet();
 
 	struct MYDATA
 	{

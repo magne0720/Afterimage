@@ -2,6 +2,7 @@
 
 #include "StageItem.h"
 
+
 StageItem* StageItem::create(int number)
 {
 	StageItem *pRet = new StageItem();
@@ -25,15 +26,18 @@ bool StageItem::init(int number)
 	{
 		return false;
 	}
-
-	allSet(number);
+	if (number != ALL_STAGE)
+		allSet(number);
+	else
+		randomSet();
+	
 	log("getStageItem");
 
 
 	return true;
 };
 
-void StageItem::allSet(int number) 
+void StageItem::allSet(int number)
 {
 	auto split = [](const std::string& input, char delimiter)
 	{
@@ -51,35 +55,50 @@ void StageItem::allSet(int number)
 
 	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
 	vector<string> lines = split(fileText, '\n');
+	vector<string> blocks = split(lines[number], ',');
+	vector<string> letters;
 
-		vector<string> blocks = split(lines[number], ',');
-		for (int i = 0; i < blocks.size(); i++)
+
+	for (int i = 0; i < blocks.size(); i++)
+	{
+		char data = blocks[i][0];
+		switch (data)
 		{
-			char data = (char)blocks[i][0];
-			log("data=[%c]", data);
-
-			switch (data)
+		case 'W':
+			i++;
+			myData.NUMBER = atoi(blocks[i].c_str());
+			break;
+		case 'L':
+			i++;
+			myData.LEVEL = atoi(blocks[i].c_str());
+			break;
+		case 'T':
+			i++;
+			initWithFile(blocks[i].c_str());
+			break;
+		case 'S':
+			i++;
+			letters = split(blocks[i], '@');
+			for (int j = 0; j < letters .size(); j++)
 			{
-			case 'W':
-				i++;
-				myData.NUMBER = atoi(blocks[i].c_str());
-				break;
-			case 'L':
-				i++;
-				myData.LEVEL = atoi(blocks[i].c_str());
-				break;
-			case 'T':
-				i++;
-				log("%s", blocks[i].c_str());
-				initWithFile(blocks[i].c_str());
-				break;
-			case 'S':
-				i++;
-				break;
-			default:
-				myData.LETTER += blocks[i].c_str();
-				myData.LETTER.push_back('\n');
-				break;
+				myData.LETTER += letters[j] + '\n';
 			}
+			break;
+		default:
+			break;
+
+
 		}
+	}
+	log("%s", myData.LETTER.c_str());
 };
+
+void StageItem::randomSet()
+{
+
+	myData.LEVEL = -1;
+	myData.NUMBER = -1;
+	myData.LETTER = "random";
+	initWithFile("random.png");
+
+}

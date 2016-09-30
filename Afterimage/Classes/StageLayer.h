@@ -31,6 +31,8 @@ private:
 
 	void update(float delta);
 
+	void setBoard();
+	void setStage();
 	void setLetter();
 
 
