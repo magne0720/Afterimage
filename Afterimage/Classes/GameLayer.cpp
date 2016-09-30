@@ -31,12 +31,13 @@ bool GameLayer::init(int fromTitle)
 	PlayerHP = 500;
 	speed = 10.0f;
 	leftAndRightNum = 0;
-	mobNum = 50;
+	mobNum = 25;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
 	goalStop = true;
 	tapStop = true;
+	actStop = false;
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -97,6 +98,8 @@ bool GameLayer::init(int fromTitle)
 			mobShop(n);
 		}
 	}
+	actStop = true;
+
 	player->changeLeft();
 	player->stopAct(2);
 	player->changeRight();
@@ -289,6 +292,19 @@ void GameLayer::mobShop(int mobNum)
 	{
 		shopstop = false;
 		umbrella->umbrella[mobNum]->stopRandomOFF();
+		if (actStop)
+		{
+			Sprite *copyUmbrella = Sprite::create("umbrellaMob.png");
+			if (umbrella->umbrella[mobNum]->stockRL == 1)
+			{
+				copyUmbrella->setFlipX(true);
+			}
+			copyUmbrella->setPosition(umbrella->umbrella[mobNum]->getPosition());
+			copyUmbrella->setScale(umbrella->umbrella[mobNum]->getScale());
+			this->addChild(copyUmbrella);
+			copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
+		}
+
 		random_device rd;
 		mt19937 mt(rd());
 		//log("mapSize%d", map->allShops.size());
@@ -299,6 +315,8 @@ void GameLayer::mobShop(int mobNum)
 		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
 		umbrella->umbrella[mobNum]->RLJudge(0);
 		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
+		umbrella->umbrella[mobNum]->setOpacity(0);
+		umbrella->umbrella[mobNum]->runAction(FadeIn::create(0.5f));
 		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
 }

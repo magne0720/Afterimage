@@ -34,8 +34,9 @@ public:
 	void stopRandomOFF();
 	void stopRandomON(float delta);
 	void leftRightMan(float delta);
+	//ç∂âEîªíf
 	void RLJudge(float delta);
-		
+
 
 	void update(float delta);
 

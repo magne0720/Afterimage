@@ -36,13 +36,12 @@ public:
 	void lossRelease(float delta);
 	//モブが振り返るまでの時間
 	void mobLookBack(float delta);
-	//モブ店湧きストッパー
-	bool shopstop;
-	//連続ゴールストッパー
-	bool goalStop;
+	bool shopstop;         //モブ店湧きストッパー
+	bool goalStop;         //連続ゴールストッパー
 	bool hit();
-	//タップストッパー
-	bool tapStop;
+	bool tapStop;          //タップストッパー
+	bool actStop;          //初期入店演出防止
+
 
 	/*Camera *camera;*/
 	RainManager *rainManagerBack;

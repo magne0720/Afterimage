@@ -39,7 +39,6 @@ bool Umbrella::init(float endPos)
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
 
 
-
 	
 	this->scheduleUpdate();
 
