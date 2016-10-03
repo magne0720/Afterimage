@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "StageItem.h"
+#include "MapCreator.h"
 
 USING_NS_CC;
 
@@ -26,12 +27,14 @@ private:
 	bool isDesided;
 	Sprite* desideSP;
 	Label* letter;
+	MapCreator* map;
 
 	Vector<StageItem*> Stages;
 
 
 	void update(float delta);
 
+	void setMap(int number);
 	void setBoard();
 	void setStage();
 	void setLetter();

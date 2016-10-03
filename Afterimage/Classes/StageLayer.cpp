@@ -29,6 +29,10 @@ bool StageLayer::init()
 	auto dip = Director::getInstance()->getEventDispatcher();
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
+	map = MapCreator::create(0);
+	addChild(map);
+
+	setMap(0);
 	setBoard();
 	setStage();
 	setLetter();
@@ -81,6 +85,7 @@ void StageLayer::update(float delta)
 		else
 		{
 			Stages.at(i)->setScale(0.2);
+
 		}
 		//Stages.at(i)->setColor(Color3B(moveSpeed, moveSpeed*10, moveSpeed*12));
 	}
@@ -170,3 +175,8 @@ void StageLayer::setLetter()
 	letter->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.85f));
 	addChild(letter,5);
 };
+void StageLayer::setMap(int number) 
+{
+	map->createStage(number);
+	map->previewStage();
+}

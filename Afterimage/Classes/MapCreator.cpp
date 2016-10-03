@@ -94,7 +94,7 @@ void MapCreator::createStage(int number)
 		log("lines=[%s]", lines[i].c_str());
 		log("data=[%c]", data);
 
-		vector<string> blocks = split(lines[i], ',');			//行配列
+		vector<string> blocks = split(lines[i], ',');		//行配列
 
 
 		switch (data)
@@ -190,4 +190,18 @@ void MapCreator::BackCreate(vector<string> letter)
 		spItem->setPosition(Vec2(SHOP_INTERVAL * (i - 1), SHOP_HEIGHT));
 		BackGrounds->addChild(spItem);
 	}
+};
+
+void MapCreator::previewStage()
+{
+	Shops->setPositionX(getPositionX() - goalPosition);
+	BackGrounds->setPositionX(getPositionX() - goalPosition);
+	Floors->setPositionX(getPositionX() - goalPosition);
+};
+
+void MapCreator::ressetStage()
+{
+	Shops->removeAllChildren();
+	BackGrounds->removeAllChildren();
+	Floors->removeAllChildren();
 };

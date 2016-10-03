@@ -22,7 +22,6 @@ class MapCreator :public Layer
 {
 private:
 	bool init(int number);
-	void createStage(int number);
 
 	
 	//次これやる
@@ -66,10 +65,15 @@ public:
 	static MapCreator* create(int number);
 	void update(float delta);
 
+
 	float getPositionPlayerX(float positionX);
-	float myAnchor;
+	void createStage(int number);
+
+	void previewStage();
+	void ressetStage();
 
 	//スクリプト内の直読み込み
+	float myAnchor;
 	
 };
 
