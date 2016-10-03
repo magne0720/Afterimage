@@ -35,12 +35,17 @@ bool Umbrella::init(float endPos)
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_int_distribution<int> STime(100, 1000);
-	uniform_int_distribution<int> randomAnger(300, 600);
+	uniform_int_distribution<int> randomAnger(180, 360);
 
 	this->schedule(schedule_selector(Umbrella::goManSwitch), ((float)STime(mt) / 100));
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
 	angerMax = randomAnger(mt);
 
+    //RepeatForever *repeatForever = RepeatForever::create(Sequence::create(JumpBy::create(0.2f, Vec2(0, 0), 25, 1),DelayTime::create(0.1f),NULL));
+	//this->runAction(repeatForever);
+
+
+	timer = 0;
 
 	
 	this->scheduleUpdate();
@@ -95,8 +100,20 @@ void Umbrella::update(float delta)
 			randomMan();
 		}
 
+		timer += 0.02f;
+		timer = timer / 1.0f;
+		if (timer > 0.6f)
+		{
+			timer = -0.6f;
+		}
+
+		float y = -6 * sin(2.0f * M_PI * 15 / 180 * timer);
+		this->setPositionY(y + this->getPositionY());
 
 	}
+
+
+
 }
 
 void Umbrella::walk(float delta)
