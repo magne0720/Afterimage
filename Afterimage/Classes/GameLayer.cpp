@@ -364,7 +364,7 @@ void GameLayer::mobShop(int mobNum)
 				this->addChild(copyUmbrella);
 				copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
 			}
-				break;
+			break;
 			case 1:
 			{
 				Sprite *copyUmbrella = Sprite::create("umbrellaman_0.png");
@@ -377,39 +377,45 @@ void GameLayer::mobShop(int mobNum)
 				this->addChild(copyUmbrella);
 				copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
 			}
-				break;
+			break;
 			default:
 				break;
 			}
-		}
-		int mSize = map->openShops.size();
-		uniform_int_distribution<int> randomShop(0, (mSize - 1));
-		uniform_int_distribution<int> RLor(1,2);
-		uniform_int_distribution<int> changeMobNum(0, 1);
-		int cMobNum = changeMobNum(mt);
-		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
-		switch (cMobNum)
-		{
-		case 0:
-		{
-			umbrella->umbrella[mobNum]->initWithFile("umbrellaMob.png");
-			
-		}
-		break;
-		case 1:
-		{
-			umbrella->umbrella[mobNum]->initWithFile("umbrellaman_0.png");
-		}
-		default:
+
+			int mSize = map->openShops.size();
+			uniform_int_distribution<int> randomShop(0, (mSize - 1));
+			uniform_int_distribution<int> RLor(1, 2);
+			int RLJ = RLor(mt);
+			log("fjilidhshifh%d", umbrella->umbrella[mobNum]->RL);
+			uniform_int_distribution<int> changeMobNum(0, 1);
+			int cMobNum = changeMobNum(mt);
+			switch (cMobNum)
+			{
+			case 0:
+			{
+				umbrella->umbrella[mobNum]->initWithFile("umbrellaMob.png");
+				uniform_int_distribution<int> randomAnger(180, 360);
+				umbrella->umbrella[mobNum]->angerMax = randomAnger(mt);
+			}
 			break;
+			case 1:
+			{
+				umbrella->umbrella[mobNum]->initWithFile("umbrellaman_0.png");
+				uniform_int_distribution<int> randomAnger(240, 420);
+				umbrella->umbrella[mobNum]->angerMax = randomAnger(mt);
+			}
+			default:
+				break;
+			}
+			umbrella->umbrella[mobNum]->setPosition(map->openShops.at(randomShop(mt))->shopStatus.gate, designResolutionSize.height*0.35f);
+			umbrella->umbrella[mobNum]->mobJudge = cMobNum;
+			umbrella->umbrella[mobNum]->stockRL = RLJ;
+			umbrella->umbrella[mobNum]->RL = RLJ;
+			umbrella->umbrella[mobNum]->RLJudge(0);
+			umbrella->umbrella[mobNum]->setOpacity(0);
+			umbrella->umbrella[mobNum]->runAction(FadeIn::create(0.5f));
+			this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 		}
-		umbrella->umbrella[mobNum]->mobJudge = cMobNum;
-		umbrella->umbrella[mobNum]->RL = RLor(mt);
-		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
-		umbrella->umbrella[mobNum]->RLJudge(0);
-		umbrella->umbrella[mobNum]->setOpacity(0);
-		umbrella->umbrella[mobNum]->runAction(FadeIn::create(0.5f));
-		this->schedule(schedule_selector(GameLayer::shopStopON), 3);
 	}
 }
 

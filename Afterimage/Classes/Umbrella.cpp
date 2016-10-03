@@ -34,7 +34,7 @@ bool Umbrella::init(float endPos)
 
 	random_device rd;
 	mt19937 mt(rd());
-	uniform_int_distribution<int> STime(100, 1000);
+	uniform_int_distribution<int> STime(100, 1300);
 
 	this->schedule(schedule_selector(Umbrella::goManSwitch), ((float)STime(mt) / 100));
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
@@ -57,7 +57,7 @@ void Umbrella::randomMan()
 	{
 		random_device rd;
 		mt19937 mt(rd());
-		uniform_int_distribution<int> mobSP(500, 1200);
+		uniform_int_distribution<int> mobSP(500, 900);
 		uniform_int_distribution<int> intRL(1, 2);
 		uniform_int_distribution<int> imageNum(0, 1);
 		mobJudge = imageNum(mt);
@@ -73,7 +73,7 @@ void Umbrella::randomMan()
 		case 1:
 		{
 			this->initWithFile("umbrellaman_0.png");
-			uniform_int_distribution<int> randomAnger(180, 360);
+			uniform_int_distribution<int> randomAnger(240, 420);
 			angerMax = randomAnger(mt);
 		}
 			break;
