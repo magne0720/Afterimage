@@ -31,7 +31,7 @@ bool GameLayer::init(int fromTitle)
 	PlayerHP = 500;
 	speed = 10.0f;
 	leftAndRightNum = 0;
-	mobNum = 20;
+	mobNum = 25;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
