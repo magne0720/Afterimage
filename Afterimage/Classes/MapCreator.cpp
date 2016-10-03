@@ -83,7 +83,7 @@ void MapCreator::createStage(int number)
 	};
 	int counter = number * 6;
 
-	String* filename = String::createWithFormat("Stage/StageData_001.txt");
+	String* filename = String::createWithFormat("Stage/StageData.txt");
 
 	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
 	vector<string> lines = split(fileText, '\n');			//s”z—ñ
