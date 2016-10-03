@@ -81,11 +81,11 @@ bool GameLayer::init(int fromTitle)
 	for (int n = 0; n < mobNum; n++)
 	{
 		angerGauge.push_back(0);
-		question.push_back(Sprite::create("hatena.png"));
+		question.push_back(Sprite::create("GameScene/hatena.png"));
 		question[n]->setScale(0.3f);
 		question[n]->setVisible(false);
 		this->addChild(question[n]);
-		anger.push_back(Sprite::create("ikari.png"));
+		anger.push_back(Sprite::create("GameScene/ikari.png"));
 		anger[n]->setScale(0.3f);
 		anger[n]->setVisible(false);
 		this->addChild(anger[n]);
@@ -253,10 +253,13 @@ void GameLayer::update(float delta)
 			}
 			else
 			{
-				angerGauge[i]--;
-				if (angerGauge[i] <= 0 )
+				if (angerGauge[i] > (int)((float)(umbrella->umbrella[i]->angerMax / 2)))
 				{
-					angerGauge[i] = 0;
+					angerGauge[i]--;
+					if (angerGauge[i] <= (int)((float)(umbrella->umbrella[i]->angerMax / 2)))
+					{
+						angerGauge[i] = (int)((float)(umbrella->umbrella[i]->angerMax / 2)) - 1;
+					}
 				}
 			}
 
@@ -354,7 +357,7 @@ void GameLayer::mobShop(int mobNum)
 			{
 			case 0:
 			{
-				Sprite *copyUmbrella = Sprite::create("umbrellaMob.png");
+				Sprite *copyUmbrella = Sprite::create("GameScene/umbrellaMob.png");
 				if (umbrella->umbrella[mobNum]->stockRL == 1)
 				{
 					copyUmbrella->setFlipX(true);
@@ -367,7 +370,7 @@ void GameLayer::mobShop(int mobNum)
 			break;
 			case 1:
 			{
-				Sprite *copyUmbrella = Sprite::create("umbrellaman_0.png");
+				Sprite *copyUmbrella = Sprite::create("GameScene/umbrellaman_0.png");
 				if (umbrella->umbrella[mobNum]->stockRL == 1)
 				{
 					copyUmbrella->setFlipX(true);
@@ -393,14 +396,14 @@ void GameLayer::mobShop(int mobNum)
 			{
 			case 0:
 			{
-				umbrella->umbrella[mobNum]->initWithFile("umbrellaMob.png");
+				umbrella->umbrella[mobNum]->initWithFile("GameScene/umbrellaMob.png");
 				uniform_int_distribution<int> randomAnger(180, 360);
 				umbrella->umbrella[mobNum]->angerMax = randomAnger(mt);
 			}
 			break;
 			case 1:
 			{
-				umbrella->umbrella[mobNum]->initWithFile("umbrellaman_0.png");
+				umbrella->umbrella[mobNum]->initWithFile("GameScene/umbrellaman_0.png");
 				uniform_int_distribution<int> randomAnger(240, 420);
 				umbrella->umbrella[mobNum]->angerMax = randomAnger(mt);
 			}

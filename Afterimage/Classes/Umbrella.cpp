@@ -65,14 +65,14 @@ void Umbrella::randomMan()
 		{
 		case 0:
 		{
-			this->initWithFile("umbrellaMob.png");
+			this->initWithFile("GameScene/umbrellaMob.png");
 			uniform_int_distribution<int> randomAnger(180, 360);
 			angerMax = randomAnger(mt);
 		}
 			break;
 		case 1:
 		{
-			this->initWithFile("umbrellaman_0.png");
+			this->initWithFile("GameScene/umbrellaman_0.png");
 			uniform_int_distribution<int> randomAnger(240, 420);
 			angerMax = randomAnger(mt);
 		}

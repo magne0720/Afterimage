@@ -25,7 +25,7 @@ bool TitleLayer::init()
 	mapCreator = MapCreator::create(1);
 	this->addChild(mapCreator);
 
-	player = Sprite::create("arukuRight2.png");
+	player = Sprite::create("GameScene/arukuRight2.png");
 	player->setScale(0.18f);
 	player->setPosition(Vec2(designResolutionSize.width*0.3f, designResolutionSize.height*0.3f));
 	this->addChild(player);
@@ -52,10 +52,10 @@ bool TitleLayer::onTouchBegan(Touch* touch, Event* event)
 		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, StageScene::create(), Color3B::WHITE));
 		animation = Animation::create();
 
-		animation->addSpriteFrameWithFileName("arukuRight1.png");
-		animation->addSpriteFrameWithFileName("arukuRight2.png");
-		animation->addSpriteFrameWithFileName("arukuRight3.png");
-		animation->addSpriteFrameWithFileName("arukuRight2.png");
+		animation->addSpriteFrameWithFileName("GameScene/arukuRight1.png");
+		animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
+		animation->addSpriteFrameWithFileName("GameScene/arukuRight3.png");
+		animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
 		animation->setDelayPerUnit(0.3f);
 		animation->setRestoreOriginalFrame(true);
 		action = Animate::create(animation);
