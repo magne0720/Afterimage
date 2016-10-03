@@ -346,29 +346,67 @@ void GameLayer::mobShop(int mobNum)
 		shopstop = false;
 		angerGauge[mobNum] = 0;
 		umbrella->umbrella[mobNum]->stopRandomOFF();
-		if (actStop)
-		{
-			Sprite *copyUmbrella = Sprite::create("umbrellaMob.png");
-			if (umbrella->umbrella[mobNum]->stockRL == 1)
-			{
-				copyUmbrella->setFlipX(true);
-			}
-			copyUmbrella->setPosition(umbrella->umbrella[mobNum]->getPosition());
-			copyUmbrella->setScale(umbrella->umbrella[mobNum]->getScale());
-			this->addChild(copyUmbrella);
-			copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
-		}
-
 		random_device rd;
 		mt19937 mt(rd());
-		//log("mapSize%d", map->allShops.size());
+		if (actStop)
+		{
+			switch (umbrella->umbrella[mobNum]->mobJudge)
+			{
+			case 0:
+			{
+				Sprite *copyUmbrella = Sprite::create("umbrellaMob.png");
+				if (umbrella->umbrella[mobNum]->stockRL == 1)
+				{
+					copyUmbrella->setFlipX(true);
+				}
+				copyUmbrella->setPosition(umbrella->umbrella[mobNum]->getPosition());
+				copyUmbrella->setScale(umbrella->umbrella[mobNum]->getScale());
+				this->addChild(copyUmbrella);
+				copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
+			}
+				break;
+			case 1:
+			{
+				Sprite *copyUmbrella = Sprite::create("umbrellaman_0.png");
+				if (umbrella->umbrella[mobNum]->stockRL == 1)
+				{
+					copyUmbrella->setFlipX(true);
+				}
+				copyUmbrella->setPosition(umbrella->umbrella[mobNum]->getPosition());
+				copyUmbrella->setScale(umbrella->umbrella[mobNum]->getScale());
+				this->addChild(copyUmbrella);
+				copyUmbrella->runAction(Sequence::create(FadeOut::create(1.0f), RemoveSelf::create(true), NULL));
+			}
+				break;
+			default:
+				break;
+			}
+		}
 		int mSize = map->openShops.size();
 		uniform_int_distribution<int> randomShop(0, (mSize - 1));
 		uniform_int_distribution<int> RLor(1,2);
+		uniform_int_distribution<int> changeMobNum(0, 1);
+		int cMobNum = changeMobNum(mt);
+		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
+		switch (cMobNum)
+		{
+		case 0:
+		{
+			umbrella->umbrella[mobNum]->initWithFile("umbrellaMob.png");
+			
+		}
+		break;
+		case 1:
+		{
+			umbrella->umbrella[mobNum]->initWithFile("umbrellaman_0.png");
+		}
+		default:
+			break;
+		}
+		umbrella->umbrella[mobNum]->mobJudge = cMobNum;
 		umbrella->umbrella[mobNum]->RL = RLor(mt);
 		umbrella->umbrella[mobNum]->stockRL = umbrella->umbrella[mobNum]->RL;
 		umbrella->umbrella[mobNum]->RLJudge(0);
-		umbrella->umbrella[mobNum]->setPositionX(map->openShops.at(randomShop(mt))->shopStatus.gate);
 		umbrella->umbrella[mobNum]->setOpacity(0);
 		umbrella->umbrella[mobNum]->runAction(FadeIn::create(0.5f));
 		this->schedule(schedule_selector(GameLayer::shopStopON), 3);

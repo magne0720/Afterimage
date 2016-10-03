@@ -19,6 +19,8 @@ public:
 	int RL;
 	//怒りやすさ
 	int angerMax;
+	//モブ判断
+	int mobJudge;
 	//生成遅延
 	bool goMan;
 	//ランダムスタッパー
