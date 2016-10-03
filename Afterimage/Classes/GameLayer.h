@@ -66,5 +66,7 @@ private:
 	bool direction;
 	//ƒ‚ƒu‚Ì“{‚èƒQ[ƒW
 	vector<int> angerGauge;
+	vector<Sprite*> question;
+	vector<Sprite*> anger;
 };
 #endif // !__GAME_LAYER_H__

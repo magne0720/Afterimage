@@ -67,7 +67,6 @@ bool GameLayer::init(int fromTitle)
 	this->addChild(rainManager, 4);
 	                                   //ƒS[ƒ‹ˆÊ’u@¶¬”
 	umbrella = UmbrellaCreator::create(map->endPosition,mobNum);
-	//umbrella->setPosition(Vec2(designResolutionSize.width * 0, designResolutionSize.height *0));
 	this->addChild(umbrella, 3);
 
 
@@ -82,20 +81,41 @@ bool GameLayer::init(int fromTitle)
 	for (int n = 0; n < mobNum; n++)
 	{
 		angerGauge.push_back(0);
+		question.push_back(Sprite::create("hatena.png"));
+		question[n]->setScale(0.3f);
+		question[n]->setVisible(false);
+		this->addChild(question[n]);
+		anger.push_back(Sprite::create("ikari.png"));
+		anger[n]->setScale(0.3f);
+		anger[n]->setVisible(false);
+		this->addChild(anger[n]);
 		random_device rd;
 		mt19937 mt(rd());
 		uniform_int_distribution<int> shopOrEnd(0, 1);
-		if (shopOrEnd(mt) == 0)
+		//if (shopOrEnd(mt) == 0)
+		//{
+		//	shopstop = false;
+		//	this->schedule(schedule_selector(GameLayer::shopStopON), 6);
+		//	umbrella->umbrella[n]->randomMan();
+		//}
+		//else
+		//{
+		//	umbrella->umbrella[n]->stopRandomOFF();
+		//	mobShop(n);
+		//}
+		switch (shopOrEnd(mt))
 		{
+		case 0:
 			shopstop = false;
 			this->schedule(schedule_selector(GameLayer::shopStopON), 6);
 			umbrella->umbrella[n]->randomMan();
-
-		}
-		else
-		{
+			break;
+		case 1:
 			umbrella->umbrella[n]->stopRandomOFF();
 			mobShop(n);
+			break;
+		default:
+			break;
 		}
 	}
 	actStop = true;
@@ -172,6 +192,8 @@ void GameLayer::update(float delta)
 
 	for (int i = 0; i < mobNum; i++)
 	{
+		question[i]->setPosition(umbrella->umbrella[i]->getPositionX(), umbrella->umbrella[i]->getPositionY() + designResolutionSize.height*0.3f);
+		anger[i]->setPosition(umbrella->umbrella[i]->getPositionX(), umbrella->umbrella[i]->getPositionY() + designResolutionSize.height*0.3f);
 		for (int j = 0; j < map->openShops.size(); j++)
 		{
 			if (umbrella->umbrella[i]->getBoundingBox().containsPoint(Vec2(map->openShops.at(j)->shopStatus.gate,designResolutionSize.height*0.4f)))
@@ -211,7 +233,6 @@ void GameLayer::update(float delta)
 							umbrella->umbrella[i]->setFlipX(false);
 							playerLoss(i);
 						}
-						log("hanbunkoeta");
 					}
 					break;
 				case 2:
@@ -240,8 +261,28 @@ void GameLayer::update(float delta)
 			}
 
 		}
+		if (angerGauge[i] > (int)((float)((umbrella->umbrella[i]->angerMax /10) * 9)))
+		{
+			question[i]->setVisible(false);
+			anger[i]->setVisible(true);
+		}
+		else
+		{
+			if (angerGauge[i] > (int)((float)(umbrella->umbrella[i]->angerMax / 2)))
+			{
+				question[i]->setVisible(true);
+				anger[i]->setVisible(false);
+			}
+			else
+			{
+				question[i]->setVisible(false);
+				anger[i]->setVisible(false);
+			}
+		}
+
 
 	}
+
 
 }
 
@@ -303,6 +344,7 @@ void GameLayer::mobShop(int mobNum)
 	if (shopstop == true)
 	{
 		shopstop = false;
+		angerGauge[mobNum] = 0;
 		umbrella->umbrella[mobNum]->stopRandomOFF();
 		if (actStop)
 		{
@@ -378,15 +420,18 @@ bool GameLayer::hit()
 void GameLayer::playerLoss(int mob)
 {
 	tapStop = false;
-	if (leftAndRightNum == 2)
+	switch (umbrella->umbrella[mob]->stockRL)
 	{
+	case 1:
+		move = MoveBy::create(0.03f, Vec2(-200.0f, 0));
+		mobMove = MoveBy::create(0.03f, Vec2(-100.0f, 0));
+		break;
+	case 2:
 		move = MoveBy::create(0.03f, Vec2(200.0f, 0));
 		mobMove = MoveBy::create(0.03f, Vec2(100.0f, 0));
-	}
-	else
-	{
-	    move = MoveBy::create(0.03f, Vec2(-200.0f, 0));
-		mobMove = MoveBy::create(0.03f, Vec2(-100.0f, 0));
+		break;
+	default:
+		break;
 	}
 	leftAndRightNum = 0;
 	umbrella->umbrella[mob]->runAction(mobMove);
