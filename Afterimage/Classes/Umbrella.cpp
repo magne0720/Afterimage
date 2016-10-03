@@ -35,11 +35,9 @@ bool Umbrella::init(float endPos)
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_int_distribution<int> STime(100, 1000);
-	uniform_int_distribution<int> randomAnger(180, 360);
 
 	this->schedule(schedule_selector(Umbrella::goManSwitch), ((float)STime(mt) / 100));
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)STime(mt) / 100));
-	angerMax = randomAnger(mt);
 
     //RepeatForever *repeatForever = RepeatForever::create(Sequence::create(JumpBy::create(0.2f, Vec2(0, 0), 25, 1),DelayTime::create(0.1f),NULL));
 	//this->runAction(repeatForever);
@@ -57,11 +55,31 @@ void Umbrella::randomMan()
 {
 	if (stopRandom == true)
 	{
-		this->initWithFile("umbrellaMob.png");
 		random_device rd;
 		mt19937 mt(rd());
 		uniform_int_distribution<int> mobSP(500, 1200);
 		uniform_int_distribution<int> intRL(1, 2);
+		uniform_int_distribution<int> imageNum(0, 1);
+		mobJudge = imageNum(mt);
+		switch (mobJudge)
+		{
+		case 0:
+		{
+			this->initWithFile("umbrellaMob.png");
+			uniform_int_distribution<int> randomAnger(180, 360);
+			angerMax = randomAnger(mt);
+		}
+			break;
+		case 1:
+		{
+			this->initWithFile("umbrellaman_0.png");
+			uniform_int_distribution<int> randomAnger(180, 360);
+			angerMax = randomAnger(mt);
+		}
+			break;
+		default:
+			break;
+		}
 		mobspeed = (float)mobSP(mt) / 100;
 		RL = intRL(mt);
 		stockRL = RL;
