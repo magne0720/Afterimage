@@ -165,7 +165,7 @@ void StageLayer::setStage()
 }
 void StageLayer::setLetter()
 {
-	letter = Label::create("non letter","arial.ttf",40);
+	letter = Label::create("non letter","fonts/851H-kktt.ttf",40);
 	letter->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
 	letter->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.85f));
 	addChild(letter,5);
