@@ -120,11 +120,12 @@ void StageLayer::update(float delta)
 //画面をタッチした時の処理
 bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 {
-			isStageTouch = true;
+	isStageTouch = true;
 	moveSpeed = 0;
+	touchTimer = 0;
+		SimpleAudioEngine::getInstance()->playEffect("Music/buton.mp3", false);
 	if (isDesided)
 	{
-		SimpleAudioEngine::getInstance()->playEffect("Music/buton.mp3", false);
 	}
 	if (touch->getLocation().x <= designResolutionSize.width*0.1f)
 	{
@@ -160,7 +161,7 @@ void StageLayer::onTouchEnded(Touch *touch, Event *event)
 		{
 			if (isStageTouch) 
 			{
-				if (touchTimer <= 1) 
+				if (touchTimer <= 0.3f) 
 				{
 					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
 				}
