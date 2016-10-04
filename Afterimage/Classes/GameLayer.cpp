@@ -2,13 +2,13 @@
 #include "ResultScene.h"
 #include "GameScene.h"
 
-GameLayer *GameLayer::create(int fromTitle)
+GameLayer *GameLayer::create(int fromTitle,int HP)
 
 {
 
 	GameLayer *pRet = new GameLayer();
 
-	if (pRet && pRet->init(fromTitle))
+	if (pRet && pRet->init(fromTitle,HP))
 	{
 		pRet->autorelease();
 
@@ -21,7 +21,7 @@ GameLayer *GameLayer::create(int fromTitle)
 	}
 }
 
-bool GameLayer::init(int fromTitle)
+bool GameLayer::init(int fromTitle,int HP)
 {
 	if (!Layer::init())
 	{
