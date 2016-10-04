@@ -22,7 +22,7 @@ bool ShopBase::init(int kind,int number)
 	{
 		return false;
 	}
-	log("ShopBase=%d", kind);
+	//log("ShopBase=%d", kind);
 
 	shopKind = kind;
 	shopNumber = number;
@@ -31,7 +31,7 @@ bool ShopBase::init(int kind,int number)
 
 
 	initWithFile(name->getCString());
-	log("%s", name->getCString());
+	//log("%s", name->getCString());
 
 	ShopCreate(kind);
 

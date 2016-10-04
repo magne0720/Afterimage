@@ -90,15 +90,14 @@ void StageItem::allSet(int number)
 
 		}
 	}
-	log("%s", myData.LETTER.c_str());
+	//log("%s", myData.LETTER.c_str());
 };
 
 void StageItem::randomSet()
 {
 
-	myData.LEVEL = -1;
-	myData.NUMBER = -1;
+	myData.LEVEL = 0;
+	myData.NUMBER = 0;
 	myData.LETTER = "random";
 	initWithFile("random.png");
-
 }

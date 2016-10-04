@@ -20,12 +20,15 @@ public:
 
 private:
 	int StageNumber;
+	int picupNumber;
 	float numbersEye;
 	float moveSpeed;
 	float RX, RY;
 	bool isStageTouch;
 	bool isDesided;
 	Sprite* desideSP;
+	Sprite* clipMask;
+	ClippingNode* clip;
 	Label* letter;
 	MapCreator* map;
 

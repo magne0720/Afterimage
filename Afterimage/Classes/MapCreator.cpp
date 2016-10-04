@@ -4,17 +4,17 @@
 MapCreator* MapCreator::create(int number)
 {
 	MapCreator *pRet = new MapCreator();
-		if (pRet && pRet->init(number))
-		{
+	if (pRet && pRet->init(number))
+	{
 		pRet->autorelease();
 		return pRet;
-		}
-		else
-		{
+	}
+	else
+	{
 		delete pRet;
 		pRet = nullptr;
 		return nullptr;
-		}
+	}
 };
 
 bool MapCreator::init(int number)
@@ -39,12 +39,6 @@ bool MapCreator::init(int number)
 	addChild(ss);
 
 	createStage(number);
-
-	for (int i = 0; i < allShops.size();i++)
-	
-	{
-		log("shopPositionX=[%f]", allShops.at(i)->shopStatus.gate);
-	}
 
 	scheduleUpdate();
 
@@ -81,21 +75,24 @@ void MapCreator::createStage(int number)
 		"building_%d.png",
 		"background_%d.png",
 	};
-	int counter = number * 6;
-
 	String* filename = String::createWithFormat("Stage/StageData.txt");
 
 	string fileText = FileUtils::getInstance()->getStringFromFile(filename->getCString());
 	vector<string> lines = split(fileText, '\n');			//行配列
+	
 
-	for (int i = counter; lines[i][0] != 'n'; i++) 
+	vector<string> datas = split(lines[number], '<');//ほしい行をデータにまとめて分ける
+
+		//log("lines=[%s]", lines[i].c_str());
+	for (int i = 0; i < datas.size();i++)
 	{
-		char data = lines[i][0];
-		log("lines=[%s]", lines[i].c_str());
-		log("data=[%c]", data);
+		char data = datas[i][0];
 
-		vector<string> blocks = split(lines[i], ',');		//行配列
+		//log("data=[%c]", data);
 
+		if (data == 'n')break;
+
+		vector<string> blocks = split(datas[i], ',');//行配列
 
 		switch (data)
 		{
@@ -112,9 +109,8 @@ void MapCreator::createStage(int number)
 			//log("B");
 			break;
 		case 'G'://GOAL
-			log("G");
 			goalPosition = openShops.at(atoi(blocks[1].c_str()))->shopStatus.gate;
-		//	log("goal=[%f]", goalPosition);
+			//	log("goal=[%f]", goalPosition);
 			break;
 		default:
 			//log("default");
@@ -122,7 +118,6 @@ void MapCreator::createStage(int number)
 			break;
 		}
 	}
-
 };
 //プレイヤーが今いる場所
 float MapCreator::getPositionPlayerX(float positionX)
@@ -137,7 +132,7 @@ void MapCreator::BackGroundMove()
 {
 	float XX = (playerPosition);
 
-	BackGrounds->setPositionX(XX/10);
+	BackGrounds->setPositionX(XX/8);
 }
 
 
@@ -194,9 +189,9 @@ void MapCreator::BackCreate(vector<string> letter)
 
 void MapCreator::previewStage()
 {
-	Shops->setPositionX(getPositionX() - goalPosition);
-	BackGrounds->setPositionX(getPositionX() - goalPosition);
-	Floors->setPositionX(getPositionX() - goalPosition);
+	Shops->setPosition(Vec2(-goalPosition, designResolutionSize.height*0.3));
+	BackGrounds->setPosition(Vec2(-goalPosition, designResolutionSize.height*0.3));
+	Floors->setPosition(Vec2(-goalPosition, designResolutionSize.height*0.3));
 };
 
 void MapCreator::ressetStage()

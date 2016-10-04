@@ -17,6 +17,7 @@ USING_NS_CC;
 #define SHOP_HEIGHT (designResolutionSize.height*0.185)
 #define START_POSITION 0
 #define NUMBER_PATH 6
+#define MOVE_CHANGE designResolutionSize.height*1.2f
 
 class MapCreator :public Layer
 {

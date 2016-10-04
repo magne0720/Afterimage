@@ -16,10 +16,12 @@ bool StageLayer::init()
 		return false;
 	}
 	StageNumber = 0;
+	picupNumber = 0;
 	moveSpeed = 0;
 	numbersEye =1;
 	RX = 0;
 	RY = 0;
+
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -30,7 +32,17 @@ bool StageLayer::init()
 	dip->addEventListenerWithSceneGraphPriority(tap, this);
 
 	map = MapCreator::create(0);
-	addChild(map);
+
+	clipMask = Sprite::create("stageMask.png");
+	clipMask->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+	
+	clip = ClippingNode::create();
+	clip->setStencil(clipMask);
+	clip->setInverted(false);
+	clip->setAlphaThreshold(0.0f);
+
+	clip->addChild(map);
+	addChild(clip);
 
 	setMap(0);
 	setBoard();
@@ -81,6 +93,11 @@ void StageLayer::update(float delta)
 			letter->setString(Stages.at(i)->myData.LETTER);
 			StageNumber = i;
 			isDesided = true;
+			if (i != picupNumber)
+			{
+				setMap(i);
+				picupNumber = i;
+			}
 		}
 		else
 		{
@@ -119,7 +136,7 @@ void StageLayer::onTouchMoved(Touch* touch, Event* event)
 {
 		Vec2 delta = touch->getDelta();
 		moveSpeed = delta.x;
-		log("%f", moveSpeed);
+	//	log("%f", moveSpeed);
 };
 
 //タッチが終わった時の処理
@@ -177,6 +194,7 @@ void StageLayer::setLetter()
 };
 void StageLayer::setMap(int number) 
 {
+	map->ressetStage();
 	map->createStage(number);
 	map->previewStage();
 }
