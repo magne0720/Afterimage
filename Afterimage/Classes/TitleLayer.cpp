@@ -8,6 +8,8 @@ bool TitleLayer::init()
 	{
 		return false;
 	}
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/title.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Music/botton.mp3");
 	tapStopper = true;
 	playerStopper = false;
 
@@ -38,6 +40,8 @@ bool TitleLayer::init()
 
 	rainManagerA->spCameraPos(designResolutionSize.width / 2);
 	rainManagerB->spCameraPos(designResolutionSize.width / 2);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/title.mp3",true);
+
 
 	this->scheduleUpdate();
 
@@ -49,6 +53,7 @@ bool TitleLayer::onTouchBegan(Touch* touch, Event* event)
 {
 	if (tapStopper == true)
 	{
+		SimpleAudioEngine::getInstance()->playEffect("Music/botton.mp3");
 		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, StageScene::create(), Color3B::WHITE));
 		animation = Animation::create();
 

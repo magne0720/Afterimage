@@ -25,6 +25,8 @@ public:
 	bool goMan;
 	//ランダムスタッパー
 	bool stopRandom;
+	//跳ねストッパー
+	bool JStop;
 
 	virtual bool init(float endPos);
 
