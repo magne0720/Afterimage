@@ -19,9 +19,9 @@ USING_NS_CC;
 class GameLayer : public Layer
 {
 public:
-	static GameLayer *create(int fromTitle);
+	static GameLayer *create(int fromTitle,int HP);
 
-	bool init(int fromTitle);
+	bool init(int fromTitle,int HP);
 
 	int stageNum;
 	int PlayerHP;

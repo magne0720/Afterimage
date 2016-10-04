@@ -2,13 +2,13 @@
 #include "ResultScene.h"
 #include "GameScene.h"
 
-GameLayer *GameLayer::create(int fromTitle)
+GameLayer *GameLayer::create(int fromTitle,int HP)
 
 {
 
 	GameLayer *pRet = new GameLayer();
 
-	if (pRet && pRet->init(fromTitle))
+	if (pRet && pRet->init(fromTitle,HP))
 	{
 		pRet->autorelease();
 
@@ -21,7 +21,7 @@ GameLayer *GameLayer::create(int fromTitle)
 	}
 }
 
-bool GameLayer::init(int fromTitle)
+bool GameLayer::init(int fromTitle,int HP)
 {
 	if (!Layer::init())
 	{
@@ -42,6 +42,7 @@ bool GameLayer::init(int fromTitle)
 
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi2.mp3");
 
 
 
@@ -482,6 +483,7 @@ bool GameLayer::hit()
 void GameLayer::playerLoss(int mob)
 {
 	tapStop = false;
+	SimpleAudioEngine::getInstance()->playEffect("Music/dekusi2.mp3");
 	switch (umbrella->umbrella[mob]->stockRL)
 	{
 	case 1:
