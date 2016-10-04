@@ -30,6 +30,7 @@ bool GameLayer::init(int fromTitle)
 	stageNum = fromTitle;
 	PlayerHP = 500;
 	speed = 10.0f;
+	dukusiTime = 10;
 	leftAndRightNum = 0;
 	mobNum = 25;
 	ACTswitch = true;
@@ -38,6 +39,11 @@ bool GameLayer::init(int fromTitle)
 	goalStop = true;
 	tapStop = true;
 	actStop = false;
+
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi.mp3");
+
+
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -125,6 +131,8 @@ bool GameLayer::init(int fromTitle)
 	player->changeRight();
 	player->stopAct(1);
 
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/gameScene.mp3", true);
+
 	this->scheduleUpdate();
 	return true;
 }
@@ -178,6 +186,13 @@ void GameLayer::update(float delta)
 	if (!hit())
 	{
 		PlayerHP--;
+		dukusiTime--;
+
+		if (dukusiTime <= 0)
+		{
+			dukusiTime = 10;
+			SimpleAudioEngine::getInstance()->playEffect("Music/dekusi.mp3");
+		}
 	}
 	if (PlayerHP < 0)
 	{

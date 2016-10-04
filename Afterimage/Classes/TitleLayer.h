@@ -6,6 +6,10 @@
 #include "MapCreator.h"
 #include "MultiResolution.h"
 #include "TitleNode.h"
+
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
 USING_NS_CC;
 
 class TitleLayer : public Layer

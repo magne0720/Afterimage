@@ -28,6 +28,7 @@ bool Umbrella::init(float endPos)
 	stockRL = 0;
 	goMan = false;
 	stopRandom = true;
+	JStop = true;
 	mobEnd = endPos;
 
 	//randomMan();
@@ -117,16 +118,18 @@ void Umbrella::update(float delta)
 		{
 			randomMan();
 		}
-
-		timer += 0.02f;
-		timer = timer / 1.0f;
-		if (timer > 0.6f)
+		if (JStop == true)
 		{
-			timer = -0.6f;
-		}
+			timer += 0.02f;
+			timer = timer / 1.0f;
+			if (timer > 0.6f)
+			{
+				timer = -0.6f;
+			}
 
-		float y = -6 * sin(2.0f * M_PI * 15 / 180 * timer);
-		this->setPositionY(y + this->getPositionY());
+			float y = -6 * sin(2.0f * M_PI * 15 / 180 * timer);
+			this->setPositionY(y + this->getPositionY());
+		}
 
 	}
 
@@ -140,16 +143,7 @@ void Umbrella::walk(float delta)
 	mt19937 mt(rd());
 	uniform_int_distribution<int> randomTime(100, 300);
 	uniform_int_distribution<int> RLranZ(0, 4);
-	//if (RLranZ(mt) == 0)
-	//{
-	//	stockRL = RL;
-	//	RL = 0;
-	//	this->scheduleOnce(schedule_selector(Umbrella::leftRightMan), ((float)randomTime(mt) / 100));
-	//}
-	//else
-	//{
-	//	this->schedule(schedule_selector(Umbrella::walk), ((float)randomTime(mt) / 100));
-	//}
+	JStop = false;
 	switch (RLranZ(mt))
 	{
 	case 0:
@@ -196,6 +190,7 @@ void Umbrella::leftRightMan(float delta)
 	mt19937 mt(rd());
 	uniform_int_distribution<int> LRTime(500, 1300);
 	RL = stockRL;
+	JStop = true;
 	this->scheduleOnce(schedule_selector(Umbrella::walk), ((float)LRTime(mt) / 100));
 
 }

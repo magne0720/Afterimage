@@ -8,6 +8,10 @@
 #include "UmbrellaCreator.h"
 #include "RainManager.h"
 #include <vector>
+
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
+
 using namespace std;
 
 USING_NS_CC;
@@ -21,6 +25,7 @@ public:
 
 	int stageNum;
 	int PlayerHP;
+	int dukusiTime;
 	void update(float delta);
 
 	//ƒ^ƒbƒ`Œn
