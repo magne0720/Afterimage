@@ -8,15 +8,15 @@ bool Player::init()
 	}
 	animeSpeed = 0.3f;
 
-	this->initWithFile("arukuRight2.png");
+	this->initWithFile("GameScene/arukuRight2.png");
 	this->setScale(0.18f);
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("arukuRight1.png");
-	animation->addSpriteFrameWithFileName("arukuRight2.png");
-	animation->addSpriteFrameWithFileName("arukuRight3.png");
-	animation->addSpriteFrameWithFileName("arukuRight2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight1.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight3.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
 
 	animation->setDelayPerUnit(animeSpeed);
 	animation->setRestoreOriginalFrame(true);
@@ -46,10 +46,10 @@ void Player::changeLeft()
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("arukuLeft1.png");
-	animation->addSpriteFrameWithFileName("arukuLeft2.png");
-	animation->addSpriteFrameWithFileName("arukuLeft3.png");
-	animation->addSpriteFrameWithFileName("arukuLeft2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuLeft1.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuLeft2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuLeft3.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuLeft2.png");
 
 
 	animation->setDelayPerUnit(animeSpeed);
@@ -65,10 +65,10 @@ void Player::changeRight()
 
 	animation = Animation::create();
 
-	animation->addSpriteFrameWithFileName("arukuRight1.png");
-	animation->addSpriteFrameWithFileName("arukuRight2.png");
-	animation->addSpriteFrameWithFileName("arukuRight3.png");
-	animation->addSpriteFrameWithFileName("arukuRight2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight1.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight3.png");
+	animation->addSpriteFrameWithFileName("GameScene/arukuRight2.png");
 
 
 	animation->setDelayPerUnit(animeSpeed);
@@ -84,10 +84,10 @@ void Player::stopAct(int LR)
 	switch (LR)
 	{
 	case 1:
-		this->initWithFile("arukuRight2.png");
+		this->initWithFile("GameScene/arukuRight2.png");
 		break;
 	case 2:
-		this->initWithFile("arukuLeft2.png");
+		this->initWithFile("GameScene/arukuLeft2.png");
 		break;
 	default:
 		break;

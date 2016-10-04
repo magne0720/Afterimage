@@ -7,12 +7,12 @@ bool HPGauge::init()
 	{
 		return false;
 	}
-	hpGauge = Sprite::create("HPwaku.png");
+	hpGauge = Sprite::create("GameScene/HPwaku.png");
 	hpGauge->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.9f));
 	hpGauge->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
 	this->addChild(hpGauge);
 
-	hpWaku = Sprite::create("HPwaku2.png");
+	hpWaku = Sprite::create("GameScene/HPwaku2.png");
 	hpWaku->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.9f));
 	hpWaku->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
 	this->addChild(hpWaku);
