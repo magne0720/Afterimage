@@ -4,8 +4,11 @@
 #include "cocos2d.h"
 #include "StageItem.h"
 #include "MapCreator.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
+
 
 class StageLayer : public Layer
 {
@@ -23,6 +26,7 @@ private:
 	int picupNumber;
 	float numbersEye;
 	float moveSpeed;
+	float touchTimer;
 	float RX, RY;
 	bool isStageTouch;
 	bool isDesided;

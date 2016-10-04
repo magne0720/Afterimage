@@ -18,10 +18,16 @@ bool StageLayer::init()
 	StageNumber = 0;
 	picupNumber = 0;
 	moveSpeed = 0;
+	touchTimer = 0;
 	numbersEye =1;
 	RX = 0;
 	RY = 0;
 
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/sentaku.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Music/button.mp3");
+
+	SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/sentaku.mp3", true);
 
 	auto tap = EventListenerTouchOneByOne::create();
 	tap->setSwallowTouches(true);
@@ -57,7 +63,10 @@ bool StageLayer::init()
 void StageLayer::update(float delta) 
 {
 
-
+	if (isStageTouch) 
+	{
+		touchTimer += delta;
+	}
 		
 	if (moveSpeed > 0)
 	{
@@ -111,8 +120,12 @@ void StageLayer::update(float delta)
 //画面をタッチした時の処理
 bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 {
+			isStageTouch = true;
 	moveSpeed = 0;
-
+	if (isDesided)
+	{
+		SimpleAudioEngine::getInstance()->playEffect("Music/buton.mp3", false);
+	}
 	if (touch->getLocation().x <= designResolutionSize.width*0.1f)
 	{
 		//Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
@@ -124,7 +137,6 @@ bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 			//log("get[%d]",i);
 			string name = Stages.at(i)->myData.LETTER.c_str();
 			letter->setString(name.c_str());
-			//isStageTouch = true;
 		}
 	
 	}
@@ -142,14 +154,16 @@ void StageLayer::onTouchMoved(Touch* touch, Event* event)
 //タッチが終わった時の処理
 void StageLayer::onTouchEnded(Touch *touch, Event *event)
 {
-	isStageTouch = false;
 	for (int i = 0; i < Stages.size(); i++)
 	{
 		if (Stages.at(i)->getBoundingBox().containsPoint(touch->getLocation()))
 		{
-			if(isDesided)
+			if (isStageTouch) 
 			{
-				Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+				if (touchTimer <= 1) 
+				{
+					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+				}
 			}
 		}
 	}
