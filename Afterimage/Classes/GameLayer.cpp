@@ -30,7 +30,7 @@ bool GameLayer::init(int fromTitle)
 	stageNum = fromTitle;
 	PlayerHP = 500;
 	speed = 10.0f;
-	dukusiTime = 10;
+	dukusiTime = 15;
 	leftAndRightNum = 0;
 	mobNum = 25;
 	ACTswitch = true;
@@ -190,7 +190,7 @@ void GameLayer::update(float delta)
 
 		if (dukusiTime <= 0)
 		{
-			dukusiTime = 10;
+			dukusiTime = 15;
 			SimpleAudioEngine::getInstance()->playEffect("Music/dekusi.mp3");
 		}
 	}
