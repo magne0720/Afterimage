@@ -42,6 +42,7 @@ bool GameLayer::init(int fromTitle)
 
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi2.mp3");
 
 
 
@@ -482,6 +483,7 @@ bool GameLayer::hit()
 void GameLayer::playerLoss(int mob)
 {
 	tapStop = false;
+	SimpleAudioEngine::getInstance()->playEffect("Music/dekusi2.mp3");
 	switch (umbrella->umbrella[mob]->stockRL)
 	{
 	case 1:
