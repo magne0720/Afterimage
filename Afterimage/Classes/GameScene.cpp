@@ -1,12 +1,12 @@
 #include "GameScene.h"
 
-GameScene *GameScene::create(int fromTitle)
+GameScene *GameScene::create(int fromTitle,int HP)
 
 {
 
 	GameScene *pRet = new GameScene();
 
-	if (pRet && pRet->init(fromTitle))
+	if (pRet && pRet->init(fromTitle,HP))
 	{
 		pRet->autorelease();
 
@@ -19,17 +19,17 @@ GameScene *GameScene::create(int fromTitle)
 	}
 }
 
-bool GameScene::init(int fromTitle)
+bool GameScene::init(int fromTitle,int HP)
 {
 	if (!Scene::init())
 	{
 		return false;
 	}
 
-	gameLayer = GameLayer::create(fromTitle);
+	gameLayer = GameLayer::create(fromTitle,HP);
 	this->addChild(gameLayer, 1);
 
-	hpGauge = HPGauge::create();
+	hpGauge = HPGauge::create(HP);
 	this->addChild(hpGauge, 2);
 
 	return true;
