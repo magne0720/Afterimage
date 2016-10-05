@@ -1,7 +1,22 @@
 #include "HPGauge.h"
 #include "GameScene.h"
 
-bool HPGauge::init()
+HPGauge *HPGauge::create(int pHP)
+{
+	HPGauge *pRet = new HPGauge();
+	if (pRet && pRet->init(pHP))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else {
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+
+bool HPGauge::init(int pHP)
 {
 	if (!Node::init())
 	{
@@ -16,7 +31,7 @@ bool HPGauge::init()
 	hpWaku->setPosition(Vec2(designResolutionSize.width*0.1f, designResolutionSize.height*0.9f));
 	hpWaku->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
 	this->addChild(hpWaku);
-	maxHP = 500.0f;
+	maxHP = (float)pHP;
 
 	this->scheduleUpdate();
 
