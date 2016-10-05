@@ -123,7 +123,7 @@ bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 	isStageTouch = true;
 	moveSpeed = 0;
 	touchTimer = 0;
-		SimpleAudioEngine::getInstance()->playEffect("Music/buton.mp3", false);
+		SimpleAudioEngine::getInstance()->playEffect("Music/button.mp3", false);
 	if (isDesided)
 	{
 	}

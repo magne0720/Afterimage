@@ -26,7 +26,7 @@ bool GameScene::init(int fromTitle)
 		return false;
 	}
 
-	gameLayer = GameLayer::create(fromTitle);
+	gameLayer = GameLayer::create(fromTitle,0);
 	this->addChild(gameLayer, 1);
 
 	hpGauge = HPGauge::create();
