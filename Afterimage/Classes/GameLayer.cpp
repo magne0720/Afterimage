@@ -28,7 +28,7 @@ bool GameLayer::init(int fromTitle,int HP)
 		return false;
 	}
 	stageNum = fromTitle;
-	PlayerHP = 500;
+	PlayerHP = HP;
 	speed = 10.0f;
 	dukusiTime = 15;
 	leftAndRightNum = 0;

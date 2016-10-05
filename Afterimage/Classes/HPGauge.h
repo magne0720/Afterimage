@@ -8,14 +8,16 @@ USING_NS_CC;
 class HPGauge : public Node
 {
 public:
-	CREATE_FUNC(HPGauge);
+	//CREATE_FUNC(HPGauge);
+	static HPGauge *create(int pHP);
+
 
 	Sprite *hpGauge;
 	Sprite *hpWaku;
 
 	float maxHP;
 
-	bool init();
+	bool init(int pHP);
 
 	void update(float delta);
 	

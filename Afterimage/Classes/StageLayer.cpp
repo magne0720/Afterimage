@@ -123,7 +123,7 @@ bool StageLayer::onTouchBegan(Touch* touch, Event* event)
 	isStageTouch = true;
 	moveSpeed = 0;
 	touchTimer = 0;
-		SimpleAudioEngine::getInstance()->playEffect("Music/buton.mp3", false);
+		SimpleAudioEngine::getInstance()->playEffect("Music/button.mp3", false);
 	if (isDesided)
 	{
 	}
@@ -163,7 +163,7 @@ void StageLayer::onTouchEnded(Touch *touch, Event *event)
 			{
 				if (touchTimer <= 0.3f) 
 				{
-					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber,200), Color3B::WHITE));
 				}
 			}
 		}

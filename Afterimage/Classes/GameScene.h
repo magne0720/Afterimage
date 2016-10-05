@@ -10,9 +10,9 @@ USING_NS_CC;
 class GameScene : public Scene
 {
 public:
-	static GameScene *create(int fromTitle);
+	static GameScene *create(int fromTitle,int HP);
 
-	bool init(int fromTitle);
+	bool init(int fromTitle,int HP);
 	GameLayer *gameLayer;
 	HPGauge *hpGauge;
 	
