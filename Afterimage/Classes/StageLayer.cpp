@@ -163,7 +163,7 @@ void StageLayer::onTouchEnded(Touch *touch, Event *event)
 			{
 				if (touchTimer <= 0.3f) 
 				{
-					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber), Color3B::WHITE));
+					Director::getInstance()->replaceScene(TransitionFade::create(2.0f, GameScene::create(StageNumber,200), Color3B::WHITE));
 				}
 			}
 		}
