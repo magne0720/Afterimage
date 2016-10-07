@@ -28,11 +28,11 @@ bool GameLayer::init(int fromTitle,int HP)
 		return false;
 	}
 	stageNum = fromTitle;
-	PlayerHP = HP;
+	PlayerHP = 200;
 	speed = 10.0f;
 	dukusiTime = 15;
 	leftAndRightNum = 0;
-	mobNum = 25;
+	mobNum = 2;
 	ACTswitch = true;
 	shopstop = true;
 	direction = true;
@@ -40,7 +40,7 @@ bool GameLayer::init(int fromTitle,int HP)
 	tapStop = true;
 	actStop = false;
 
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
+	//SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi2.mp3");
 
@@ -132,7 +132,8 @@ bool GameLayer::init(int fromTitle,int HP)
 	player->changeRight();
 	player->stopAct(1);
 
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/gameScene.mp3", true);
+	//SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/gameScene.mp3", true);
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 
 	this->scheduleUpdate();
 	return true;

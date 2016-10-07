@@ -121,7 +121,7 @@ void ResultLayer::makeBoard()
 		"!!クリア!!",
 		"あまりぬれなかった！",
 		"スコアは%d",
-		"ヤッタネ!!",
+		"やったね!!",
 		"none",
 	};
 	int letterSize[5] =
