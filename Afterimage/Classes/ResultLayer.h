@@ -1,4 +1,4 @@
-﻿#ifndef __RESULT_LAYER_H__
+#ifndef __RESULT_LAYER_H__
 #define __RESULT_LAYER_H__
 
 #include "cocos2d.h"
@@ -18,10 +18,10 @@ public:
 
 private:
 	int endScore;
-	int clockCounter;	
+	int clockCounter;
 	bool tapStopper;
 	float takeTimer;
-	float takeClock[5]=
+	float takeClock[5] =
 	{
 		1.0f,
 		2.0f,
