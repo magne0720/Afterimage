@@ -40,7 +40,7 @@ bool GameLayer::init(int fromTitle,int HP)
 	tapStop = true;
 	actStop = false;
 
-	//SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/gameScene.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("Music/dekusi2.mp3");
 
@@ -132,7 +132,7 @@ bool GameLayer::init(int fromTitle,int HP)
 	player->changeRight();
 	player->stopAct(1);
 
-	//SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/gameScene.mp3", true);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/gameScene.mp3", true);
 	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 
 	this->scheduleUpdate();
